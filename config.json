@@ -1,0 +1,36 @@
+[
+  {
+    "title": "Cats",
+    "images": [
+      {
+        "alt": "orange cat",
+        "source": "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_16x9.jpg"
+      },
+      {
+        "alt": "black cat",
+        "source": "https://static.wixstatic.com/media/dabbfc_b95fa5447ea6451eab34da40dd42e6ff~mv2_d_3840_2880_s_4_2.jpg/v1/fill/w_640,h_414,al_l,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/dabbfc_b95fa5447ea6451eab34da40dd42e6ff~mv2_d_3840_2880_s_4_2.jpg"
+      },
+      {
+        "alt": "white cat",
+        "source": "https://www.boredpanda.com/blog/wp-content/uploads/2023/05/645df4ac24ad5_cute-white-cats.jpg"
+      }
+    ]
+  },
+  {
+    "title": "Nature",
+    "images": [
+      {
+        "alt": "delicate arch",
+        "source": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Delicate_arch_sunset.jpg"
+      },
+      {
+        "alt": "mt. rainier",
+        "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Rainier20200906.jpg/800px-Rainier20200906.jpg"
+      },
+      {
+        "alt": "redwood trees",
+        "source": "https://media.cntraveler.com/photos/641366bd693167e7802a8bf2/16:9/w_2560%2Cc_limit/Redwood%2520National%2520Park_GettyImages-1079164438.jpg"
+      }
+    ]
+  }
+]
