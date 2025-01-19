@@ -53,7 +53,7 @@ function addImageSeries(imageSeries: LoadedImageSeries) {
     galleryDiv.appendChild(seriesDiv);
 
     const title = document.createElement("h2");
-    title.classList.add("mainFont", "imageSeriesTitle");
+    title.classList.add("mainFont", "textColor", "imageSeriesTitle");
     title.textContent = imageSeries.title;
     seriesDiv.appendChild(title);
 
