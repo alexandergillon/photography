@@ -9,11 +9,22 @@
     letter-spacing: 0.15rem;
 }
 
+:root {
+    --background-color: #FDFAF6;
+    --text-color: #000000;
+}
+
+.bgColor {
+    background-color: var(--background-color);
+}
+
+.textColor {
+    color: var(--text-color);
+}
+
 body {
     width: 80%;
     margin: auto;
-    /*background-color: #101010;*/
-    background-color: #FDFAF6;
 }
 
 #pageTitle {
