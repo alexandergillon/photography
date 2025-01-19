@@ -1,41 +1,92 @@
-/** Type for an image in config.json. */
-type Image = {
-    alt: string;
-    source: string;
-}
+/**
+ * @file Main code for laying out the gallery. Loads all images and arranges them on the page.
+ */
 
-/** Type for a gallery item in config.json. This is a sequence of images with a title. */
-type GalleryItem = {
-    title: string;
-    images: Image[];
-}
+import type {Gallery, LoadedGallery, LoadedImage, LoadedImageSeries} from "./types";
 
-/** The gallery div, for adding gallery items to. */
+/** The gallery div, for adding image series to. */
 const galleryDiv = document.getElementById("gallery")!;
 
-/** Adds a gallery item to the gallery div. */
-function addGalleryItem(galleryItem: GalleryItem) {
-    const galleryItemDiv = document.createElement("div");
-    galleryItemDiv.classList.add("galleryItem");
-    galleryDiv.appendChild(galleryItemDiv);
+/** Loads in all image series and arranges them on the page. */
+fetch("./config.json")
+    .then(response => response.json())
+    .then((json: Gallery) => loadAllImages(json))
+    .then(gallery => gallery.forEach(imageSeries => addImageSeries(imageSeries)));
 
-    const galleryItemTitle = document.createElement("h2");
-    galleryItemTitle.textContent = galleryItem.title;
-    galleryItemDiv.appendChild(galleryItemTitle);
+/**
+ * Loads all images in the gallery. Images are attached to the gallery in-place.
+ * @param gallery The gallery configuration.
+ * @return That gallery, with all images created as HTML images, with all images loaded (or errored, etc.).
+ */
+async function loadAllImages(gallery: Gallery): Promise<LoadedGallery> {
+    const imageLoadPromises: Promise<void>[] = [];
 
-    const galleryImageDiv = document.createElement("div");
-    galleryItemDiv.appendChild(galleryImageDiv);
+    for (const imageSeries of gallery) {
+        for (const row of imageSeries.rows) {
+            for (const image of row) {
+                const htmlImage = document.createElement("img");
+                imageLoadPromises.push(new Promise(resolve => {
+                        htmlImage.addEventListener("load", () => resolve());
+                        htmlImage.addEventListener("error", () => resolve());
+                    }
+                ));
 
-    for (const image of galleryItem.images) {
-        const htmlImage = document.createElement("img");
-        htmlImage.alt = image.alt;
-        htmlImage.src = image.source;
-        galleryImageDiv.appendChild(htmlImage);
+                htmlImage.classList.add("imageSeriesImage");
+                htmlImage.alt = image.alt;
+                htmlImage.src = image.src;
+                (image as LoadedImage).image = htmlImage;
+            }
+        }
+    }
+
+    await Promise.all(imageLoadPromises);
+    return gallery as LoadedGallery;
+}
+
+/**
+ * Adds an image series to the gallery.
+ * @param imageSeries The image series to add.
+ */
+function addImageSeries(imageSeries: LoadedImageSeries) {
+    const seriesDiv = document.createElement("div");
+    seriesDiv.classList.add("imageSeries");
+    galleryDiv.appendChild(seriesDiv);
+
+    const title = document.createElement("h2");
+    title.textContent = imageSeries.title;
+    seriesDiv.appendChild(title);
+
+    const rowsDiv = document.createElement("div");
+    rowsDiv.classList.add("imageSeriesRows");
+    seriesDiv.appendChild(rowsDiv);
+
+    for (const row of imageSeries.rows) {
+        rowsDiv.appendChild(createRow(row));
     }
 }
 
-/** Loads in all the gallery items. */
-fetch("./config.json")
-.then(response => response.json())
-.then((json: GalleryItem[]) => json.forEach(galleryItem => addGalleryItem(galleryItem)));
+/**
+ * Creates a row in an image series.
+ *
+ * Some explanation for how the layout works. In order to get the images to take up the full width
+ * while all being the same height, we allocate the width between images according to their width
+ * divided by their height. One way to think of this is that we are transforming each image from
+ * being 'width' * 'height' to being 'width / height' * 1 (i.e. all having the same height).
+ *
+ * We then use a CSS grid to actually achieve the layout (i.e. each row is a grid).
+ *
+ * @param row The row to create.
+ * @return A div containing the row.
+ */
+function createRow(row : LoadedImage[]): HTMLDivElement {
+    const rowDiv = document.createElement("div");
+    rowDiv.classList.add("imageSeriesRow");
 
+    const aspects = row.map(image => image.image.naturalWidth / image.image.naturalHeight);
+    const gridTemplateColumns = aspects.map(aspect => `${aspect}fr`).join(" ");
+    rowDiv.style.setProperty("grid-template-columns", gridTemplateColumns);
+
+    // Images are already created and loaded, just need to add them to the row.
+    row.forEach(image => rowDiv.appendChild(image.image));
+    return rowDiv;
+}

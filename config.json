@@ -1,36 +1,68 @@
 [
   {
     "title": "Cats",
-    "images": [
-      {
-        "alt": "orange cat",
-        "source": "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_16x9.jpg"
-      },
-      {
-        "alt": "black cat",
-        "source": "https://static.wixstatic.com/media/dabbfc_b95fa5447ea6451eab34da40dd42e6ff~mv2_d_3840_2880_s_4_2.jpg/v1/fill/w_640,h_414,al_l,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/dabbfc_b95fa5447ea6451eab34da40dd42e6ff~mv2_d_3840_2880_s_4_2.jpg"
-      },
-      {
-        "alt": "white cat",
-        "source": "https://www.boredpanda.com/blog/wp-content/uploads/2023/05/645df4ac24ad5_cute-white-cats.jpg"
-      }
+    "rows": [
+      [
+        {
+          "alt": "orange cat",
+          "src": "https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_16x9.jpg"
+        },
+        {
+          "alt": "black cat",
+          "src": "https://static.wixstatic.com/media/dabbfc_b95fa5447ea6451eab34da40dd42e6ff~mv2_d_3840_2880_s_4_2.jpg/v1/fill/w_640,h_414,al_l,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/dabbfc_b95fa5447ea6451eab34da40dd42e6ff~mv2_d_3840_2880_s_4_2.jpg"
+        },
+        {
+          "alt": "white cat",
+          "src": "https://www.boredpanda.com/blog/wp-content/uploads/2023/05/645df4ac24ad5_cute-white-cats.jpg"
+        },
+        {
+          "alt": "orange cat",
+          "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW6y2HpOb6HE3vPxjFzOBQgOrsdhgmcWgLEg&s"
+        }
+      ],
+      [
+        {
+          "alt": "black cat",
+          "src": "https://image.petmd.com/files/inline-images/bombay-cat-breed.jpg?VersionId=Qz_cZGLn1bPgxzUXCY5No4UwZLwtClwU"
+        },
+        {
+          "alt": "white cat",
+          "src": "https://www.purina.co.uk/sites/default/files/styles/ttt_image_510/public/2021-12/white-cat-breeds-HERO.jpg?itok=o198-N3y"
+        },
+        {
+          "alt": "orange cat",
+          "src": "https://basepaws.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fqj2yxv39d6ig%2F1wMKs0lPg0uu63ygLSckMN%2F2095049173360d931c1d08f2a34e525c%2Forange-cat.jpeg&w=3840&q=75"
+        }
+      ],
+      [
+        {
+          "alt": "black cat",
+          "src": "https://www.whiskas.in/sites/g/files/fnmzdf2051/files/2024-09/Black-cat-mobile.png"
+        },
+        {
+          "alt": "white cat",
+          "src": "https://image.petmd.com/files/inline-images/white-cat-breeds-turkish-van.jpg?VersionId=9BlGhdmSR_Iz8kRH8Y9CkZuiCSzWxp7t"
+        }
+      ]
     ]
   },
   {
     "title": "Nature",
-    "images": [
-      {
-        "alt": "delicate arch",
-        "source": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Delicate_arch_sunset.jpg"
-      },
-      {
-        "alt": "mt. rainier",
-        "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Rainier20200906.jpg/800px-Rainier20200906.jpg"
-      },
-      {
-        "alt": "redwood trees",
-        "source": "https://media.cntraveler.com/photos/641366bd693167e7802a8bf2/16:9/w_2560%2Cc_limit/Redwood%2520National%2520Park_GettyImages-1079164438.jpg"
-      }
+    "rows": [
+      [
+        {
+          "alt": "delicate arch",
+          "src": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Delicate_arch_sunset.jpg"
+        },
+        {
+          "alt": "mt. rainier",
+          "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Rainier20200906.jpg/800px-Rainier20200906.jpg"
+        },
+        {
+          "alt": "redwood trees",
+          "src": "https://media.cntraveler.com/photos/641366bd693167e7802a8bf2/16:9/w_2560%2Cc_limit/Redwood%2520National%2520Park_GettyImages-1079164438.jpg"
+        }
+      ]
     ]
   }
 ]
