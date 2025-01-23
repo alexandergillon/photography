@@ -1,19 +1,23 @@
-/** The following types are the interface between build_r2_config.ts and <INSERT>. */
+/** Types for various scripts and configuration files. */
 
-type R2ConfigImage = {
+type BaseImage = {
     path: string,           // path to image, from /scripts
     alt_text: string,       // alt text for the image
     objectName: string,     // object name for the image in R2
 };
 
-type R2ConfigImageRow = R2ConfigImage[];
+type UploadedImage = BaseImage & {
+    r2Url: string,          //
+}
 
-type R2ConfigImageSeries = {
-    name: string,               // name of the image series
-    rows: R2ConfigImageRow[],   // image rows
+type ImageRow<T extends BaseImage> = T[];
+
+type ImageSeries<T extends BaseImage> = {
+    name: string,           // name of the image series
+    rows: ImageRow<T>[],    // image rows
 };
 
-type R2Config = R2ConfigImageSeries[]; // type of intermediate/r2_config.json
+type Gallery<T extends BaseImage> = ImageSeries<T>[];
 
 /** TS doesn't know about Object.groupBy(). This is a workaround from here: https://stackoverflow.com/a/77724124. */
 

@@ -4,7 +4,7 @@
  * the directories / images and sorts them into rows, assigning R2 object names to each
  * image.
  *
- * Outputs a configuration file that is used by the next script.
+ * Outputs a configuration file that is used by the next script, upload_to_r2.ts.
  *
  * Example input:
  *  /input
@@ -28,19 +28,19 @@
  *         "rows": [
  *             [
  *                 {
- *                     "path": "input/01 Chicago/A1 street.png",
- *                     "alt_text": "street",
- *                     "objectName": "0-Chicago/A1_street"
+ *                     "path": "input/01 Chicago/A1 chicago street.png",
+ *                     "alt_text": "chicago street",
+ *                     "objectName": "0-Chicago/A1_chicago_street.png"
  *                 },
  *                 {
- *                     "path": "input/01 Chicago/A2 boats.png",
- *                     "alt_text": "boats",
- *                     "objectName": "0-Chicago/A2_boats"
+ *                     "path": "input/01 Chicago/A2 two boats.png",
+ *                     "alt_text": "two boats",
+ *                     "objectName": "0-Chicago/A2_two_boats.png"
  *                 },
  *                 {
- *                     "path": "input/01 Chicago/A3 buildings.png",
- *                     "alt_text": "buildings",
- *                     "objectName": "0-Chicago/A3_buildings"
+ *                     "path": "input/01 Chicago/A3 group of chicago buildings.png",
+ *                     "alt_text": "group of chicago buildings",
+ *                     "objectName": "0-Chicago/A3_group_of_chicago_buildings.png"
  *                 }
  *             ]
  *         ]
@@ -50,31 +50,31 @@
  *         "rows": [
  *             [
  *                 {
- *                     "path": "input/02 Starved Rock/A1 flag.png",
- *                     "alt_text": "flag",
- *                     "objectName": "1-Starved_Rock_State_Park/A1_flag"
+ *                     "path": "input/02 Starved Rock/A1 canyon with flag.png",
+ *                     "alt_text": "canyon with flag",
+ *                     "objectName": "1-Starved_Rock_State_Park/A1_canyon_with_flag.png"
  *                 },
  *                 {
  *                     "path": "input/02 Starved Rock/A2 bridge.png",
  *                     "alt_text": "bridge",
- *                     "objectName": "1-Starved_Rock_State_Park/A2_bridge"
+ *                     "objectName": "1-Starved_Rock_State_Park/A2_bridge.png"
  *                 }
  *             ],
  *             [
  *                 {
  *                     "path": "input/02 Starved Rock/B1 clearing.png",
  *                     "alt_text": "clearing",
- *                     "objectName": "1-Starved_Rock_State_Park/B1_clearing"
+ *                     "objectName": "1-Starved_Rock_State_Park/B1_clearing.png"
  *                 },
  *                 {
  *                     "path": "input/02 Starved Rock/B2 trees.png",
  *                     "alt_text": "trees",
- *                     "objectName": "1-Starved_Rock_State_Park/B2_trees"
+ *                     "objectName": "1-Starved_Rock_State_Park/B2_trees.png"
  *                 },
  *                 {
- *                     "path": "input/02 Starved Rock/B3 river.png",
- *                     "alt_text": "river",
- *                     "objectName": "1-Starved_Rock_State_Park/B3_river"
+ *                     "path": "input/02 Starved Rock/B3 trees across river.png",
+ *                     "alt_text": "trees across river",
+ *                     "objectName": "1-Starved_Rock_State_Park/B3_trees_across_river.png"
  *                 }
  *             ]
  *         ]
@@ -88,7 +88,7 @@ import * as process from "process";
 
 /** Main function - compiles the configuration file for the next step. */
 function main(): number {
-    const r2_config: R2Config = [];
+    const r2_config: Gallery<BaseImage> = [];
 
     fs.readdirSync("./input", {withFileTypes: true})
         .filter(dirEntry => !dirEntry.isFile())                     // For each directory in the input directory
@@ -110,7 +110,7 @@ function main(): number {
  * @param directory Path to the directory to turn into an R2 config image series.
  * @return The R2 config image series for that directory.
  */
-function directory_to_r2_config(index: number, directory: string): R2ConfigImageSeries {
+function directory_to_r2_config(index: number, directory: string): ImageSeries<BaseImage> {
     const namePath = `${directory}/name.txt`;
     if (!fs.existsSync(namePath)) throw new Error(`Could not find name.txt for ${directory}`);
     const seriesName = fs.readFileSync(namePath).toString();
@@ -122,7 +122,7 @@ function directory_to_r2_config(index: number, directory: string): R2ConfigImage
         .filter(file => file.endsWith(".png"))
     const rows = Object.groupBy(images, row); // And splits them by row
 
-    const configRows: R2ConfigImageRow[] = [];
+    const configRows: ImageRow<BaseImage>[] = [];
     for (const rowName of Object.keys(rows).sort()) { // .sort() so that rows are in the right order
         const row = rows[rowName];
         const configRow = row.map(image => {
@@ -130,7 +130,7 @@ function directory_to_r2_config(index: number, directory: string): R2ConfigImage
                 path: `${directory}/${image}`,
                 alt_text: altText(image),
                 // Index ensures uniqueness between series with the same name
-                objectName: `${index}-${sanitize(seriesName)}/${sanitize(image.replace(/\.png$/, ""))}`,
+                objectName: `${index}-${sanitize(seriesName)}/${sanitize(image)}`,
             }
         });
         configRows.push(configRow);
@@ -144,7 +144,7 @@ function directory_to_r2_config(index: number, directory: string): R2ConfigImage
 
 /** Removes most special characters from a string. */
 function sanitize(s: string): string {
-    return s.replaceAll(/\W+/g, "_");
+    return s.replaceAll(/[^A-Za-z0-9_.]/g, "_");
 }
 
 /**
@@ -175,7 +175,7 @@ function altText(name: string): string {
  * Validates the generated configuration. Throws an exception on failure.
  * @param config Config to generate.
  */
-function validateConfig(config: R2Config) {
+function validateConfig(config: Gallery<BaseImage>) {
     // Checks that all object names are unique and satisfy R2 naming requirements.
     const seenObjects: Set<string> = new Set();
     for (const series of config) {
@@ -196,7 +196,7 @@ function validateConfig(config: R2Config) {
  */
 function validateObjectName(objectName: string) {
     if (objectName.length > 1024) throw new Error(`Object name ${objectName} is longer than 1024 characters (${objectName.length} characters)`);
-    if (!objectName.match(/^[a-zA-Z0-9/_-]+$/)) throw new Error(`Object name ${objectName} contains disallowed characters`);
+    if (!objectName.match(/^[a-zA-Z0-9/_.-]+$/)) throw new Error(`Object name ${objectName} contains disallowed characters`);
 }
 
 process.exit(main());

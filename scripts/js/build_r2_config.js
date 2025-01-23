@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @file First script in a 'pipeline' of processing scripts to turn a directory-based
  * arrangement of images into a configuration for the website. This scripts reads in
@@ -29,19 +28,19 @@
  *         "rows": [
  *             [
  *                 {
- *                     "path": "input/01 Chicago/A1 street.png",
- *                     "alt_text": "street",
- *                     "objectName": "0-Chicago/A1_street"
+ *                     "path": "input/01 Chicago/A1 chicago street.png",
+ *                     "alt_text": "chicago street",
+ *                     "objectName": "0-Chicago/A1_chicago_street.png"
  *                 },
  *                 {
- *                     "path": "input/01 Chicago/A2 boats.png",
- *                     "alt_text": "boats",
- *                     "objectName": "0-Chicago/A2_boats"
+ *                     "path": "input/01 Chicago/A2 two boats.png",
+ *                     "alt_text": "two boats",
+ *                     "objectName": "0-Chicago/A2_two_boats.png"
  *                 },
  *                 {
- *                     "path": "input/01 Chicago/A3 buildings.png",
- *                     "alt_text": "buildings",
- *                     "objectName": "0-Chicago/A3_buildings"
+ *                     "path": "input/01 Chicago/A3 group of chicago buildings.png",
+ *                     "alt_text": "group of chicago buildings",
+ *                     "objectName": "0-Chicago/A3_group_of_chicago_buildings.png"
  *                 }
  *             ]
  *         ]
@@ -51,31 +50,31 @@
  *         "rows": [
  *             [
  *                 {
- *                     "path": "input/02 Starved Rock/A1 flag.png",
- *                     "alt_text": "flag",
- *                     "objectName": "1-Starved_Rock_State_Park/A1_flag"
+ *                     "path": "input/02 Starved Rock/A1 canyon with flag.png",
+ *                     "alt_text": "canyon with flag",
+ *                     "objectName": "1-Starved_Rock_State_Park/A1_canyon_with_flag.png"
  *                 },
  *                 {
  *                     "path": "input/02 Starved Rock/A2 bridge.png",
  *                     "alt_text": "bridge",
- *                     "objectName": "1-Starved_Rock_State_Park/A2_bridge"
+ *                     "objectName": "1-Starved_Rock_State_Park/A2_bridge.png"
  *                 }
  *             ],
  *             [
  *                 {
  *                     "path": "input/02 Starved Rock/B1 clearing.png",
  *                     "alt_text": "clearing",
- *                     "objectName": "1-Starved_Rock_State_Park/B1_clearing"
+ *                     "objectName": "1-Starved_Rock_State_Park/B1_clearing.png"
  *                 },
  *                 {
  *                     "path": "input/02 Starved Rock/B2 trees.png",
  *                     "alt_text": "trees",
- *                     "objectName": "1-Starved_Rock_State_Park/B2_trees"
+ *                     "objectName": "1-Starved_Rock_State_Park/B2_trees.png"
  *                 },
  *                 {
- *                     "path": "input/02 Starved Rock/B3 river.png",
- *                     "alt_text": "river",
- *                     "objectName": "1-Starved_Rock_State_Park/B3_river"
+ *                     "path": "input/02 Starved Rock/B3 trees across river.png",
+ *                     "alt_text": "trees across river",
+ *                     "objectName": "1-Starved_Rock_State_Park/B3_trees_across_river.png"
  *                 }
  *             ]
  *         ]
@@ -83,39 +82,12 @@
  * ]
  *
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = __importDefault(require("fs"));
-const process = __importStar(require("process"));
+import fs from "fs";
+import * as process from "process";
 /** Main function - compiles the configuration file for the next step. */
 function main() {
     const r2_config = [];
-    fs_1.default.readdirSync("./input", { withFileTypes: true })
+    fs.readdirSync("./input", { withFileTypes: true })
         .filter(dirEntry => !dirEntry.isFile()) // For each directory in the input directory
         .map(dirEntry => dirEntry.name) // Get its name
         .sort((dir1, dir2) => dir1.localeCompare(dir2)) // Sorted lexicographically
@@ -123,7 +95,7 @@ function main() {
         r2_config.push(directory_to_r2_config(index, `input/${dir}`));
     });
     validateConfig(r2_config);
-    fs_1.default.writeFileSync("./intermediate/r2_config.json", JSON.stringify(r2_config, null, 4));
+    fs.writeFileSync("./intermediate/r2_config.json", JSON.stringify(r2_config, null, 4));
     return 0; // success
 }
 /**
@@ -135,11 +107,11 @@ function main() {
  */
 function directory_to_r2_config(index, directory) {
     const namePath = `${directory}/name.txt`;
-    if (!fs_1.default.existsSync(namePath))
+    if (!fs.existsSync(namePath))
         throw new Error(`Could not find name.txt for ${directory}`);
-    const seriesName = fs_1.default.readFileSync(namePath).toString();
+    const seriesName = fs.readFileSync(namePath).toString();
     // Gets all pngs in the directory
-    const images = fs_1.default.readdirSync(directory, { withFileTypes: true })
+    const images = fs.readdirSync(directory, { withFileTypes: true })
         .filter(dirEntry => dirEntry.isFile())
         .map(dirEntry => dirEntry.name)
         .filter(file => file.endsWith(".png"));
@@ -152,7 +124,7 @@ function directory_to_r2_config(index, directory) {
                 path: `${directory}/${image}`,
                 alt_text: altText(image),
                 // Index ensures uniqueness between series with the same name
-                objectName: `${index}-${sanitize(seriesName)}/${sanitize(image.replace(/\.png$/, ""))}`,
+                objectName: `${index}-${sanitize(seriesName)}/${sanitize(image)}`,
             };
         });
         configRows.push(configRow);
@@ -164,7 +136,7 @@ function directory_to_r2_config(index, directory) {
 }
 /** Removes most special characters from a string. */
 function sanitize(s) {
-    return s.replaceAll(/\W+/g, "_");
+    return s.replaceAll(/[^A-Za-z0-9_.]/g, "_");
 }
 /**
  * Gets the row from an image name. Images names are of the form A1 ..., A2 ..., B1 ..., etc., where the letter denotes
@@ -216,7 +188,7 @@ function validateConfig(config) {
 function validateObjectName(objectName) {
     if (objectName.length > 1024)
         throw new Error(`Object name ${objectName} is longer than 1024 characters (${objectName.length} characters)`);
-    if (!objectName.match(/^[a-zA-Z0-9/_-]+$/))
+    if (!objectName.match(/^[a-zA-Z0-9/_.-]+$/))
         throw new Error(`Object name ${objectName} contains disallowed characters`);
 }
 process.exit(main());

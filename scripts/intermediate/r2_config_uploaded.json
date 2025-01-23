@@ -1,0 +1,66 @@
+[
+    {
+        "name": "Chicago",
+        "rows": [
+            [
+                {
+                    "path": "input/01 Chicago/A1 chicago street.png",
+                    "alt_text": "chicago street",
+                    "objectName": "0-Chicago/A1_chicago_street.png",
+                    "r2Url": "images.photography.alexandergillon.com/0-Chicago/A1_chicago_street.png"
+                },
+                {
+                    "path": "input/01 Chicago/A2 two boats.png",
+                    "alt_text": "two boats",
+                    "objectName": "0-Chicago/A2_two_boats.png",
+                    "r2Url": "images.photography.alexandergillon.com/0-Chicago/A2_two_boats.png"
+                },
+                {
+                    "path": "input/01 Chicago/A3 group of chicago buildings.png",
+                    "alt_text": "group of chicago buildings",
+                    "objectName": "0-Chicago/A3_group_of_chicago_buildings.png",
+                    "r2Url": "images.photography.alexandergillon.com/0-Chicago/A3_group_of_chicago_buildings.png"
+                }
+            ]
+        ]
+    },
+    {
+        "name": "Starved Rock State Park",
+        "rows": [
+            [
+                {
+                    "path": "input/02 Starved Rock/A1 canyon with flag.png",
+                    "alt_text": "canyon with flag",
+                    "objectName": "1-Starved_Rock_State_Park/A1_canyon_with_flag.png",
+                    "r2Url": "images.photography.alexandergillon.com/1-Starved_Rock_State_Park/A1_canyon_with_flag.png"
+                },
+                {
+                    "path": "input/02 Starved Rock/A2 bridge.png",
+                    "alt_text": "bridge",
+                    "objectName": "1-Starved_Rock_State_Park/A2_bridge.png",
+                    "r2Url": "images.photography.alexandergillon.com/1-Starved_Rock_State_Park/A2_bridge.png"
+                }
+            ],
+            [
+                {
+                    "path": "input/02 Starved Rock/B1 clearing.png",
+                    "alt_text": "clearing",
+                    "objectName": "1-Starved_Rock_State_Park/B1_clearing.png",
+                    "r2Url": "images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B1_clearing.png"
+                },
+                {
+                    "path": "input/02 Starved Rock/B2 trees.png",
+                    "alt_text": "trees",
+                    "objectName": "1-Starved_Rock_State_Park/B2_trees.png",
+                    "r2Url": "images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B2_trees.png"
+                },
+                {
+                    "path": "input/02 Starved Rock/B3 trees across river.png",
+                    "alt_text": "trees across river",
+                    "objectName": "1-Starved_Rock_State_Park/B3_trees_across_river.png",
+                    "r2Url": "images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B3_trees_across_river.png"
+                }
+            ]
+        ]
+    }
+]
