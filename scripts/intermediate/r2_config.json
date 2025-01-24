@@ -1,6 +1,6 @@
 [
     {
-        "name": "Chicago",
+        "title": "Chicago",
         "rows": [
             [
                 {
@@ -22,7 +22,7 @@
         ]
     },
     {
-        "name": "Starved Rock State Park",
+        "title": "Starved Rock State Park",
         "rows": [
             [
                 {

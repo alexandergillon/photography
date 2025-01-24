@@ -4,7 +4,7 @@
  * the directories / images and sorts them into rows, assigning R2 object names to each
  * image.
  *
- * Outputs a configuration file that is used by the next script.
+ * Outputs a configuration file that is used by the next script, upload_to_r2.ts.
  *
  * Example input:
  *  /input
@@ -130,7 +130,7 @@ function directory_to_r2_config(index, directory) {
         configRows.push(configRow);
     }
     return {
-        name: seriesName,
+        title: seriesName,
         rows: configRows
     };
 }

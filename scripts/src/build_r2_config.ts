@@ -137,7 +137,7 @@ function directory_to_r2_config(index: number, directory: string): ImageSeries<B
     }
 
     return {
-        name: seriesName,
+        title: seriesName,
         rows: configRows
     };
 }

@@ -7,17 +7,22 @@ type BaseImage = {
 };
 
 type UploadedImage = BaseImage & {
-    r2Url: string,          //
+    r2Url: string,          // URL to image, publicly accessible via the web
 }
 
-type ImageRow<T extends BaseImage> = T[];
+type WebConfigImage = {
+    alt: string;            // alt text for the image
+    src: string;            // URL to image
+}
 
-type ImageSeries<T extends BaseImage> = {
-    name: string,           // name of the image series
+type ImageRow<T> = T[];
+
+type ImageSeries<T> = {
+    title: string,          // name of the image series
     rows: ImageRow<T>[],    // image rows
 };
 
-type Gallery<T extends BaseImage> = ImageSeries<T>[];
+type Gallery<T> = ImageSeries<T>[];
 
 /** TS doesn't know about Object.groupBy(). This is a workaround from here: https://stackoverflow.com/a/77724124. */
 

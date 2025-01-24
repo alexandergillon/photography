@@ -69,7 +69,7 @@ async function resolveImage(r2Client: S3Client, image: BaseImage) {
     if (!await existsInR2(r2Client, image)) {
         await uploadToR2(r2Client, image);
     }
-    (image as UploadedImage).r2Url = `${secrets.r2_public_url}/${image.objectName}`;
+    (image as UploadedImage).r2Url = `https://${secrets.r2_public_url}/${image.objectName}`;
 }
 
 /**
