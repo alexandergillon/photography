@@ -5,23 +5,23 @@
             [
                 {
                     "path": "input/01 Chicago/A1 chicago street.png",
-                    "alt_text": "chicago street",
-                    "objectName": "0-Chicago/A1_chicago_street.png",
-                    "thumbObjectName": "0-Chicago/A1_chicago_street_thumb.jpg",
+                    "altText": "chicago street",
+                    "objectKey": "0-Chicago/A1_chicago_street.png",
+                    "thumbObjectKey": "0-Chicago/A1_chicago_street_thumb.jpg",
                     "thumbPath": "input/01 Chicago/A1 chicago street thumbnail.jpg"
                 },
                 {
                     "path": "input/01 Chicago/A2 two boats.png",
-                    "alt_text": "two boats",
-                    "objectName": "0-Chicago/A2_two_boats.png",
-                    "thumbObjectName": "0-Chicago/A2_two_boats_thumb.jpg",
+                    "altText": "two boats",
+                    "objectKey": "0-Chicago/A2_two_boats.png",
+                    "thumbObjectKey": "0-Chicago/A2_two_boats_thumb.jpg",
                     "thumbPath": "input/01 Chicago/A2 two boats thumbnail.jpg"
                 },
                 {
                     "path": "input/01 Chicago/A3 group of chicago buildings.png",
-                    "alt_text": "group of chicago buildings",
-                    "objectName": "0-Chicago/A3_group_of_chicago_buildings.png",
-                    "thumbObjectName": "0-Chicago/A3_group_of_chicago_buildings_thumb.jpg",
+                    "altText": "group of chicago buildings",
+                    "objectKey": "0-Chicago/A3_group_of_chicago_buildings.png",
+                    "thumbObjectKey": "0-Chicago/A3_group_of_chicago_buildings_thumb.jpg",
                     "thumbPath": "input/01 Chicago/A3 group of chicago buildings thumbnail.jpg"
                 }
             ]
@@ -33,39 +33,39 @@
             [
                 {
                     "path": "input/02 Starved Rock/A1 canyon with flag.png",
-                    "alt_text": "canyon with flag",
-                    "objectName": "1-Starved_Rock_State_Park/A1_canyon_with_flag.png",
-                    "thumbObjectName": "1-Starved_Rock_State_Park/A1_canyon_with_flag_thumb.jpg",
+                    "altText": "canyon with flag",
+                    "objectKey": "1-Starved_Rock_State_Park/A1_canyon_with_flag.png",
+                    "thumbObjectKey": "1-Starved_Rock_State_Park/A1_canyon_with_flag_thumb.jpg",
                     "thumbPath": "input/02 Starved Rock/A1 canyon with flag thumbnail.jpg"
                 },
                 {
                     "path": "input/02 Starved Rock/A2 bridge.png",
-                    "alt_text": "bridge",
-                    "objectName": "1-Starved_Rock_State_Park/A2_bridge.png",
-                    "thumbObjectName": "1-Starved_Rock_State_Park/A2_bridge_thumb.jpg",
+                    "altText": "bridge",
+                    "objectKey": "1-Starved_Rock_State_Park/A2_bridge.png",
+                    "thumbObjectKey": "1-Starved_Rock_State_Park/A2_bridge_thumb.jpg",
                     "thumbPath": "input/02 Starved Rock/A2 bridge thumbnail.jpg"
                 }
             ],
             [
                 {
                     "path": "input/02 Starved Rock/B1 clearing.png",
-                    "alt_text": "clearing",
-                    "objectName": "1-Starved_Rock_State_Park/B1_clearing.png",
-                    "thumbObjectName": "1-Starved_Rock_State_Park/B1_clearing_thumb.jpg",
+                    "altText": "clearing",
+                    "objectKey": "1-Starved_Rock_State_Park/B1_clearing.png",
+                    "thumbObjectKey": "1-Starved_Rock_State_Park/B1_clearing_thumb.jpg",
                     "thumbPath": "input/02 Starved Rock/B1 clearing thumbnail.jpg"
                 },
                 {
                     "path": "input/02 Starved Rock/B2 trees.png",
-                    "alt_text": "trees",
-                    "objectName": "1-Starved_Rock_State_Park/B2_trees.png",
-                    "thumbObjectName": "1-Starved_Rock_State_Park/B2_trees_thumb.jpg",
+                    "altText": "trees",
+                    "objectKey": "1-Starved_Rock_State_Park/B2_trees.png",
+                    "thumbObjectKey": "1-Starved_Rock_State_Park/B2_trees_thumb.jpg",
                     "thumbPath": "input/02 Starved Rock/B2 trees thumbnail.jpg"
                 },
                 {
                     "path": "input/02 Starved Rock/B3 trees across river.png",
-                    "alt_text": "trees across river",
-                    "objectName": "1-Starved_Rock_State_Park/B3_trees_across_river.png",
-                    "thumbObjectName": "1-Starved_Rock_State_Park/B3_trees_across_river_thumb.jpg",
+                    "altText": "trees across river",
+                    "objectKey": "1-Starved_Rock_State_Park/B3_trees_across_river.png",
+                    "thumbObjectKey": "1-Starved_Rock_State_Park/B3_trees_across_river_thumb.jpg",
                     "thumbPath": "input/02 Starved Rock/B3 trees across river thumbnail.jpg"
                 }
             ]

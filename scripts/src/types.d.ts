@@ -2,9 +2,9 @@
 
 type BaseImage = {
     path: string,               // path to image, from /scripts
-    alt_text: string,           // alt text for the image
-    objectName: string,         // object name for the image in R2
-    thumbObjectName: string,    // object name for the image's thumbnail in R2
+    altText: string,            // alt text for the image
+    objectKey: string,          // object key for the image in R2
+    thumbObjectKey: string,     // object key for the image's thumbnail in R2
 };
 
 type ThumbImage = BaseImage & {

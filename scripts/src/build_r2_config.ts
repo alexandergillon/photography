@@ -1,7 +1,7 @@
 /**
  * @file First script in a 'pipeline' of processing scripts to turn a directory-based
  * arrangement of images into a configuration for the website. This scripts reads in
- * the directories / images and sorts them into rows, assigning R2 object names to each
+ * the directories / images and sorts them into rows, assigning R2 object keys to each
  * image.
  *
  * Outputs a configuration file that is used by the next script, create_thumbs.ts.
@@ -52,10 +52,10 @@ function directory_to_r2_config(index: number, directory: string): ImageSeries<B
         const configRow = row.map(image => {
             return {
                 path: `${directory}/${image}`,
-                alt_text: altText(image),
+                altText: altText(image),
                 // Index ensures uniqueness between series with the same name
-                objectName: `${index}-${sanitize(seriesName)}/${sanitize(image)}`,
-                thumbObjectName: `${index}-${sanitize(seriesName)}/${sanitize(image.replace(/\.png$/, "_thumb.jpg"))}`,
+                objectKey: `${index}-${sanitize(seriesName)}/${sanitize(image)}`,
+                thumbObjectKey: `${index}-${sanitize(seriesName)}/${sanitize(image.replace(/\.png$/, "_thumb.jpg"))}`,
             }
         });
         configRows.push(configRow);
@@ -101,28 +101,30 @@ function altText(name: string): string {
  * @param config Config to generate.
  */
 function validateConfig(config: Gallery<BaseImage>) {
-    // Checks that all object names are unique and satisfy R2 naming requirements.
+    // Checks that all object keys are unique and satisfy R2 naming requirements.
     const seenObjects: Set<string> = new Set();
     for (const series of config) {
         for (const row of series.rows) {
             for (const object of row) {
-                validateObjectName(object.objectName);
-                validateObjectName(object.thumbObjectName);
-                if (seenObjects.has(object.objectName)) throw new Error(`Object name ${object.objectName} is not unique`);
-                seenObjects.add(object.objectName);
+                validateObjectKey(object.objectKey);
+                validateObjectKey(object.thumbObjectKey);
+                if (seenObjects.has(object.objectKey)) throw new Error(`Object key ${object.objectKey} is not unique`);
+                if (seenObjects.has(object.thumbObjectKey)) throw new Error(`Object key ${object.thumbObjectKey} is not unique`);
+                seenObjects.add(object.objectKey);
+                seenObjects.add(object.thumbObjectKey);
             }
         }
     }
 }
 
 /**
- * Validates than an object name only contains 'safe characters', which is a bit arbitrary but loosely based on the S3
+ * Validates than an object key only contains 'safe characters', which is a bit arbitrary but loosely based on the S3
  * naming requirements: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
- * @param objectName Object name to validate.
+ * @param objectKey Object key to validate.
  */
-function validateObjectName(objectName: string) {
-    if (objectName.length > 1024) throw new Error(`Object name ${objectName} is longer than 1024 characters (${objectName.length} characters)`);
-    if (!objectName.match(/^[a-zA-Z0-9/_.-]+$/)) throw new Error(`Object name ${objectName} contains disallowed characters`);
+function validateObjectKey(objectKey: string) {
+    if (objectKey.length > 1024) throw new Error(`Object key ${objectKey} is longer than 1024 characters (${objectKey.length} characters)`);
+    if (!objectKey.match(/^[a-zA-Z0-9/_.-]+$/)) throw new Error(`Object key ${objectKey} contains disallowed characters`);
 }
 
 process.exit(main());

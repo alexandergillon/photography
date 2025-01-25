@@ -16,7 +16,7 @@ function main() {
             title: series.title,
             rows: series.rows.map(row => row.map(image => {
                 return {
-                    alt: image.alt_text,
+                    alt: image.altText,
                     src: image.r2Url,
                     thumb: image.thumbR2URL,
                 }

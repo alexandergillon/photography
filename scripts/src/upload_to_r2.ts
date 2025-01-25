@@ -66,35 +66,35 @@ async function checkBucketExists(r2Client: S3Client) {
  * @param image The image to resolve images for.
  */
 async function resolveImages(r2Client: S3Client, image: ThumbImage) {
-    if (!await existsInR2(r2Client, image.objectName)) {
-        await uploadToR2(r2Client, image.path, image.objectName);
+    if (!await existsInR2(r2Client, image.objectKey)) {
+        await uploadToR2(r2Client, image.path, image.objectKey);
     }
-    if (!await existsInR2(r2Client, image.thumbObjectName)) {
-        await uploadToR2(r2Client, image.thumbPath, image.thumbObjectName);
+    if (!await existsInR2(r2Client, image.thumbObjectKey)) {
+        await uploadToR2(r2Client, image.thumbPath, image.thumbObjectKey);
     }
-    (image as UploadedImage).r2Url = `https://${secrets.r2_public_url}/${image.objectName}`;
-    (image as UploadedImage).thumbR2URL = `https://${secrets.r2_public_url}/${image.thumbObjectName}`;
+    (image as UploadedImage).r2Url = `https://${secrets.r2_public_url}/${image.objectKey}`;
+    (image as UploadedImage).thumbR2URL = `https://${secrets.r2_public_url}/${image.thumbObjectKey}`;
 }
 
 /**
  * Checks whether an object already exists in R2.
  *
  * @param r2Client The R2 client.
- * @param objectName The object name.
+ * @param objectKey The key for the object.
  * @return Whether that image exists in R2.
  */
-async function existsInR2(r2Client: S3Client, objectName: string): Promise<boolean> {
+async function existsInR2(r2Client: S3Client, objectKey: string): Promise<boolean> {
     try {
         const command = new HeadObjectCommand({
             Bucket: secrets.bucket_name,
-            Key: objectName,
+            Key: objectKey,
         });
         await r2Client.send(command);
-        console.log(`Exists in R2: ${objectName}`);
+        console.log(`Exists in R2: ${objectKey}`);
         return true;
     } catch (error) {
         if (error.$metadata.httpStatusCode === 404) {
-            console.log(`Does not exist in R2: ${objectName}`);
+            console.log(`Does not exist in R2: ${objectKey}`);
             return false;
         } else {
             throw error;
@@ -106,16 +106,16 @@ async function existsInR2(r2Client: S3Client, objectName: string): Promise<boole
  * Uploads an object to R2.
  * @param r2Client The R2 client.
  * @param path Path of the file that will be the object.
- * @param objectName Name of the object in R2.
+ * @param objectKey The key for the object.
  */
-async function uploadToR2(r2Client: S3Client, path: string, objectName: string) {
+async function uploadToR2(r2Client: S3Client, path: string, objectKey: string) {
     const command = new PutObjectCommand({
         Bucket: secrets.bucket_name,
-        Key: objectName,
+        Key: objectKey,
         Body: fs.readFileSync(path),
         ContentType: "image/png",
     });
-    console.log(`Uploading to R2: ${objectName}`);
+    console.log(`Uploading to R2: ${objectKey}`);
     await r2Client.send(command);
 }
 
