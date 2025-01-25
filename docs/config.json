@@ -5,15 +5,18 @@
             [
                 {
                     "alt": "chicago street",
-                    "src": "https://images.photography.alexandergillon.com/0-Chicago/A1_chicago_street.png"
+                    "src": "https://images.photography.alexandergillon.com/0-Chicago/A1_chicago_street.png",
+                    "thumb": "https://images.photography.alexandergillon.com/0-Chicago/A1_chicago_street_thumb.jpg"
                 },
                 {
                     "alt": "two boats",
-                    "src": "https://images.photography.alexandergillon.com/0-Chicago/A2_two_boats.png"
+                    "src": "https://images.photography.alexandergillon.com/0-Chicago/A2_two_boats.png",
+                    "thumb": "https://images.photography.alexandergillon.com/0-Chicago/A2_two_boats_thumb.jpg"
                 },
                 {
                     "alt": "group of chicago buildings",
-                    "src": "https://images.photography.alexandergillon.com/0-Chicago/A3_group_of_chicago_buildings.png"
+                    "src": "https://images.photography.alexandergillon.com/0-Chicago/A3_group_of_chicago_buildings.png",
+                    "thumb": "https://images.photography.alexandergillon.com/0-Chicago/A3_group_of_chicago_buildings_thumb.jpg"
                 }
             ]
         ]
@@ -24,25 +27,30 @@
             [
                 {
                     "alt": "canyon with flag",
-                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/A1_canyon_with_flag.png"
+                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/A1_canyon_with_flag.png",
+                    "thumb": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/A1_canyon_with_flag_thumb.jpg"
                 },
                 {
                     "alt": "bridge",
-                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/A2_bridge.png"
+                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/A2_bridge.png",
+                    "thumb": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/A2_bridge_thumb.jpg"
                 }
             ],
             [
                 {
                     "alt": "clearing",
-                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B1_clearing.png"
+                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B1_clearing.png",
+                    "thumb": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B1_clearing_thumb.jpg"
                 },
                 {
                     "alt": "trees",
-                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B2_trees.png"
+                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B2_trees.png",
+                    "thumb": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B2_trees_thumb.jpg"
                 },
                 {
                     "alt": "trees across river",
-                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B3_trees_across_river.png"
+                    "src": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B3_trees_across_river.png",
+                    "thumb": "https://images.photography.alexandergillon.com/1-Starved_Rock_State_Park/B3_trees_across_river_thumb.jpg"
                 }
             ]
         ]

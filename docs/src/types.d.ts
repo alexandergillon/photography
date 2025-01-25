@@ -16,6 +16,7 @@
 export type Image = {
     alt: string;    // alt text
     src: string;    // image source
+    thumb: string;  // thumbnail image source
 }
 
 /** A row of images - all displayed with equal height. */
@@ -30,12 +31,8 @@ export type ImageSeries = {
 /** The overall gallery - config.json has this 'type'. */
 export type Gallery = ImageSeries[];
 
-/** Loaded equivalent of an Image. */
-export type LoadedImage = {
-    alt: string;
-    src: string;
-    image: HTMLImageElement;
-}
+/** A loaded in image. */
+export type LoadedImage = HTMLImageElement;
 
 /** Loaded equivalent of an ImageRow. */
 export type LoadedImageRow = LoadedImage[];

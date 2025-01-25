@@ -7,7 +7,8 @@ const galleryDiv = document.getElementById("gallery");
 fetch("./config.json")
     .then(response => response.json())
     .then((json) => loadAllImages(json))
-    .then(gallery => gallery.forEach(imageSeries => addImageSeries(imageSeries)));
+    .then(gallery => gallery.forEach(imageSeries => addImageSeries(imageSeries)))
+    .then(() => mediumZoom(".imageSeriesImage", { background: window.getComputedStyle(document.body).backgroundColor }));
 /**
  * Loads all images in the gallery. Images are attached to the gallery in-place.
  * @param gallery The gallery configuration.
@@ -15,8 +16,11 @@ fetch("./config.json")
  */
 async function loadAllImages(gallery) {
     const imageLoadPromises = [];
+    const loadedGallery = [];
     for (const imageSeries of gallery) {
+        const loadedRows = [];
         for (const row of imageSeries.rows) {
+            const loadedRow = [];
             for (const image of row) {
                 const htmlImage = document.createElement("img");
                 imageLoadPromises.push(new Promise(resolve => {
@@ -25,13 +29,18 @@ async function loadAllImages(gallery) {
                 }));
                 htmlImage.classList.add("imageSeriesImage");
                 htmlImage.alt = image.alt;
-                htmlImage.src = image.src;
-                image.image = htmlImage;
+                htmlImage.src = image.thumb;
+                loadedRow.push(htmlImage);
             }
+            loadedRows.push(loadedRow);
         }
+        loadedGallery.push({
+            title: imageSeries.title,
+            rows: loadedRows,
+        });
     }
     await Promise.all(imageLoadPromises);
-    return gallery;
+    return loadedGallery;
 }
 /**
  * Adds an image series to the gallery.
@@ -68,11 +77,11 @@ function addImageSeries(imageSeries) {
 function createRow(row) {
     const rowDiv = document.createElement("div");
     rowDiv.classList.add("imageSeriesRow");
-    const aspects = row.map(image => image.image.naturalWidth / image.image.naturalHeight);
+    const aspects = row.map(image => image.naturalWidth / image.naturalHeight);
     const gridTemplateColumns = aspects.map(aspect => `${aspect}fr`).join(" ");
     rowDiv.style.setProperty("grid-template-columns", gridTemplateColumns);
     // Images are already created and loaded, just need to add them to the row.
-    row.forEach(image => rowDiv.appendChild(image.image));
+    row.forEach(image => rowDiv.appendChild(image));
     return rowDiv;
 }
 export {};
