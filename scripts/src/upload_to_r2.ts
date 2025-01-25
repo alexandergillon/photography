@@ -67,10 +67,10 @@ async function checkBucketExists(r2Client: S3Client) {
  */
 async function resolveImages(r2Client: S3Client, image: ThumbImage) {
     if (!await existsInR2(r2Client, image.objectKey)) {
-        await uploadToR2(r2Client, image.path, image.objectKey);
+        await uploadToR2(r2Client, image.path, image.objectKey, "image/png");
     }
     if (!await existsInR2(r2Client, image.thumbObjectKey)) {
-        await uploadToR2(r2Client, image.thumbPath, image.thumbObjectKey);
+        await uploadToR2(r2Client, image.thumbPath, image.thumbObjectKey, "image/jpeg");
     }
     (image as UploadedImage).r2Url = `https://${secrets.r2_public_url}/${image.objectKey}`;
     (image as UploadedImage).thumbR2URL = `https://${secrets.r2_public_url}/${image.thumbObjectKey}`;
@@ -107,13 +107,14 @@ async function existsInR2(r2Client: S3Client, objectKey: string): Promise<boolea
  * @param r2Client The R2 client.
  * @param path Path of the file that will be the object.
  * @param objectKey The key for the object.
+ * @param contentType The content type of the file.
  */
-async function uploadToR2(r2Client: S3Client, path: string, objectKey: string) {
+async function uploadToR2(r2Client: S3Client, path: string, objectKey: string, contentType: string) {
     const command = new PutObjectCommand({
         Bucket: secrets.bucket_name,
         Key: objectKey,
         Body: fs.readFileSync(path),
-        ContentType: "image/png",
+        ContentType: contentType,
     });
     console.log(`Uploading to R2: ${objectKey}`);
     await r2Client.send(command);

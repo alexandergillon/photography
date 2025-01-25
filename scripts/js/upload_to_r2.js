@@ -61,10 +61,10 @@ async function checkBucketExists(r2Client) {
  */
 async function resolveImages(r2Client, image) {
     if (!await existsInR2(r2Client, image.objectKey)) {
-        await uploadToR2(r2Client, image.path, image.objectKey);
+        await uploadToR2(r2Client, image.path, image.objectKey, "image/png");
     }
     if (!await existsInR2(r2Client, image.thumbObjectKey)) {
-        await uploadToR2(r2Client, image.thumbPath, image.thumbObjectKey);
+        await uploadToR2(r2Client, image.thumbPath, image.thumbObjectKey, "image/jpeg");
     }
     image.r2Url = `https://${secrets.r2_public_url}/${image.objectKey}`;
     image.thumbR2URL = `https://${secrets.r2_public_url}/${image.thumbObjectKey}`;
@@ -101,13 +101,14 @@ async function existsInR2(r2Client, objectKey) {
  * @param r2Client The R2 client.
  * @param path Path of the file that will be the object.
  * @param objectKey The key for the object.
+ * @param contentType The content type of the file.
  */
-async function uploadToR2(r2Client, path, objectKey) {
+async function uploadToR2(r2Client, path, objectKey, contentType) {
     const command = new PutObjectCommand({
         Bucket: secrets.bucket_name,
         Key: objectKey,
         Body: fs.readFileSync(path),
-        ContentType: "image/png",
+        ContentType: contentType,
     });
     console.log(`Uploading to R2: ${objectKey}`);
     await r2Client.send(command);
