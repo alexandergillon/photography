@@ -1,10 +1,10 @@
 /**
- * @file Second script in a 'pipeline' of processing scripts to turn a directory-based
+ * @file Third script in a 'pipeline' of processing scripts to turn a directory-based
  * arrangement of images into a configuration for the website. This scripts reads in
  * the config from the last script and uploades the appropriate images to R2 if they
  * are not already there.
  *
- * Outputs an updated configuration file with R2 links that is used by the next script.
+ * Outputs an updated configuration file with R2 links that is used by the next script, convert_to_web_config.ts.
  */
 import fs from "fs";
 import { S3Client, HeadBucketCommand, HeadObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
@@ -25,11 +25,11 @@ async function main() {
         },
     });
     await checkBucketExists(r2Client);
-    const config = JSON.parse(fs.readFileSync("intermediate/r2_config.json").toString());
+    const config = JSON.parse(fs.readFileSync("intermediate/r2_config_thumb.json").toString());
     for (const series of config) {
         for (const row of series.rows) {
             for (const image of row) {
-                await resolveImage(r2Client, image);
+                await resolveImages(r2Client, image);
             }
         }
     }
@@ -53,38 +53,42 @@ async function checkBucketExists(r2Client) {
     }
 }
 /**
- * Resolves the image in R2 for an image in the config file. Adds the image's URL to the config image. This may
- * involve uploading the image to R2 if it does not already exist there.
+ * Resolves images (thumbnail and full-size) in R2 for an image in the config file. Adds the image's URL to the config
+ * image. This may involve uploading images to R2 if they do not already exist there.
  *
  * @param r2Client The R2 client.
- * @param image The image to resolve.
+ * @param image The image to resolve images for.
  */
-async function resolveImage(r2Client, image) {
-    if (!await existsInR2(r2Client, image)) {
-        await uploadToR2(r2Client, image);
+async function resolveImages(r2Client, image) {
+    if (!await existsInR2(r2Client, image.objectName)) {
+        await uploadToR2(r2Client, image.path, image.objectName);
+    }
+    if (!await existsInR2(r2Client, image.thumbObjectName)) {
+        await uploadToR2(r2Client, image.thumbPath, image.thumbObjectName);
     }
     image.r2Url = `https://${secrets.r2_public_url}/${image.objectName}`;
+    image.thumbR2URL = `https://${secrets.r2_public_url}/${image.thumbObjectName}`;
 }
 /**
- * Checks whether an image already exists in R2.
+ * Checks whether an object already exists in R2.
  *
  * @param r2Client The R2 client.
- * @param image The image to check.
+ * @param objectName The object name.
  * @return Whether that image exists in R2.
  */
-async function existsInR2(r2Client, image) {
+async function existsInR2(r2Client, objectName) {
     try {
         const command = new HeadObjectCommand({
             Bucket: secrets.bucket_name,
-            Key: image.objectName,
+            Key: objectName,
         });
         await r2Client.send(command);
-        console.log(`Exists in R2: ${image.objectName}`);
+        console.log(`Exists in R2: ${objectName}`);
         return true;
     }
     catch (error) {
         if (error.$metadata.httpStatusCode === 404) {
-            console.log(`Does not exist in R2: ${image.objectName}`);
+            console.log(`Does not exist in R2: ${objectName}`);
             return false;
         }
         else {
@@ -93,18 +97,19 @@ async function existsInR2(r2Client, image) {
     }
 }
 /**
- * Uploads an image to R2.
+ * Uploads an object to R2.
  * @param r2Client The R2 client.
- * @param image The image to upload.
+ * @param path Path of the file that will be the object.
+ * @param objectName Name of the object in R2.
  */
-async function uploadToR2(r2Client, image) {
+async function uploadToR2(r2Client, path, objectName) {
     const command = new PutObjectCommand({
         Bucket: secrets.bucket_name,
-        Key: image.objectName,
-        Body: fs.readFileSync(image.path),
+        Key: objectName,
+        Body: fs.readFileSync(path),
         ContentType: "image/png",
     });
-    console.log(`Uploading to R2: ${image.objectName}`);
+    console.log(`Uploading to R2: ${objectName}`);
     await r2Client.send(command);
 }
 process.exit(await main());

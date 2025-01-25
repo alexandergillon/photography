@@ -4,83 +4,7 @@
  * the directories / images and sorts them into rows, assigning R2 object names to each
  * image.
  *
- * Outputs a configuration file that is used by the next script, upload_to_r2.ts.
- *
- * Example input:
- *  /input
- *      /01 Chicago
- *          A1 street.png
- *          A2 boats.png
- *          A3 buildings.png
- *          name.txt - contains 'Chicago'
- *      /02 Starved Rock
- *          A1 flag.png
- *          A2 bridge.png
- *          B1 clearing.png
- *          B2 trees.png
- *          B3 river.png
- *          name.txt - contains 'Starved Rock State Park'
- *
- * Example output:
- * [
- *     {
- *         "name": "Chicago",
- *         "rows": [
- *             [
- *                 {
- *                     "path": "input/01 Chicago/A1 chicago street.png",
- *                     "alt_text": "chicago street",
- *                     "objectName": "0-Chicago/A1_chicago_street.png"
- *                 },
- *                 {
- *                     "path": "input/01 Chicago/A2 two boats.png",
- *                     "alt_text": "two boats",
- *                     "objectName": "0-Chicago/A2_two_boats.png"
- *                 },
- *                 {
- *                     "path": "input/01 Chicago/A3 group of chicago buildings.png",
- *                     "alt_text": "group of chicago buildings",
- *                     "objectName": "0-Chicago/A3_group_of_chicago_buildings.png"
- *                 }
- *             ]
- *         ]
- *     },
- *     {
- *         "name": "Starved Rock State Park",
- *         "rows": [
- *             [
- *                 {
- *                     "path": "input/02 Starved Rock/A1 canyon with flag.png",
- *                     "alt_text": "canyon with flag",
- *                     "objectName": "1-Starved_Rock_State_Park/A1_canyon_with_flag.png"
- *                 },
- *                 {
- *                     "path": "input/02 Starved Rock/A2 bridge.png",
- *                     "alt_text": "bridge",
- *                     "objectName": "1-Starved_Rock_State_Park/A2_bridge.png"
- *                 }
- *             ],
- *             [
- *                 {
- *                     "path": "input/02 Starved Rock/B1 clearing.png",
- *                     "alt_text": "clearing",
- *                     "objectName": "1-Starved_Rock_State_Park/B1_clearing.png"
- *                 },
- *                 {
- *                     "path": "input/02 Starved Rock/B2 trees.png",
- *                     "alt_text": "trees",
- *                     "objectName": "1-Starved_Rock_State_Park/B2_trees.png"
- *                 },
- *                 {
- *                     "path": "input/02 Starved Rock/B3 trees across river.png",
- *                     "alt_text": "trees across river",
- *                     "objectName": "1-Starved_Rock_State_Park/B3_trees_across_river.png"
- *                 }
- *             ]
- *         ]
- *     }
- * ]
- *
+ * Outputs a configuration file that is used by the next script, create_thumbs.ts.
  */
 import fs from "fs";
 import * as process from "process";
@@ -125,6 +49,7 @@ function directory_to_r2_config(index, directory) {
                 alt_text: altText(image),
                 // Index ensures uniqueness between series with the same name
                 objectName: `${index}-${sanitize(seriesName)}/${sanitize(image)}`,
+                thumbObjectName: `${index}-${sanitize(seriesName)}/${sanitize(image.replace(/\.png$/, "_thumb.jpg"))}`,
             };
         });
         configRows.push(configRow);
@@ -173,6 +98,7 @@ function validateConfig(config) {
         for (const row of series.rows) {
             for (const object of row) {
                 validateObjectName(object.objectName);
+                validateObjectName(object.thumbObjectName);
                 if (seenObjects.has(object.objectName))
                     throw new Error(`Object name ${object.objectName} is not unique`);
                 seenObjects.add(object.objectName);

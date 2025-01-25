@@ -1,25 +1,31 @@
 /** Types for various scripts and configuration files. */
 
 type BaseImage = {
-    path: string,           // path to image, from /scripts
-    alt_text: string,       // alt text for the image
-    objectName: string,     // object name for the image in R2
+    path: string,               // path to image, from /scripts
+    alt_text: string,           // alt text for the image
+    objectName: string,         // object name for the image in R2
+    thumbObjectName: string,    // object name for the image's thumbnail in R2
 };
 
-type UploadedImage = BaseImage & {
-    r2Url: string,          // URL to image, publicly accessible via the web
+type ThumbImage = BaseImage & {
+    thumbPath: string,          // path to thumbnail image, from /scripts
+}
+
+type UploadedImage = ThumbImage & {
+    r2Url: string,              // URL to image
+    thumbR2URL: string,         // URL to the image thumbnail
 }
 
 type WebConfigImage = {
-    alt: string;            // alt text for the image
-    src: string;            // URL to image
+    alt: string;                // alt text for the image
+    src: string;                // URL to image
 }
 
 type ImageRow<T> = T[];
 
 type ImageSeries<T> = {
-    title: string,          // name of the image series
-    rows: ImageRow<T>[],    // image rows
+    title: string,              // name of the image series
+    rows: ImageRow<T>[],        // image rows
 };
 
 type Gallery<T> = ImageSeries<T>[];

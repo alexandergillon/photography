@@ -1,5 +1,5 @@
 /**
- * @file Third script in a 'pipeline' of processing scripts to turn a directory-based
+ * @file Fourth script in a 'pipeline' of processing scripts to turn a directory-based
  * arrangement of images into a configuration for the website. This 'script' (if you
  * can call it that, considering how simple it is) converts the uploaded config into
  * one accepted by the frontend.
@@ -18,6 +18,7 @@ function main() {
                 return {
                     alt: image.alt_text,
                     src: image.r2Url,
+                    thumb: image.thumbR2URL,
                 }
             }))
         }
