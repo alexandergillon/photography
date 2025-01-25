@@ -28,10 +28,17 @@ async function main() {
  */
 async function createThumb(image) {
     const thumbName = `${image.path.replace(/\.png$/, " thumbnail")}`;
-    const png = await Jimp.read(image.path);
-    png.scaleToFit({ w: 1920, h: 1920 });
-    await png.write(`${thumbName}.jpg`); // Jimp requires an extension, so we need to specify the path this way else TS complains
+    try {
+        // Skip creating thumbnail if it's already there
+        await Jimp.read(`${thumbName}.jpg`); // throws if file does not exist
+        console.log(`Found thumbnail for image ${image.path}`);
+    }
+    catch (ignore) {
+        const png = await Jimp.read(image.path);
+        png.scaleToFit({ w: 1920, h: 1920 });
+        await png.write(`${thumbName}.jpg`); // Jimp requires an extension, so we need to specify the path this way else TS complains
+        console.log(`Created thumbnail ${thumbName}.jpg for image ${image.path}`);
+    }
     image.thumbPath = `${thumbName}.jpg`;
-    console.log(`Created thumbnail ${thumbName}.jpg for image ${image.path}`);
 }
 process.exit(await main());
