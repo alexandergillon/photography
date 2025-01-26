@@ -23,6 +23,58 @@
 }
 
 body {
+    margin: 0;
+}
+
+nav {
+    height: 2.5rem;
+    margin: 0.75rem;
+
+    ul {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    li {
+        float: right;
+        height: 100%;
+        aspect-ratio: 1 / 1;
+    }
+
+    a {
+        display: inline-block;
+        height: 80%;
+        margin: 10%;
+    }
+
+    div {
+        height: 100%;
+        position: relative;
+    }
+
+    img {
+        height: 100%;
+    }
+}
+
+.navBarLogo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    transition: 0.25s;
+}
+
+.navBarLogo:hover {
+    opacity: 0;
+    transition: 0.25s;
+}
+
+#content {
     width: 80%;
     margin: auto;
 }
