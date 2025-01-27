@@ -143,17 +143,14 @@ nav {
             transition: 0.25s;
         }
 
-        a:hover {
-            color: #89CFF1;
-            transition: 0.25s;
-        }
-
         .externalLinkIcon {
             position: relative;
             top: -0.1rem; /* link icon is not really 'centered' at the source in the way that we want it, so move it up a little */
             vertical-align: middle;
             height: 0.75rem;
             margin-left: 0.35rem;
+            filter: invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
+            transition: 0.25s;
         }
 
         /* copyright icon uses a different font, adjusted a little so it sits vertically centered */
@@ -164,5 +161,15 @@ nav {
             font-size: 1.2rem;
             font-family: Arial, sans-serif;
         }
+    }
+
+    span:hover a {
+        color: #89CFF1;
+        transition: 0.25s;
+    }
+
+    span:hover .externalLinkIcon {
+        filter: invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
+        transition: 0.25s;
     }
 }
