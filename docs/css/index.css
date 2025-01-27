@@ -62,24 +62,19 @@ nav {
         position: relative;
     }
 
+    .navBarIcon {
+        filter: brightness(0) saturate(100%);
+        transition: 0.25s;
+    }
+
+    .navBarIcon:hover {
+        filter: none;
+        transition: 0.25s;
+    }
+
     img {
         height: 100%;
     }
-}
-
-.navBarLogo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 1;
-    transition: 0.25s;
-}
-
-.navBarLogo:hover {
-    opacity: 0;
-    transition: 0.25s;
 }
 
 #content {
