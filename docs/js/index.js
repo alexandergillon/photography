@@ -51,7 +51,7 @@ function addImageSeries(imageSeries) {
     seriesDiv.classList.add("imageSeries");
     galleryDiv.appendChild(seriesDiv);
     const title = document.createElement("h2");
-    title.classList.add("mainFont", "textColor", "imageSeriesTitle");
+    title.classList.add("mainFontWide", "textColor", "imageSeriesTitle");
     title.textContent = imageSeries.title;
     seriesDiv.appendChild(title);
     const rowsDiv = document.createElement("div");

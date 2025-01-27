@@ -6,6 +6,12 @@
 .mainFont {
     font-family: "Wasted Vindey", serif;
     font-variant-ligatures: none;
+    letter-spacing: 0.02rem;
+}
+
+.mainFontWide {
+    font-family: "Wasted Vindey", serif;
+    font-variant-ligatures: none;
     letter-spacing: 0.15rem;
 }
 
@@ -38,6 +44,7 @@ nav {
     }
 
     li {
+        display: inline-block;
         float: right;
         height: 100%;
         margin: 0 0.4rem;
@@ -81,8 +88,8 @@ nav {
 }
 
 #pageTitle {
-    margin-top: 3rem;
-    margin-bottom: 5rem;
+    margin: 3rem auto 5rem;
+    text-align: center;
     font-weight: normal;
     font-size: 6rem;
 }
@@ -106,4 +113,61 @@ nav {
 .imageSeriesImage {
     object-fit: contain;
     width: 100%;
+}
+
+#footer {
+    height: 2.5rem;
+    margin: 3rem 1rem;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        text-align: center;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+    /* divider between footer elements */
+    li + li:before {
+        position: relative;
+        top: 0.1rem; /* slash sits above the text baseline, but we want it to be vertically centered with text */
+        font-size: 1.3rem;
+        content: "/";
+    }
+
+    span {
+        margin: 0 0.5rem;
+        font-size: 1.1rem;
+
+        a {
+            text-decoration: none;
+            color: #3776A1;
+            transition: 0.25s;
+        }
+
+        a:hover {
+            color: #89CFF1;
+            transition: 0.25s;
+        }
+
+        .externalLinkIcon {
+            position: relative;
+            top: -0.1rem; /* link icon is not really 'centered' at the source in the way that we want it, so move it up a little */
+            vertical-align: middle;
+            height: 0.75rem;
+            margin-left: 0.35rem;
+        }
+
+        /* copyright icon uses a different font, adjusted a little so it sits vertically centered */
+        #copyright {
+            position: relative;
+            top: 0.05rem;
+            margin: 0;
+            font-size: 1.2rem;
+            font-family: Arial, sans-serif;
+        }
+    }
 }
