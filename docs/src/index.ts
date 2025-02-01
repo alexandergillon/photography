@@ -14,7 +14,8 @@ fetch("./config.json")
     .then(response => response.json())
     .then((json: Gallery) => loadAllImages(json))
     .then(gallery => gallery.forEach((imageSeries, i) => addImageSeries(imageSeries, i)))
-    .then(() => mediumZoom(".imageSeriesImage", { background: window.getComputedStyle(document.body).backgroundColor }));
+    .then(() => mediumZoom(".imageSeriesImage", { background: window.getComputedStyle(document.body).backgroundColor }))
+    .then(() => addResizeListener());
 
 /**
  * Loads all images in the gallery. Images are attached to the gallery in-place.
@@ -86,7 +87,7 @@ function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
     openCloseButton.checked = true;
     openCloseButton.addEventListener('change', event => {
         const checked = (event.target as HTMLInputElement).checked;
-        rowsDiv.style.maxHeight = checked ? `${rowsDiv.scrollHeight}px` : "0px";
+        rowsDiv.style.setProperty("--max-height", checked ? `${rowsDiv.scrollHeight}px` : "0px");
     });
     titleDiv.appendChild(openCloseButton);
 
@@ -104,7 +105,7 @@ function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
         rowsDiv.appendChild(createRow(row));
     }
 
-    rowsDiv.style.maxHeight = `${rowsDiv.scrollHeight}px`; // needs to happen after images are added to be correct
+    rowsDiv.style.setProperty("--max-height", `${rowsDiv.scrollHeight}px`); // needs to happen after images are added to be correct
 }
 
 /**
@@ -131,4 +132,16 @@ function createRow(row : LoadedImage[]): HTMLDivElement {
     // Images are already created and loaded, just need to add them to the row.
     row.forEach(image => rowDiv.appendChild(image));
     return rowDiv;
+}
+
+/**
+ * Adds resize listener to the window. This is needed because resizing the window causes the sizes of images to change,
+ * hence the size of the divs containing them also needs to change accordingly.
+ */
+function addResizeListener() {
+    window.addEventListener("resize", () => {
+        for (const rowsDiv of document.querySelectorAll(".imageSeriesRows")) {
+            (rowsDiv as HTMLDivElement).style.setProperty("--max-height", `${rowsDiv.scrollHeight}px`);
+        }
+    });
 }

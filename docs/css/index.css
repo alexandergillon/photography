@@ -122,8 +122,10 @@ nav {
 }
 
 .imageSeriesRows {
-    overflow: hidden;
     --transition-time: 0; /* set in Js */
+    --max-height: 0; /* set in JS */
+    overflow: hidden;
+    max-height: var(--max-height);
     transition: max-height var(--transition-time) ease-in-out;
 }
 
