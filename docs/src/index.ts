@@ -13,7 +13,7 @@ declare const mediumZoom: any;
 fetch("./config.json")
     .then(response => response.json())
     .then((json: Gallery) => loadAllImages(json))
-    .then(gallery => gallery.forEach(imageSeries => addImageSeries(imageSeries)))
+    .then(gallery => gallery.forEach((imageSeries, i) => addImageSeries(imageSeries, i)))
     .then(() => mediumZoom(".imageSeriesImage", { background: window.getComputedStyle(document.body).backgroundColor }));
 
 /**
@@ -58,24 +58,53 @@ async function loadAllImages(gallery: Gallery): Promise<LoadedGallery> {
 /**
  * Adds an image series to the gallery.
  * @param imageSeries The image series to add.
+ * @param i The index of the image series. Needed to generate unique identifiers.
  */
-function addImageSeries(imageSeries: LoadedImageSeries) {
+function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
     const seriesDiv = document.createElement("div");
     seriesDiv.classList.add("imageSeries");
     galleryDiv.appendChild(seriesDiv);
 
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("imageSeriesTitleDiv");
+    seriesDiv.appendChild(titleDiv);
+
     const title = document.createElement("h2");
     title.classList.add("mainFontWide", "textColor", "imageSeriesTitle");
     title.textContent = imageSeries.title;
-    seriesDiv.appendChild(title);
+    titleDiv.appendChild(title);
 
     const rowsDiv = document.createElement("div");
     rowsDiv.classList.add("imageSeriesRows");
+    rowsDiv.style.setProperty("--transition-time", `${0.5 + 0.25 * imageSeries.rows.length}s`);
     seriesDiv.appendChild(rowsDiv);
+
+    const openCloseButton = document.createElement("input");
+    openCloseButton.classList.add("imageSeriesDropdownCheckbox");
+    openCloseButton.id = `label${i}`;
+    openCloseButton.type = "checkbox";
+    openCloseButton.checked = true;
+    openCloseButton.addEventListener('change', event => {
+        const checked = (event.target as HTMLInputElement).checked;
+        rowsDiv.style.maxHeight = checked ? `${rowsDiv.scrollHeight}px` : "0px";
+    });
+    titleDiv.appendChild(openCloseButton);
+
+    const label = document.createElement("label");
+    label.classList.add("imageSeriesDropdownLabel");
+    label.htmlFor = `label${i}`;
+    titleDiv.appendChild(label);
+
+    const labelImage = document.createElement("img");
+    labelImage.classList.add("imageSeriesDropdownLabelImage");
+    labelImage.src = "images/dropdown.svg";
+    label.appendChild(labelImage);
 
     for (const row of imageSeries.rows) {
         rowsDiv.appendChild(createRow(row));
     }
+
+    rowsDiv.style.maxHeight = `${rowsDiv.scrollHeight}px`; // needs to happen after images are added to be correct
 }
 
 /**

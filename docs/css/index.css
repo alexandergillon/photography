@@ -89,8 +89,10 @@ nav {
     font-size: 6rem;
 }
 
-.imageSeries {
-    margin-bottom: 8rem;
+.imageSeriesTitleDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .imageSeriesTitle {
@@ -98,11 +100,42 @@ nav {
     font-size: 2.25rem;
 }
 
+.imageSeriesDropdownCheckbox {
+    display: none;
+}
+
+.imageSeriesDropdownLabelImage {
+    height: 1rem;
+    transform: scaleY(1);
+    filter: none;
+    transition: 0.25s ease-in-out;
+}
+
+.imageSeriesDropdownLabelImage:hover {
+    filter: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
+    transition: 0.25s ease-in-out;
+}
+
+:checked + .imageSeriesDropdownLabel > .imageSeriesDropdownLabelImage {
+    transform: scaleY(-1);
+    transition: 0.25s ease-in-out;
+}
+
+.imageSeriesRows {
+    overflow: hidden;
+    --transition-time: 0; /* set in Js */
+    transition: max-height var(--transition-time) ease-in-out;
+}
+
 .imageSeriesRow {
     display: grid;
     column-gap: 0.5em;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+}
+
+.imageSeriesRow:last-child {
+    margin-bottom: 3rem;
 }
 
 .imageSeriesImage {
@@ -149,7 +182,7 @@ nav {
             vertical-align: middle;
             height: 0.75rem;
             margin-left: 0.35rem;
-            filter: invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
+            filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
             transition: 0.25s;
         }
 
@@ -169,7 +202,7 @@ nav {
     }
 
     span:hover .externalLinkIcon {
-        filter: invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
+        filter: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
         transition: 0.25s;
     }
 }
