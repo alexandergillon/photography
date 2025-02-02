@@ -76,7 +76,7 @@ function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
     titleDiv.appendChild(title);
 
     const rowsDiv = document.createElement("div");
-    rowsDiv.classList.add("imageSeriesRows");
+    rowsDiv.classList.add("imageSeriesRows", "expanded");
     rowsDiv.style.setProperty("--transition-time", `${0.5 + 0.25 * imageSeries.rows.length}s`);
     seriesDiv.appendChild(rowsDiv);
 
@@ -87,7 +87,7 @@ function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
     openCloseButton.checked = true;
     openCloseButton.addEventListener('change', event => {
         const checked = (event.target as HTMLInputElement).checked;
-        rowsDiv.style.setProperty("--max-height", checked ? `${rowsDiv.scrollHeight}px` : "0px");
+        checked ? rowsDiv.classList.add("expanded") : rowsDiv.classList.remove("expanded");
     });
     titleDiv.appendChild(openCloseButton);
 

@@ -60,7 +60,7 @@ function addImageSeries(imageSeries, i) {
     title.textContent = imageSeries.title;
     titleDiv.appendChild(title);
     const rowsDiv = document.createElement("div");
-    rowsDiv.classList.add("imageSeriesRows");
+    rowsDiv.classList.add("imageSeriesRows", "expanded");
     rowsDiv.style.setProperty("--transition-time", `${0.5 + 0.25 * imageSeries.rows.length}s`);
     seriesDiv.appendChild(rowsDiv);
     const openCloseButton = document.createElement("input");
@@ -70,7 +70,7 @@ function addImageSeries(imageSeries, i) {
     openCloseButton.checked = true;
     openCloseButton.addEventListener('change', event => {
         const checked = event.target.checked;
-        rowsDiv.style.setProperty("--max-height", checked ? `${rowsDiv.scrollHeight}px` : "0px");
+        checked ? rowsDiv.classList.add("expanded") : rowsDiv.classList.remove("expanded");
     });
     titleDiv.appendChild(openCloseButton);
     const label = document.createElement("label");

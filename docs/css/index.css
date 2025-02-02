@@ -127,11 +127,14 @@ nav {
 }
 
 .imageSeriesRows {
-    --transition-time: 0; /* set in Js */
-    --max-height: 0; /* set in JS */
     overflow: hidden;
-    max-height: var(--max-height);
-    transition: max-height var(--transition-time) ease-in-out;
+    max-height: 0;
+    transition: max-height var(--transition-time) ease-in-out; /* --transition-time set in JS */
+}
+
+.imageSeriesRows.expanded {
+    max-height: var(--max-height); /* --max-height set in JS */
+    transition: max-height var(--transition-time) ease-in-out; /* --transition-time set in JS */
 }
 
 .imageSeriesRow {
