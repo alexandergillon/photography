@@ -66,19 +66,31 @@ function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
     seriesDiv.classList.add("imageSeries");
     galleryDiv.appendChild(seriesDiv);
 
-    const titleDiv = document.createElement("div");
-    titleDiv.classList.add("imageSeriesTitleDiv");
-    seriesDiv.appendChild(titleDiv);
-
-    const title = document.createElement("h2");
-    title.classList.add("mainFontWide", "textColor", "imageSeriesTitle");
-    title.textContent = imageSeries.title;
-    titleDiv.appendChild(title);
-
     const rowsDiv = document.createElement("div");
     rowsDiv.classList.add("imageSeriesRows", "expanded");
     rowsDiv.style.setProperty("--transition-time", `${0.5 + 0.25 * imageSeries.rows.length}s`);
+
+    const titleDiv = createTitle(imageSeries, i, rowsDiv);
+    seriesDiv.appendChild(titleDiv);
     seriesDiv.appendChild(rowsDiv);
+
+    for (const row of imageSeries.rows) {
+        rowsDiv.appendChild(createRow(row));
+    }
+
+    rowsDiv.style.setProperty("--max-height", `${rowsDiv.scrollHeight}px`); // needs to happen after images are added to be correct
+}
+
+/**
+ * Creates the title for an image series.
+ * @param imageSeries The image series.
+ * @param i The index of the image series. Needed to generate unique identifiers.
+ * @param rowsDiv The HTML <div> which will contain the image rows for this div. Needed to set up the dropdown button,
+ * which interacts with that <div>.
+ */
+function createTitle(imageSeries: LoadedImageSeries, i: number, rowsDiv: HTMLDivElement): HTMLDivElement {
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("imageSeriesTitleDiv");
 
     const openCloseButton = document.createElement("input");
     openCloseButton.classList.add("imageSeriesDropdownCheckbox");
@@ -91,21 +103,25 @@ function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
     });
     titleDiv.appendChild(openCloseButton);
 
-    const label = document.createElement("label");
-    label.classList.add("imageSeriesDropdownLabel");
-    label.htmlFor = `label${i}`;
-    titleDiv.appendChild(label);
+    // both title and dropdown button have labels, so that both can be used to open/close dropdown
+    const titleLabel = document.createElement("label");
+    titleLabel.classList.add("imageSeriesDropdownLabel");
+    titleLabel.htmlFor = `label${i}`;
+    titleDiv.appendChild(titleLabel);
+    const dropdownLabel = titleLabel.cloneNode(true);
+    titleDiv.appendChild(dropdownLabel);
 
-    const labelImage = document.createElement("img");
-    labelImage.classList.add("imageSeriesDropdownLabelImage");
-    labelImage.src = "images/dropdown.svg";
-    label.appendChild(labelImage);
+    const title = document.createElement("h2");
+    title.classList.add("mainFontWide", "textColor", "imageSeriesTitle");
+    title.textContent = imageSeries.title;
+    titleLabel.appendChild(title);
+    const dropdown = document.createElement("img");
+    dropdown.classList.add("imageSeriesDropdownLabelImage");
+    dropdown.src = "images/dropdown.svg";
+    dropdown.alt = `expand/collapse ${imageSeries.title}`;
+    dropdownLabel.appendChild(dropdown);
 
-    for (const row of imageSeries.rows) {
-        rowsDiv.appendChild(createRow(row));
-    }
-
-    rowsDiv.style.setProperty("--max-height", `${rowsDiv.scrollHeight}px`); // needs to happen after images are added to be correct
+    return titleDiv;
 }
 
 /**

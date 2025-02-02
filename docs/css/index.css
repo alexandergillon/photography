@@ -121,7 +121,7 @@ nav {
     transition: 0.25s ease-in-out;
 }
 
-:checked + .imageSeriesDropdownLabel > .imageSeriesDropdownLabelImage {
+:checked ~ .imageSeriesDropdownLabel > .imageSeriesDropdownLabelImage {
     transform: scaleY(-1);
     transition: 0.25s ease-in-out;
 }
