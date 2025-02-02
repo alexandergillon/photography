@@ -183,40 +183,52 @@ nav {
     span {
         margin: 0 0.5rem;
         font-size: 1.1rem;
-
-        a {
-            text-decoration: none;
-            color: #3776A1;
-            transition: 0.25s;
-        }
-
-        .externalLinkIcon {
-            position: relative;
-            top: -0.1rem; /* link icon is not really 'centered' at the source in the way that we want it, so move it up a little */
-            vertical-align: middle;
-            height: 0.75rem;
-            margin-left: 0.35rem;
-            filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
-            transition: 0.25s;
-        }
-
-        /* copyright icon uses a different font, adjusted a little so it sits vertically centered */
-        #copyright {
-            position: relative;
-            top: 0.05rem;
-            margin: 0;
-            font-size: 1.2rem;
-            font-family: Arial, sans-serif;
-        }
     }
 
-    span:hover a {
+    /* copyright icon uses a different font, adjusted a little so it sits vertically centered */
+    #copyright {
+        position: relative;
+        top: 0.05rem;
+        margin: 0;
+        font-size: 1.2rem;
+        font-family: Arial, sans-serif;
+    }
+}
+
+#footer, .noScriptText {
+    a {
+        text-decoration: none;
+        color: #3776A1;
+        transition: 0.25s;
+    }
+
+    a:hover {
         color: #89CFF1;
         transition: 0.25s;
     }
 
-    span:hover .externalLinkIcon {
+    .externalLinkIcon {
+        position: relative;
+        top: -0.1rem; /* link icon is not really 'centered' at the source in the way that we want it, so move it up a little */
+        vertical-align: middle;
+        height: 0.75rem;
+        margin-left: 0.35rem;
+        margin-right: 0.1rem;
+        filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
+        transition: 0.25s;
+    }
+
+    :hover > .externalLinkIcon {
         filter: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
         transition: 0.25s;
     }
+}
+
+.noScriptText {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.noScriptText:last-child {
+    margin-bottom: 7rem;
 }
