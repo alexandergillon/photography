@@ -7,18 +7,20 @@ const galleryDiv = document.getElementById("gallery");
 fetch("./config.json")
     .then(response => response.json())
     .then((json) => loadAllImages(json))
-    .then(gallery => gallery.forEach((imageSeries, i) => addImageSeries(imageSeries, i)))
-    .then(() => mediumZoom(".imageSeriesImage", { background: window.getComputedStyle(document.body).backgroundColor }))
-    .then(() => addResizeListener());
+    .then(gallery => {
+    addResizeListener();
+    displayGallery(gallery);
+});
 /**
  * Loads all images in the gallery. Images are attached to the gallery in-place.
  * @param gallery The gallery configuration.
- * @return That gallery, with all images created as HTML images, with all images loaded (or errored, etc.).
+ * @return That gallery, with all images created as HTML images. Each image series has a promise which resolves when
+ * that image series is loaded.
  */
-async function loadAllImages(gallery) {
-    const imageLoadPromises = [];
+function loadAllImages(gallery) {
     const loadedGallery = [];
     for (const imageSeries of gallery) {
+        const imageLoadPromises = [];
         const loadedRows = [];
         for (const row of imageSeries.rows) {
             const loadedRow = [];
@@ -38,10 +40,16 @@ async function loadAllImages(gallery) {
         loadedGallery.push({
             title: imageSeries.title,
             rows: loadedRows,
+            isLoaded: Promise.all(imageLoadPromises),
         });
     }
-    await Promise.all(imageLoadPromises);
     return loadedGallery;
+}
+async function displayGallery(gallery) {
+    for (const [i, imageSeries] of gallery.entries()) {
+        await imageSeries.isLoaded;
+        addImageSeries(imageSeries, i);
+    }
 }
 /**
  * Adds an image series to the gallery.
@@ -120,8 +128,11 @@ function createRow(row) {
     const aspects = row.map(image => image.naturalWidth / image.naturalHeight);
     const gridTemplateColumns = aspects.map(aspect => `${aspect}fr`).join(" ");
     rowDiv.style.setProperty("grid-template-columns", gridTemplateColumns);
-    // Images are already created and loaded, just need to add them to the row.
-    row.forEach(image => rowDiv.appendChild(image));
+    // Images are already created and loaded, just need to add medium-zoom and add them to the row.
+    for (const image of row) {
+        mediumZoom(image, { background: window.getComputedStyle(document.body).backgroundColor });
+        rowDiv.appendChild(image);
+    }
     return rowDiv;
 }
 /**

@@ -13,20 +13,22 @@ declare const mediumZoom: any;
 fetch("./config.json")
     .then(response => response.json())
     .then((json: Gallery) => loadAllImages(json))
-    .then(gallery => gallery.forEach((imageSeries, i) => addImageSeries(imageSeries, i)))
-    .then(() => mediumZoom(".imageSeriesImage", { background: window.getComputedStyle(document.body).backgroundColor }))
-    .then(() => addResizeListener());
+    .then(gallery => {
+        addResizeListener();
+        displayGallery(gallery);
+    });
 
 /**
  * Loads all images in the gallery. Images are attached to the gallery in-place.
  * @param gallery The gallery configuration.
- * @return That gallery, with all images created as HTML images, with all images loaded (or errored, etc.).
+ * @return That gallery, with all images created as HTML images. Each image series has a promise which resolves when
+ * that image series is loaded.
  */
-async function loadAllImages(gallery: Gallery): Promise<LoadedGallery> {
-    const imageLoadPromises: Promise<void>[] = [];
+function loadAllImages(gallery: Gallery): LoadedGallery {
     const loadedGallery: LoadedGallery = [];
 
     for (const imageSeries of gallery) {
+        const imageLoadPromises: Promise<void>[] = [];
         const loadedRows = [];
         for (const row of imageSeries.rows) {
             const loadedRow = [];
@@ -49,11 +51,22 @@ async function loadAllImages(gallery: Gallery): Promise<LoadedGallery> {
         loadedGallery.push({
             title: imageSeries.title,
             rows: loadedRows,
+            isLoaded: Promise.all(imageLoadPromises),
         });
     }
 
-    await Promise.all(imageLoadPromises);
     return loadedGallery;
+}
+
+/**
+ * Displays the gallery on the page, image series by image series, as they load.
+ * @param gallery The gallery.
+ */
+async function displayGallery(gallery: LoadedGallery) {
+    for (const [i, imageSeries] of gallery.entries()) {
+        await imageSeries.isLoaded;
+        addImageSeries(imageSeries, i);
+    }
 }
 
 /**
@@ -145,8 +158,11 @@ function createRow(row : LoadedImage[]): HTMLDivElement {
     const gridTemplateColumns = aspects.map(aspect => `${aspect}fr`).join(" ");
     rowDiv.style.setProperty("grid-template-columns", gridTemplateColumns);
 
-    // Images are already created and loaded, just need to add them to the row.
-    row.forEach(image => rowDiv.appendChild(image));
+    // Images are already created and loaded, just need to add medium-zoom and add them to the row.
+    for (const image of row) {
+        mediumZoom(image, { background: window.getComputedStyle(document.body).backgroundColor });
+        rowDiv.appendChild(image);
+    }
     return rowDiv;
 }
 

@@ -41,6 +41,7 @@ export type LoadedImageRow = LoadedImage[];
 export type LoadedImageSeries = {
     title: string;
     rows: LoadedImageRow[];
+    isLoaded: Promise<void[]>; // resolves when all images in the series are actually loaded
 }
 
 /** Loaded equivalent of a Gallery. */
