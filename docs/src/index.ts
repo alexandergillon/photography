@@ -63,18 +63,37 @@ function loadAllImages(gallery: Gallery): LoadedGallery {
  * @param gallery The gallery.
  */
 async function displayGallery(gallery: LoadedGallery) {
+    const intersectionObserver = createIntersectionObserver();
     for (const [i, imageSeries] of gallery.entries()) {
         await imageSeries.isLoaded;
-        addImageSeries(imageSeries, i);
+        addImageSeries(imageSeries, i, intersectionObserver);
     }
+}
+
+/**
+ * Creates an interaction observer set up to play fade-in animations for image series.
+ * @return The interaction observer.
+ */
+function createIntersectionObserver() {
+    let intersectionObserver: IntersectionObserver;
+    intersectionObserver = new IntersectionObserver(entries => {
+        // interaction observer fires when registered - isIntersecting is make sure we only add the animation when
+        // we fire at the 0.1 threshold value
+        for (const imageSeries of entries.filter(entry => entry.isIntersecting).map(entry => entry.target as HTMLDivElement)) {
+            imageSeries.classList.add("imageSeriesLoadAnimation");
+            intersectionObserver.unobserve(imageSeries);
+        }
+    }, { threshold: 0.1 });
+    return intersectionObserver;
 }
 
 /**
  * Adds an image series to the gallery.
  * @param imageSeries The image series to add.
  * @param i The index of the image series. Needed to generate unique identifiers.
+ * @param interactionObserver The interaction observer, for image series fade-in animations.
  */
-function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
+function addImageSeries(imageSeries: LoadedImageSeries, i: number, interactionObserver: IntersectionObserver) {
     const seriesDiv = document.createElement("div");
     seriesDiv.classList.add("imageSeries");
     galleryDiv.appendChild(seriesDiv);
@@ -92,6 +111,7 @@ function addImageSeries(imageSeries: LoadedImageSeries, i: number) {
     }
 
     rowsDiv.style.setProperty("--max-height", `${rowsDiv.scrollHeight}px`); // needs to happen after images are added to be correct
+    interactionObserver.observe(seriesDiv);
 }
 
 /**

@@ -91,6 +91,7 @@ nav {
 
 .imageSeries {
     margin: 2rem 0;
+    opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
 }
 
 .imageSeriesTitleDiv {
@@ -231,4 +232,23 @@ nav {
 
 .noScriptText:last-child {
     margin-bottom: 7rem;
+}
+
+.imageSeriesLoadAnimation {
+    animation-duration: 0.5s;
+    animation-name: image-series-load-animation;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards; /* keeps opacity at 1 after animation is done */
+}
+
+@keyframes image-series-load-animation {
+    0% {
+        opacity: 0;
+        translate: 0 -1rem;
+    }
+
+    100% {
+        opacity: 1;
+        translate: 0 0;
+    }
 }
