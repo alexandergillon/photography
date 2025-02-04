@@ -3,14 +3,15 @@
  */
 /** The gallery div, for adding image series to. */
 const galleryDiv = document.getElementById("gallery");
+/** From OverlayScrollbars, set in js/lib/overlayscrollbars.js. */
+const { OverlayScrollbars, ClickScrollPlugin } = OverlayScrollbarsGlobal;
 /** Loads in all image series and arranges them on the page. */
-fetch("./config.json")
+initializeScrollbar();
+addResizeListener();
+fetch("config.json")
     .then(response => response.json())
     .then((json) => loadAllImages(json))
-    .then(gallery => {
-    addResizeListener();
-    displayGallery(gallery);
-});
+    .then(gallery => displayGallery(gallery));
 /**
  * Loads all images in the gallery. Images are attached to the gallery in-place.
  * @param gallery The gallery configuration.
@@ -157,6 +158,15 @@ function createRow(row) {
         rowDiv.appendChild(image);
     }
     return rowDiv;
+}
+/** Initializes the scrollbar. */
+function initializeScrollbar() {
+    OverlayScrollbars.plugin(ClickScrollPlugin); // needed for clickScroll: true
+    OverlayScrollbars(document.body, {
+        scrollbars: {
+            clickScroll: true,
+        },
+    });
 }
 /**
  * Adds resize listener to the window. This is needed because resizing the window causes the sizes of images to change,

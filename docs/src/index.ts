@@ -2,21 +2,24 @@
  * @file Main code for laying out the gallery. Loads all images and arranges them on the page.
  */
 
-import type {Gallery, LoadedGallery, LoadedImage, LoadedImageSeries} from "./types";
+import type {Gallery, LoadedGallery, LoadedImage, LoadedImageSeries} from "types";
 
 /** The gallery div, for adding image series to. */
 const galleryDiv = document.getElementById("gallery")!;
-/** From medium-zoom, loaded with the page. */
+/** From medium-zoom, set in another script. */
 declare const mediumZoom: any;
+/** From OverlayScrollbars, set in js/lib/medium-zoom.js. */
+declare const OverlayScrollbarsGlobal: any;
+/** From OverlayScrollbars, set in js/lib/overlayscrollbars.js. */
+const { OverlayScrollbars, ClickScrollPlugin } = OverlayScrollbarsGlobal;
 
 /** Loads in all image series and arranges them on the page. */
-fetch("./config.json")
+initializeScrollbar();
+addResizeListener();
+fetch("config.json")
     .then(response => response.json())
     .then((json: Gallery) => loadAllImages(json))
-    .then(gallery => {
-        addResizeListener();
-        displayGallery(gallery);
-    });
+    .then(gallery => displayGallery(gallery));
 
 /**
  * Loads all images in the gallery. Images are attached to the gallery in-place.
@@ -184,6 +187,16 @@ function createRow(row : LoadedImage[]): HTMLDivElement {
         rowDiv.appendChild(image);
     }
     return rowDiv;
+}
+
+/** Initializes the scrollbar. */
+function initializeScrollbar() {
+    OverlayScrollbars.plugin(ClickScrollPlugin); // needed for clickScroll: true
+    OverlayScrollbars(document.body, {
+        scrollbars: {
+            clickScroll: true,
+        },
+    });
 }
 
 /**

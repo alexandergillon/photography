@@ -34,7 +34,7 @@ body {
 
 nav {
     height: 2.5rem;
-    margin: 0.8rem;
+    margin: 0.8rem calc(0.8rem + 5px) 0.8rem 0.8rem; /* margin-right is a but wider because of scrollbar */
 
     ul {
         height: 100%;
