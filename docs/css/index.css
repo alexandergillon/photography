@@ -110,16 +110,23 @@ nav {
     display: none;
 }
 
-.imageSeriesDropdownLabelImage {
-    height: 1rem;
-    transform: scaleY(1);
+.imageSeriesDropdownLabel {
+    cursor: pointer;
+}
+
+.imageSeriesDropdownLabel > * {
     filter: none;
     transition: 0.25s ease-in-out;
 }
 
-.imageSeriesDropdownLabelImage:hover {
-    filter: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
+.imageSeriesDropdownLabel:hover > * {
+    filter: brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(91%) contrast(90%);
     transition: 0.25s ease-in-out;
+}
+
+.imageSeriesDropdownLabelImage {
+    height: 1rem;
+    transform: scaleY(1);
 }
 
 :checked ~ .imageSeriesDropdownLabel > .imageSeriesDropdownLabelImage {
