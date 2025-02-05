@@ -16,6 +16,7 @@ const { OverlayScrollbars, ClickScrollPlugin } = OverlayScrollbarsGlobal;
 /** Loads in all image series and arranges them on the page. */
 initializeScrollbar();
 addResizeListener();
+fadeInBody();
 fetch("config.json")
     .then(response => response.json())
     .then((json: Gallery) => loadAllImages(json))
@@ -209,4 +210,9 @@ function addResizeListener() {
             (rowsDiv as HTMLDivElement).style.setProperty("--max-height", `${rowsDiv.scrollHeight}px`);
         }
     });
+}
+
+/** Plays a fade-in animation on the document body. */
+function fadeInBody() {
+    document.body.classList.add("fadeInAnimation");
 }

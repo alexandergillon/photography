@@ -29,6 +29,7 @@
 }
 
 body {
+    opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
     margin: 0;
 }
 
@@ -239,6 +240,23 @@ nav {
 
 .noScriptText:last-child {
     margin-bottom: 7rem;
+}
+
+.fadeInAnimation {
+    animation-duration: 0.5s;
+    animation-name: fade-in;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards; /* keeps opacity at 1 after animation is done */
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .imageSeriesLoadAnimation {
