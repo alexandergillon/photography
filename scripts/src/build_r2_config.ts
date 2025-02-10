@@ -23,7 +23,8 @@ function main(): number {
         });
 
     validateConfig(r2_config);
-    fs.writeFileSync("./intermediate/r2_config.json", JSON.stringify(r2_config, null, 4));
+    // series need to be in reverse order so that the newest is shown first
+    fs.writeFileSync("./intermediate/r2_config.json", JSON.stringify(r2_config.reverse(), null, 4));
     return 0; // success
 }
 
@@ -63,7 +64,7 @@ function directory_to_r2_config(index: number, directory: string): ImageSeries<B
 
     return {
         title: seriesName,
-        rows: configRows
+        rows: configRows,
     };
 }
 

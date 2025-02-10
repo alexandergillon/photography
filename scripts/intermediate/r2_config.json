@@ -1,25 +1,84 @@
 [
     {
-        "title": "Chicago",
+        "title": "Rome",
         "rows": [
             [
                 {
-                    "path": "input/01 Chicago/A1 chicago street.png",
-                    "altText": "chicago street",
-                    "objectKey": "0-Chicago/A1_chicago_street.png",
-                    "thumbObjectKey": "0-Chicago/A1_chicago_street_thumb.jpg"
+                    "path": "input/04 Rome/A1 Vittoriano.png",
+                    "altText": "Vittoriano",
+                    "objectKey": "3-Rome/A1_Vittoriano.png",
+                    "thumbObjectKey": "3-Rome/A1_Vittoriano_thumb.jpg"
                 },
                 {
-                    "path": "input/01 Chicago/A2 two boats.png",
-                    "altText": "two boats",
-                    "objectKey": "0-Chicago/A2_two_boats.png",
-                    "thumbObjectKey": "0-Chicago/A2_two_boats_thumb.jpg"
+                    "path": "input/04 Rome/A2 Colosseum.png",
+                    "altText": "Colosseum",
+                    "objectKey": "3-Rome/A2_Colosseum.png",
+                    "thumbObjectKey": "3-Rome/A2_Colosseum_thumb.jpg"
                 },
                 {
-                    "path": "input/01 Chicago/A3 group of chicago buildings.png",
-                    "altText": "group of chicago buildings",
-                    "objectKey": "0-Chicago/A3_group_of_chicago_buildings.png",
-                    "thumbObjectKey": "0-Chicago/A3_group_of_chicago_buildings_thumb.jpg"
+                    "path": "input/04 Rome/A3 Piazza del Campidoglio - Dea Roma.png",
+                    "altText": "Piazza del Campidoglio - Dea Roma",
+                    "objectKey": "3-Rome/A3_Piazza_del_Campidoglio___Dea_Roma.png",
+                    "thumbObjectKey": "3-Rome/A3_Piazza_del_Campidoglio___Dea_Roma_thumb.jpg"
+                },
+                {
+                    "path": "input/04 Rome/A4 Arch of Constantine.png",
+                    "altText": "Arch of Constantine",
+                    "objectKey": "3-Rome/A4_Arch_of_Constantine.png",
+                    "thumbObjectKey": "3-Rome/A4_Arch_of_Constantine_thumb.jpg"
+                }
+            ],
+            [
+                {
+                    "path": "input/04 Rome/B1 couple.png",
+                    "altText": "couple",
+                    "objectKey": "3-Rome/B1_couple.png",
+                    "thumbObjectKey": "3-Rome/B1_couple_thumb.jpg"
+                },
+                {
+                    "path": "input/04 Rome/B2 Palatine Hill.png",
+                    "altText": "Palatine Hill",
+                    "objectKey": "3-Rome/B2_Palatine_Hill.png",
+                    "thumbObjectKey": "3-Rome/B2_Palatine_Hill_thumb.jpg"
+                }
+            ]
+        ]
+    },
+    {
+        "title": "Venice",
+        "rows": [
+            [
+                {
+                    "path": "input/03 Venice/A1 canal.png",
+                    "altText": "canal",
+                    "objectKey": "2-Venice/A1_canal.png",
+                    "thumbObjectKey": "2-Venice/A1_canal_thumb.jpg"
+                },
+                {
+                    "path": "input/03 Venice/A2 boats.png",
+                    "altText": "boats",
+                    "objectKey": "2-Venice/A2_boats.png",
+                    "thumbObjectKey": "2-Venice/A2_boats_thumb.jpg"
+                }
+            ],
+            [
+                {
+                    "path": "input/03 Venice/B1 doge's palace.png",
+                    "altText": "doge's palace",
+                    "objectKey": "2-Venice/B1_doge_s_palace.png",
+                    "thumbObjectKey": "2-Venice/B1_doge_s_palace_thumb.jpg"
+                },
+                {
+                    "path": "input/03 Venice/B2 buildings.png",
+                    "altText": "buildings",
+                    "objectKey": "2-Venice/B2_buildings.png",
+                    "thumbObjectKey": "2-Venice/B2_buildings_thumb.jpg"
+                },
+                {
+                    "path": "input/03 Venice/B3 gondola.png",
+                    "altText": "gondola",
+                    "objectKey": "2-Venice/B3_gondola.png",
+                    "thumbObjectKey": "2-Venice/B3_gondola_thumb.jpg"
                 }
             ]
         ]
@@ -59,6 +118,31 @@
                     "altText": "trees across river",
                     "objectKey": "1-Starved_Rock_State_Park/B3_trees_across_river.png",
                     "thumbObjectKey": "1-Starved_Rock_State_Park/B3_trees_across_river_thumb.jpg"
+                }
+            ]
+        ]
+    },
+    {
+        "title": "Chicago",
+        "rows": [
+            [
+                {
+                    "path": "input/01 Chicago/A1 chicago street.png",
+                    "altText": "chicago street",
+                    "objectKey": "0-Chicago/A1_chicago_street.png",
+                    "thumbObjectKey": "0-Chicago/A1_chicago_street_thumb.jpg"
+                },
+                {
+                    "path": "input/01 Chicago/A2 two boats.png",
+                    "altText": "two boats",
+                    "objectKey": "0-Chicago/A2_two_boats.png",
+                    "thumbObjectKey": "0-Chicago/A2_two_boats_thumb.jpg"
+                },
+                {
+                    "path": "input/01 Chicago/A3 group of chicago buildings.png",
+                    "altText": "group of chicago buildings",
+                    "objectKey": "0-Chicago/A3_group_of_chicago_buildings.png",
+                    "thumbObjectKey": "0-Chicago/A3_group_of_chicago_buildings_thumb.jpg"
                 }
             ]
         ]

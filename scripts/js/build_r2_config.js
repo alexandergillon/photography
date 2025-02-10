@@ -19,7 +19,8 @@ function main() {
         r2_config.push(directory_to_r2_config(index, `input/${dir}`));
     });
     validateConfig(r2_config);
-    fs.writeFileSync("./intermediate/r2_config.json", JSON.stringify(r2_config, null, 4));
+    // series need to be in reverse order so that the newest is shown first
+    fs.writeFileSync("./intermediate/r2_config.json", JSON.stringify(r2_config.reverse(), null, 4));
     return 0; // success
 }
 /**
@@ -56,7 +57,7 @@ function directory_to_r2_config(index, directory) {
     }
     return {
         title: seriesName,
-        rows: configRows
+        rows: configRows,
     };
 }
 /** Removes most special characters from a string. */
