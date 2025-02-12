@@ -3,11 +3,11 @@
  */
 
 import type {Gallery, LoadedGallery, LoadedImage, LoadedImageSeries} from "types";
+import PhotoSwipeLightbox from "./lib/photoswipe-lightbox.js";
+import PhotoSwipe from "./lib/photoswipe.js";
 
 /** The gallery div, for adding image series to. */
 const galleryDiv = document.getElementById("gallery")!;
-/** From medium-zoom, set in another script. */
-declare const mediumZoom: any;
 /** From OverlayScrollbars, set in js/lib/medium-zoom.js. */
 declare const OverlayScrollbarsGlobal: any;
 /** From OverlayScrollbars, set in js/lib/overlayscrollbars.js. */
@@ -116,6 +116,25 @@ function addImageSeries(imageSeries: LoadedImageSeries, i: number, interactionOb
 
     rowsDiv.style.setProperty("--max-height", `${rowsDiv.scrollHeight}px`); // needs to happen after images are added to be correct
     interactionObserver.observe(seriesDiv);
+
+    const lightbox = new PhotoSwipeLightbox({
+        // core setup
+        gallery: rowsDiv,
+        children: 'a',
+        pswpModule: PhotoSwipe,
+        // disable UI elements
+        counter: false,
+        zoom: false,
+        close: false,
+        // modify UX behavior
+        wheelToZoom: true,
+        loop: false,
+        imageClickAction: "close",
+        // styling
+        mainClass: "pswpCustom mainFont",
+        bgOpacity: 1,
+    });
+    lightbox.init();
 }
 
 /**
@@ -184,8 +203,13 @@ function createRow(row : LoadedImage[]): HTMLDivElement {
 
     // Images are already created and loaded, just need to add medium-zoom and add them to the row.
     for (const image of row) {
-        mediumZoom(image, { background: window.getComputedStyle(document.body).backgroundColor });
-        rowDiv.appendChild(image);
+        // PhotoSwipe requires images to be wrapped in an anchor with these attributes set
+        const anchor = document.createElement("a");
+        anchor.setAttribute("data-pswp-src", image.src);
+        anchor.setAttribute("data-pswp-width", image.naturalWidth.toString());
+        anchor.setAttribute("data-pswp-height", image.naturalHeight.toString());
+        anchor.appendChild(image);
+        rowDiv.appendChild(anchor);
     }
     return rowDiv;
 }

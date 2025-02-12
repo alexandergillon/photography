@@ -28,6 +28,15 @@
     color: var(--text-color);
 }
 
+.pswp__bg {
+    background: var(--background-color) !important;
+}
+
+.pswpCustom {
+    --pswp-icon-color: var(--text-color) !important;
+    --pswp-icon-color-secondary: var(--background-color) !important;
+}
+
 body {
     opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
     margin: 0;
@@ -164,6 +173,7 @@ nav {
 .imageSeriesImage {
     object-fit: contain;
     width: 100%;
+    cursor: zoom-in;
 }
 
 #footer {
