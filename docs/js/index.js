@@ -170,6 +170,9 @@ function createTitle(imageSeries, i, rowsDiv) {
 function createRow(row) {
     const rowDiv = document.createElement("div");
     rowDiv.classList.add("imageSeriesRow");
+    // Rows containing only one image have that image centered, and its height capped. Otherwise, it would likely be absurdly large and not fit on the screen.
+    if (row.length === 1)
+        rowDiv.classList.add("singleton");
     const aspects = row.map(image => image.naturalWidth / image.naturalHeight);
     const gridTemplateColumns = aspects.map(aspect => `${aspect}fr`).join(" ");
     rowDiv.style.setProperty("grid-template-columns", gridTemplateColumns);

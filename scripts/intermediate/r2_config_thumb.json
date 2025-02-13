@@ -1,5 +1,19 @@
 [
     {
+        "title": "Solar Eclipse 2024",
+        "rows": [
+            [
+                {
+                    "path": "input/05 Eclipse/A1 solar eclipse.png",
+                    "altText": "solar eclipse",
+                    "objectKey": "4-Solar_Eclipse_2024/A1_solar_eclipse.png",
+                    "thumbObjectKey": "4-Solar_Eclipse_2024/A1_solar_eclipse_thumb.jpg",
+                    "thumbPath": "input/05 Eclipse/A1 solar eclipse thumbnail.jpg"
+                }
+            ]
+        ]
+    },
+    {
         "title": "Rome",
         "rows": [
             [
