@@ -1,0 +1,9 @@
+# Include docs folder in language statistics, as this is where TS source
+# files are located. Linguist excludes docs by default.
+docs/** -linguist-documentation
+# Exclude JS compiled from TS
+docs/js/** linguist-vendored
+scripts/js/** linguist-vendored
+# Exclude JS/TS/CSS which is not ours
+docs/src/lib/** linguist-vendored
+docs/css/lib/** linguist-vendored
