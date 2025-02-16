@@ -4,36 +4,75 @@
         "rows": [
             [
                 {
-                    "path": "input/08 Ravenswood Manor/A1 trees.png",
+                    "path": "input/09 Ravenswood Manor/A1 trees.png",
                     "altText": "trees",
-                    "objectKey": "7-Ravenswood_Manor/A1_trees.png",
-                    "thumbObjectKey": "7-Ravenswood_Manor/A1_trees_thumb.jpg"
+                    "objectKey": "8-Ravenswood_Manor/A1_trees.png",
+                    "thumbObjectKey": "8-Ravenswood_Manor/A1_trees_thumb.jpg"
                 },
                 {
-                    "path": "input/08 Ravenswood Manor/A2 floodlight.png",
+                    "path": "input/09 Ravenswood Manor/A2 floodlight.png",
                     "altText": "floodlight",
-                    "objectKey": "7-Ravenswood_Manor/A2_floodlight.png",
-                    "thumbObjectKey": "7-Ravenswood_Manor/A2_floodlight_thumb.jpg"
+                    "objectKey": "8-Ravenswood_Manor/A2_floodlight.png",
+                    "thumbObjectKey": "8-Ravenswood_Manor/A2_floodlight_thumb.jpg"
                 },
                 {
-                    "path": "input/08 Ravenswood Manor/A3 brown line train.png",
+                    "path": "input/09 Ravenswood Manor/A3 brown line train.png",
                     "altText": "brown line train",
-                    "objectKey": "7-Ravenswood_Manor/A3_brown_line_train.png",
-                    "thumbObjectKey": "7-Ravenswood_Manor/A3_brown_line_train_thumb.jpg"
+                    "objectKey": "8-Ravenswood_Manor/A3_brown_line_train.png",
+                    "thumbObjectKey": "8-Ravenswood_Manor/A3_brown_line_train_thumb.jpg"
                 }
             ],
             [
                 {
-                    "path": "input/08 Ravenswood Manor/B1 train crossing river.png",
+                    "path": "input/09 Ravenswood Manor/B1 train crossing river.png",
                     "altText": "train crossing river",
-                    "objectKey": "7-Ravenswood_Manor/B1_train_crossing_river.png",
-                    "thumbObjectKey": "7-Ravenswood_Manor/B1_train_crossing_river_thumb.jpg"
+                    "objectKey": "8-Ravenswood_Manor/B1_train_crossing_river.png",
+                    "thumbObjectKey": "8-Ravenswood_Manor/B1_train_crossing_river_thumb.jpg"
                 },
                 {
-                    "path": "input/08 Ravenswood Manor/B2 squirrel.png",
+                    "path": "input/09 Ravenswood Manor/B2 squirrel.png",
                     "altText": "squirrel",
-                    "objectKey": "7-Ravenswood_Manor/B2_squirrel.png",
-                    "thumbObjectKey": "7-Ravenswood_Manor/B2_squirrel_thumb.jpg"
+                    "objectKey": "8-Ravenswood_Manor/B2_squirrel.png",
+                    "thumbObjectKey": "8-Ravenswood_Manor/B2_squirrel_thumb.jpg"
+                }
+            ]
+        ]
+    },
+    {
+        "title": "Chicago Cultural Center",
+        "rows": [
+            [
+                {
+                    "path": "input/08 Chicago Cultural Center/A1 hanging lamp.png",
+                    "altText": "hanging lamp",
+                    "objectKey": "7-Chicago_Cultural_Center/A1_hanging_lamp.png",
+                    "thumbObjectKey": "7-Chicago_Cultural_Center/A1_hanging_lamp_thumb.jpg"
+                },
+                {
+                    "path": "input/08 Chicago Cultural Center/A2 clothing exhibit.png",
+                    "altText": "clothing exhibit",
+                    "objectKey": "7-Chicago_Cultural_Center/A2_clothing_exhibit.png",
+                    "thumbObjectKey": "7-Chicago_Cultural_Center/A2_clothing_exhibit_thumb.jpg"
+                },
+                {
+                    "path": "input/08 Chicago Cultural Center/A3 Preston Bradley hall.png",
+                    "altText": "Preston Bradley hall",
+                    "objectKey": "7-Chicago_Cultural_Center/A3_Preston_Bradley_hall.png",
+                    "thumbObjectKey": "7-Chicago_Cultural_Center/A3_Preston_Bradley_hall_thumb.jpg"
+                }
+            ],
+            [
+                {
+                    "path": "input/08 Chicago Cultural Center/B1 stained glass dome.png",
+                    "altText": "stained glass dome",
+                    "objectKey": "7-Chicago_Cultural_Center/B1_stained_glass_dome.png",
+                    "thumbObjectKey": "7-Chicago_Cultural_Center/B1_stained_glass_dome_thumb.jpg"
+                },
+                {
+                    "path": "input/08 Chicago Cultural Center/B2 wall mosaic.png",
+                    "altText": "wall mosaic",
+                    "objectKey": "7-Chicago_Cultural_Center/B2_wall_mosaic.png",
+                    "thumbObjectKey": "7-Chicago_Cultural_Center/B2_wall_mosaic_thumb.jpg"
                 }
             ]
         ]

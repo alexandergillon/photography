@@ -5,30 +5,64 @@
             [
                 {
                     "alt": "trees",
-                    "src": "https://images.alexandergillon.com/7-Ravenswood_Manor/A1_trees.png",
-                    "thumb": "https://images.alexandergillon.com/7-Ravenswood_Manor/A1_trees_thumb.jpg"
+                    "src": "https://images.alexandergillon.com/8-Ravenswood_Manor/A1_trees.png",
+                    "thumb": "https://images.alexandergillon.com/8-Ravenswood_Manor/A1_trees_thumb.jpg"
                 },
                 {
                     "alt": "floodlight",
-                    "src": "https://images.alexandergillon.com/7-Ravenswood_Manor/A2_floodlight.png",
-                    "thumb": "https://images.alexandergillon.com/7-Ravenswood_Manor/A2_floodlight_thumb.jpg"
+                    "src": "https://images.alexandergillon.com/8-Ravenswood_Manor/A2_floodlight.png",
+                    "thumb": "https://images.alexandergillon.com/8-Ravenswood_Manor/A2_floodlight_thumb.jpg"
                 },
                 {
                     "alt": "brown line train",
-                    "src": "https://images.alexandergillon.com/7-Ravenswood_Manor/A3_brown_line_train.png",
-                    "thumb": "https://images.alexandergillon.com/7-Ravenswood_Manor/A3_brown_line_train_thumb.jpg"
+                    "src": "https://images.alexandergillon.com/8-Ravenswood_Manor/A3_brown_line_train.png",
+                    "thumb": "https://images.alexandergillon.com/8-Ravenswood_Manor/A3_brown_line_train_thumb.jpg"
                 }
             ],
             [
                 {
                     "alt": "train crossing river",
-                    "src": "https://images.alexandergillon.com/7-Ravenswood_Manor/B1_train_crossing_river.png",
-                    "thumb": "https://images.alexandergillon.com/7-Ravenswood_Manor/B1_train_crossing_river_thumb.jpg"
+                    "src": "https://images.alexandergillon.com/8-Ravenswood_Manor/B1_train_crossing_river.png",
+                    "thumb": "https://images.alexandergillon.com/8-Ravenswood_Manor/B1_train_crossing_river_thumb.jpg"
                 },
                 {
                     "alt": "squirrel",
-                    "src": "https://images.alexandergillon.com/7-Ravenswood_Manor/B2_squirrel.png",
-                    "thumb": "https://images.alexandergillon.com/7-Ravenswood_Manor/B2_squirrel_thumb.jpg"
+                    "src": "https://images.alexandergillon.com/8-Ravenswood_Manor/B2_squirrel.png",
+                    "thumb": "https://images.alexandergillon.com/8-Ravenswood_Manor/B2_squirrel_thumb.jpg"
+                }
+            ]
+        ]
+    },
+    {
+        "title": "Chicago Cultural Center",
+        "rows": [
+            [
+                {
+                    "alt": "hanging lamp",
+                    "src": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A1_hanging_lamp.png",
+                    "thumb": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A1_hanging_lamp_thumb.jpg"
+                },
+                {
+                    "alt": "clothing exhibit",
+                    "src": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A2_clothing_exhibit.png",
+                    "thumb": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A2_clothing_exhibit_thumb.jpg"
+                },
+                {
+                    "alt": "Preston Bradley hall",
+                    "src": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A3_Preston_Bradley_hall.png",
+                    "thumb": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A3_Preston_Bradley_hall_thumb.jpg"
+                }
+            ],
+            [
+                {
+                    "alt": "stained glass dome",
+                    "src": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/B1_stained_glass_dome.png",
+                    "thumb": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/B1_stained_glass_dome_thumb.jpg"
+                },
+                {
+                    "alt": "wall mosaic",
+                    "src": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/B2_wall_mosaic.png",
+                    "thumb": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/B2_wall_mosaic_thumb.jpg"
                 }
             ]
         ]
