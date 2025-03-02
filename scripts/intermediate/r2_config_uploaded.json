@@ -6,49 +6,49 @@
                 {
                     "path": "input/09 Ravenswood Manor/A1 trees.png",
                     "altText": "trees",
-                    "objectKey": "8-Ravenswood_Manor/A1_trees.png",
-                    "thumbObjectKey": "8-Ravenswood_Manor/A1_trees_thumb.jpg",
+                    "objectKey": "9-Ravenswood_Manor/A1_trees.png",
+                    "thumbObjectKey": "9-Ravenswood_Manor/A1_trees_thumb.jpg",
                     "thumbPath": "input/09 Ravenswood Manor/A1 trees thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/8-Ravenswood_Manor/A1_trees.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/8-Ravenswood_Manor/A1_trees_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/9-Ravenswood_Manor/A1_trees.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/9-Ravenswood_Manor/A1_trees_thumb.jpg"
                 },
                 {
                     "path": "input/09 Ravenswood Manor/A2 floodlight.png",
                     "altText": "floodlight",
-                    "objectKey": "8-Ravenswood_Manor/A2_floodlight.png",
-                    "thumbObjectKey": "8-Ravenswood_Manor/A2_floodlight_thumb.jpg",
+                    "objectKey": "9-Ravenswood_Manor/A2_floodlight.png",
+                    "thumbObjectKey": "9-Ravenswood_Manor/A2_floodlight_thumb.jpg",
                     "thumbPath": "input/09 Ravenswood Manor/A2 floodlight thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/8-Ravenswood_Manor/A2_floodlight.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/8-Ravenswood_Manor/A2_floodlight_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/9-Ravenswood_Manor/A2_floodlight.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/9-Ravenswood_Manor/A2_floodlight_thumb.jpg"
                 },
                 {
                     "path": "input/09 Ravenswood Manor/A3 brown line train.png",
                     "altText": "brown line train",
-                    "objectKey": "8-Ravenswood_Manor/A3_brown_line_train.png",
-                    "thumbObjectKey": "8-Ravenswood_Manor/A3_brown_line_train_thumb.jpg",
+                    "objectKey": "9-Ravenswood_Manor/A3_brown_line_train.png",
+                    "thumbObjectKey": "9-Ravenswood_Manor/A3_brown_line_train_thumb.jpg",
                     "thumbPath": "input/09 Ravenswood Manor/A3 brown line train thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/8-Ravenswood_Manor/A3_brown_line_train.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/8-Ravenswood_Manor/A3_brown_line_train_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/9-Ravenswood_Manor/A3_brown_line_train.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/9-Ravenswood_Manor/A3_brown_line_train_thumb.jpg"
                 }
             ],
             [
                 {
                     "path": "input/09 Ravenswood Manor/B1 train crossing river.png",
                     "altText": "train crossing river",
-                    "objectKey": "8-Ravenswood_Manor/B1_train_crossing_river.png",
-                    "thumbObjectKey": "8-Ravenswood_Manor/B1_train_crossing_river_thumb.jpg",
+                    "objectKey": "9-Ravenswood_Manor/B1_train_crossing_river.png",
+                    "thumbObjectKey": "9-Ravenswood_Manor/B1_train_crossing_river_thumb.jpg",
                     "thumbPath": "input/09 Ravenswood Manor/B1 train crossing river thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/8-Ravenswood_Manor/B1_train_crossing_river.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/8-Ravenswood_Manor/B1_train_crossing_river_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/9-Ravenswood_Manor/B1_train_crossing_river.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/9-Ravenswood_Manor/B1_train_crossing_river_thumb.jpg"
                 },
                 {
                     "path": "input/09 Ravenswood Manor/B2 squirrel.png",
                     "altText": "squirrel",
-                    "objectKey": "8-Ravenswood_Manor/B2_squirrel.png",
-                    "thumbObjectKey": "8-Ravenswood_Manor/B2_squirrel_thumb.jpg",
+                    "objectKey": "9-Ravenswood_Manor/B2_squirrel.png",
+                    "thumbObjectKey": "9-Ravenswood_Manor/B2_squirrel_thumb.jpg",
                     "thumbPath": "input/09 Ravenswood Manor/B2 squirrel thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/8-Ravenswood_Manor/B2_squirrel.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/8-Ravenswood_Manor/B2_squirrel_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/9-Ravenswood_Manor/B2_squirrel.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/9-Ravenswood_Manor/B2_squirrel_thumb.jpg"
                 }
             ]
         ]
@@ -60,49 +60,49 @@
                 {
                     "path": "input/08 Chicago Cultural Center/A1 hanging lamp.png",
                     "altText": "hanging lamp",
-                    "objectKey": "7-Chicago_Cultural_Center/A1_hanging_lamp.png",
-                    "thumbObjectKey": "7-Chicago_Cultural_Center/A1_hanging_lamp_thumb.jpg",
+                    "objectKey": "8-Chicago_Cultural_Center/A1_hanging_lamp.png",
+                    "thumbObjectKey": "8-Chicago_Cultural_Center/A1_hanging_lamp_thumb.jpg",
                     "thumbPath": "input/08 Chicago Cultural Center/A1 hanging lamp thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A1_hanging_lamp.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A1_hanging_lamp_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/A1_hanging_lamp.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/A1_hanging_lamp_thumb.jpg"
                 },
                 {
                     "path": "input/08 Chicago Cultural Center/A2 clothing exhibit.png",
                     "altText": "clothing exhibit",
-                    "objectKey": "7-Chicago_Cultural_Center/A2_clothing_exhibit.png",
-                    "thumbObjectKey": "7-Chicago_Cultural_Center/A2_clothing_exhibit_thumb.jpg",
+                    "objectKey": "8-Chicago_Cultural_Center/A2_clothing_exhibit.png",
+                    "thumbObjectKey": "8-Chicago_Cultural_Center/A2_clothing_exhibit_thumb.jpg",
                     "thumbPath": "input/08 Chicago Cultural Center/A2 clothing exhibit thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A2_clothing_exhibit.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A2_clothing_exhibit_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/A2_clothing_exhibit.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/A2_clothing_exhibit_thumb.jpg"
                 },
                 {
                     "path": "input/08 Chicago Cultural Center/A3 Preston Bradley hall.png",
                     "altText": "Preston Bradley hall",
-                    "objectKey": "7-Chicago_Cultural_Center/A3_Preston_Bradley_hall.png",
-                    "thumbObjectKey": "7-Chicago_Cultural_Center/A3_Preston_Bradley_hall_thumb.jpg",
+                    "objectKey": "8-Chicago_Cultural_Center/A3_Preston_Bradley_hall.png",
+                    "thumbObjectKey": "8-Chicago_Cultural_Center/A3_Preston_Bradley_hall_thumb.jpg",
                     "thumbPath": "input/08 Chicago Cultural Center/A3 Preston Bradley hall thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A3_Preston_Bradley_hall.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/A3_Preston_Bradley_hall_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/A3_Preston_Bradley_hall.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/A3_Preston_Bradley_hall_thumb.jpg"
                 }
             ],
             [
                 {
                     "path": "input/08 Chicago Cultural Center/B1 stained glass dome.png",
                     "altText": "stained glass dome",
-                    "objectKey": "7-Chicago_Cultural_Center/B1_stained_glass_dome.png",
-                    "thumbObjectKey": "7-Chicago_Cultural_Center/B1_stained_glass_dome_thumb.jpg",
+                    "objectKey": "8-Chicago_Cultural_Center/B1_stained_glass_dome.png",
+                    "thumbObjectKey": "8-Chicago_Cultural_Center/B1_stained_glass_dome_thumb.jpg",
                     "thumbPath": "input/08 Chicago Cultural Center/B1 stained glass dome thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/B1_stained_glass_dome.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/B1_stained_glass_dome_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/B1_stained_glass_dome.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/B1_stained_glass_dome_thumb.jpg"
                 },
                 {
                     "path": "input/08 Chicago Cultural Center/B2 wall mosaic.png",
                     "altText": "wall mosaic",
-                    "objectKey": "7-Chicago_Cultural_Center/B2_wall_mosaic.png",
-                    "thumbObjectKey": "7-Chicago_Cultural_Center/B2_wall_mosaic_thumb.jpg",
+                    "objectKey": "8-Chicago_Cultural_Center/B2_wall_mosaic.png",
+                    "thumbObjectKey": "8-Chicago_Cultural_Center/B2_wall_mosaic_thumb.jpg",
                     "thumbPath": "input/08 Chicago Cultural Center/B2 wall mosaic thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/B2_wall_mosaic.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/7-Chicago_Cultural_Center/B2_wall_mosaic_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/B2_wall_mosaic.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/8-Chicago_Cultural_Center/B2_wall_mosaic_thumb.jpg"
                 }
             ]
         ]
@@ -114,20 +114,20 @@
                 {
                     "path": "input/07 Cats/A1 Couscous.png",
                     "altText": "Couscous",
-                    "objectKey": "6-Couscous___Chickpea/A1_Couscous.png",
-                    "thumbObjectKey": "6-Couscous___Chickpea/A1_Couscous_thumb.jpg",
+                    "objectKey": "7-Couscous___Chickpea/A1_Couscous.png",
+                    "thumbObjectKey": "7-Couscous___Chickpea/A1_Couscous_thumb.jpg",
                     "thumbPath": "input/07 Cats/A1 Couscous thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/6-Couscous___Chickpea/A1_Couscous.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/6-Couscous___Chickpea/A1_Couscous_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/7-Couscous___Chickpea/A1_Couscous.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/7-Couscous___Chickpea/A1_Couscous_thumb.jpg"
                 },
                 {
                     "path": "input/07 Cats/A2 Chickpea.png",
                     "altText": "Chickpea",
-                    "objectKey": "6-Couscous___Chickpea/A2_Chickpea.png",
-                    "thumbObjectKey": "6-Couscous___Chickpea/A2_Chickpea_thumb.jpg",
+                    "objectKey": "7-Couscous___Chickpea/A2_Chickpea.png",
+                    "thumbObjectKey": "7-Couscous___Chickpea/A2_Chickpea_thumb.jpg",
                     "thumbPath": "input/07 Cats/A2 Chickpea thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/6-Couscous___Chickpea/A2_Chickpea.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/6-Couscous___Chickpea/A2_Chickpea_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/7-Couscous___Chickpea/A2_Chickpea.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/7-Couscous___Chickpea/A2_Chickpea_thumb.jpg"
                 }
             ]
         ]
@@ -139,49 +139,49 @@
                 {
                     "path": "input/06 Starved Rock/A1 canyon with flag.png",
                     "altText": "canyon with flag",
-                    "objectKey": "5-Starved_Rock_State_Park/A1_canyon_with_flag.png",
-                    "thumbObjectKey": "5-Starved_Rock_State_Park/A1_canyon_with_flag_thumb.jpg",
+                    "objectKey": "6-Starved_Rock_State_Park/A1_canyon_with_flag.png",
+                    "thumbObjectKey": "6-Starved_Rock_State_Park/A1_canyon_with_flag_thumb.jpg",
                     "thumbPath": "input/06 Starved Rock/A1 canyon with flag thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/A1_canyon_with_flag.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/A1_canyon_with_flag_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/A1_canyon_with_flag.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/A1_canyon_with_flag_thumb.jpg"
                 },
                 {
                     "path": "input/06 Starved Rock/A2 bridge.png",
                     "altText": "bridge",
-                    "objectKey": "5-Starved_Rock_State_Park/A2_bridge.png",
-                    "thumbObjectKey": "5-Starved_Rock_State_Park/A2_bridge_thumb.jpg",
+                    "objectKey": "6-Starved_Rock_State_Park/A2_bridge.png",
+                    "thumbObjectKey": "6-Starved_Rock_State_Park/A2_bridge_thumb.jpg",
                     "thumbPath": "input/06 Starved Rock/A2 bridge thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/A2_bridge.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/A2_bridge_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/A2_bridge.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/A2_bridge_thumb.jpg"
                 }
             ],
             [
                 {
                     "path": "input/06 Starved Rock/B1 clearing.png",
                     "altText": "clearing",
-                    "objectKey": "5-Starved_Rock_State_Park/B1_clearing.png",
-                    "thumbObjectKey": "5-Starved_Rock_State_Park/B1_clearing_thumb.jpg",
+                    "objectKey": "6-Starved_Rock_State_Park/B1_clearing.png",
+                    "thumbObjectKey": "6-Starved_Rock_State_Park/B1_clearing_thumb.jpg",
                     "thumbPath": "input/06 Starved Rock/B1 clearing thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/B1_clearing.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/B1_clearing_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/B1_clearing.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/B1_clearing_thumb.jpg"
                 },
                 {
                     "path": "input/06 Starved Rock/B2 trees.png",
                     "altText": "trees",
-                    "objectKey": "5-Starved_Rock_State_Park/B2_trees.png",
-                    "thumbObjectKey": "5-Starved_Rock_State_Park/B2_trees_thumb.jpg",
+                    "objectKey": "6-Starved_Rock_State_Park/B2_trees.png",
+                    "thumbObjectKey": "6-Starved_Rock_State_Park/B2_trees_thumb.jpg",
                     "thumbPath": "input/06 Starved Rock/B2 trees thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/B2_trees.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/B2_trees_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/B2_trees.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/B2_trees_thumb.jpg"
                 },
                 {
                     "path": "input/06 Starved Rock/B3 trees across river.png",
                     "altText": "trees across river",
-                    "objectKey": "5-Starved_Rock_State_Park/B3_trees_across_river.png",
-                    "thumbObjectKey": "5-Starved_Rock_State_Park/B3_trees_across_river_thumb.jpg",
+                    "objectKey": "6-Starved_Rock_State_Park/B3_trees_across_river.png",
+                    "thumbObjectKey": "6-Starved_Rock_State_Park/B3_trees_across_river_thumb.jpg",
                     "thumbPath": "input/06 Starved Rock/B3 trees across river thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/B3_trees_across_river.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/5-Starved_Rock_State_Park/B3_trees_across_river_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/B3_trees_across_river.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/6-Starved_Rock_State_Park/B3_trees_across_river_thumb.jpg"
                 }
             ]
         ]
@@ -193,29 +193,29 @@
                 {
                     "path": "input/05 Chicago/A1 chicago street.png",
                     "altText": "chicago street",
-                    "objectKey": "4-Chicago/A1_chicago_street.png",
-                    "thumbObjectKey": "4-Chicago/A1_chicago_street_thumb.jpg",
+                    "objectKey": "5-Chicago/A1_chicago_street.png",
+                    "thumbObjectKey": "5-Chicago/A1_chicago_street_thumb.jpg",
                     "thumbPath": "input/05 Chicago/A1 chicago street thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/4-Chicago/A1_chicago_street.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/4-Chicago/A1_chicago_street_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/5-Chicago/A1_chicago_street.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/5-Chicago/A1_chicago_street_thumb.jpg"
                 },
                 {
                     "path": "input/05 Chicago/A2 two boats.png",
                     "altText": "two boats",
-                    "objectKey": "4-Chicago/A2_two_boats.png",
-                    "thumbObjectKey": "4-Chicago/A2_two_boats_thumb.jpg",
+                    "objectKey": "5-Chicago/A2_two_boats.png",
+                    "thumbObjectKey": "5-Chicago/A2_two_boats_thumb.jpg",
                     "thumbPath": "input/05 Chicago/A2 two boats thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/4-Chicago/A2_two_boats.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/4-Chicago/A2_two_boats_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/5-Chicago/A2_two_boats.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/5-Chicago/A2_two_boats_thumb.jpg"
                 },
                 {
                     "path": "input/05 Chicago/A3 group of chicago buildings.png",
                     "altText": "group of chicago buildings",
-                    "objectKey": "4-Chicago/A3_group_of_chicago_buildings.png",
-                    "thumbObjectKey": "4-Chicago/A3_group_of_chicago_buildings_thumb.jpg",
+                    "objectKey": "5-Chicago/A3_group_of_chicago_buildings.png",
+                    "thumbObjectKey": "5-Chicago/A3_group_of_chicago_buildings_thumb.jpg",
                     "thumbPath": "input/05 Chicago/A3 group of chicago buildings thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/4-Chicago/A3_group_of_chicago_buildings.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/4-Chicago/A3_group_of_chicago_buildings_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/5-Chicago/A3_group_of_chicago_buildings.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/5-Chicago/A3_group_of_chicago_buildings_thumb.jpg"
                 }
             ]
         ]
@@ -227,49 +227,49 @@
                 {
                     "path": "input/04 Venice/A1 canal.png",
                     "altText": "canal",
-                    "objectKey": "3-Venice/A1_canal.png",
-                    "thumbObjectKey": "3-Venice/A1_canal_thumb.jpg",
+                    "objectKey": "4-Venice/A1_canal.png",
+                    "thumbObjectKey": "4-Venice/A1_canal_thumb.jpg",
                     "thumbPath": "input/04 Venice/A1 canal thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/3-Venice/A1_canal.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/3-Venice/A1_canal_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/4-Venice/A1_canal.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/4-Venice/A1_canal_thumb.jpg"
                 },
                 {
                     "path": "input/04 Venice/A2 boats.png",
                     "altText": "boats",
-                    "objectKey": "3-Venice/A2_boats.png",
-                    "thumbObjectKey": "3-Venice/A2_boats_thumb.jpg",
+                    "objectKey": "4-Venice/A2_boats.png",
+                    "thumbObjectKey": "4-Venice/A2_boats_thumb.jpg",
                     "thumbPath": "input/04 Venice/A2 boats thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/3-Venice/A2_boats.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/3-Venice/A2_boats_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/4-Venice/A2_boats.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/4-Venice/A2_boats_thumb.jpg"
                 }
             ],
             [
                 {
                     "path": "input/04 Venice/B1 doge's palace.png",
                     "altText": "doge's palace",
-                    "objectKey": "3-Venice/B1_doge_s_palace.png",
-                    "thumbObjectKey": "3-Venice/B1_doge_s_palace_thumb.jpg",
+                    "objectKey": "4-Venice/B1_doge_s_palace.png",
+                    "thumbObjectKey": "4-Venice/B1_doge_s_palace_thumb.jpg",
                     "thumbPath": "input/04 Venice/B1 doge's palace thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/3-Venice/B1_doge_s_palace.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/3-Venice/B1_doge_s_palace_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/4-Venice/B1_doge_s_palace.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/4-Venice/B1_doge_s_palace_thumb.jpg"
                 },
                 {
                     "path": "input/04 Venice/B2 buildings.png",
                     "altText": "buildings",
-                    "objectKey": "3-Venice/B2_buildings.png",
-                    "thumbObjectKey": "3-Venice/B2_buildings_thumb.jpg",
+                    "objectKey": "4-Venice/B2_buildings.png",
+                    "thumbObjectKey": "4-Venice/B2_buildings_thumb.jpg",
                     "thumbPath": "input/04 Venice/B2 buildings thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/3-Venice/B2_buildings.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/3-Venice/B2_buildings_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/4-Venice/B2_buildings.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/4-Venice/B2_buildings_thumb.jpg"
                 },
                 {
                     "path": "input/04 Venice/B3 gondola.png",
                     "altText": "gondola",
-                    "objectKey": "3-Venice/B3_gondola.png",
-                    "thumbObjectKey": "3-Venice/B3_gondola_thumb.jpg",
+                    "objectKey": "4-Venice/B3_gondola.png",
+                    "thumbObjectKey": "4-Venice/B3_gondola_thumb.jpg",
                     "thumbPath": "input/04 Venice/B3 gondola thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/3-Venice/B3_gondola.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/3-Venice/B3_gondola_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/4-Venice/B3_gondola.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/4-Venice/B3_gondola_thumb.jpg"
                 }
             ]
         ]
@@ -281,58 +281,92 @@
                 {
                     "path": "input/03 Rome/A1 Vittoriano.png",
                     "altText": "Vittoriano",
-                    "objectKey": "2-Rome/A1_Vittoriano.png",
-                    "thumbObjectKey": "2-Rome/A1_Vittoriano_thumb.jpg",
+                    "objectKey": "3-Rome/A1_Vittoriano.png",
+                    "thumbObjectKey": "3-Rome/A1_Vittoriano_thumb.jpg",
                     "thumbPath": "input/03 Rome/A1 Vittoriano thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/2-Rome/A1_Vittoriano.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/2-Rome/A1_Vittoriano_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/3-Rome/A1_Vittoriano.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/3-Rome/A1_Vittoriano_thumb.jpg"
                 },
                 {
                     "path": "input/03 Rome/A2 Colosseum.png",
                     "altText": "Colosseum",
-                    "objectKey": "2-Rome/A2_Colosseum.png",
-                    "thumbObjectKey": "2-Rome/A2_Colosseum_thumb.jpg",
+                    "objectKey": "3-Rome/A2_Colosseum.png",
+                    "thumbObjectKey": "3-Rome/A2_Colosseum_thumb.jpg",
                     "thumbPath": "input/03 Rome/A2 Colosseum thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/2-Rome/A2_Colosseum.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/2-Rome/A2_Colosseum_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/3-Rome/A2_Colosseum.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/3-Rome/A2_Colosseum_thumb.jpg"
                 },
                 {
                     "path": "input/03 Rome/A3 Piazza del Campidoglio - Dea Roma.png",
                     "altText": "Piazza del Campidoglio - Dea Roma",
-                    "objectKey": "2-Rome/A3_Piazza_del_Campidoglio___Dea_Roma.png",
-                    "thumbObjectKey": "2-Rome/A3_Piazza_del_Campidoglio___Dea_Roma_thumb.jpg",
+                    "objectKey": "3-Rome/A3_Piazza_del_Campidoglio___Dea_Roma.png",
+                    "thumbObjectKey": "3-Rome/A3_Piazza_del_Campidoglio___Dea_Roma_thumb.jpg",
                     "thumbPath": "input/03 Rome/A3 Piazza del Campidoglio - Dea Roma thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/2-Rome/A3_Piazza_del_Campidoglio___Dea_Roma.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/2-Rome/A3_Piazza_del_Campidoglio___Dea_Roma_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/3-Rome/A3_Piazza_del_Campidoglio___Dea_Roma.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/3-Rome/A3_Piazza_del_Campidoglio___Dea_Roma_thumb.jpg"
                 },
                 {
                     "path": "input/03 Rome/A4 Arch of Constantine.png",
                     "altText": "Arch of Constantine",
-                    "objectKey": "2-Rome/A4_Arch_of_Constantine.png",
-                    "thumbObjectKey": "2-Rome/A4_Arch_of_Constantine_thumb.jpg",
+                    "objectKey": "3-Rome/A4_Arch_of_Constantine.png",
+                    "thumbObjectKey": "3-Rome/A4_Arch_of_Constantine_thumb.jpg",
                     "thumbPath": "input/03 Rome/A4 Arch of Constantine thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/2-Rome/A4_Arch_of_Constantine.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/2-Rome/A4_Arch_of_Constantine_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/3-Rome/A4_Arch_of_Constantine.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/3-Rome/A4_Arch_of_Constantine_thumb.jpg"
                 }
             ],
             [
                 {
                     "path": "input/03 Rome/B1 couple.png",
                     "altText": "couple",
-                    "objectKey": "2-Rome/B1_couple.png",
-                    "thumbObjectKey": "2-Rome/B1_couple_thumb.jpg",
+                    "objectKey": "3-Rome/B1_couple.png",
+                    "thumbObjectKey": "3-Rome/B1_couple_thumb.jpg",
                     "thumbPath": "input/03 Rome/B1 couple thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/2-Rome/B1_couple.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/2-Rome/B1_couple_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/3-Rome/B1_couple.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/3-Rome/B1_couple_thumb.jpg"
                 },
                 {
                     "path": "input/03 Rome/B2 Palatine Hill.png",
                     "altText": "Palatine Hill",
-                    "objectKey": "2-Rome/B2_Palatine_Hill.png",
-                    "thumbObjectKey": "2-Rome/B2_Palatine_Hill_thumb.jpg",
+                    "objectKey": "3-Rome/B2_Palatine_Hill.png",
+                    "thumbObjectKey": "3-Rome/B2_Palatine_Hill_thumb.jpg",
                     "thumbPath": "input/03 Rome/B2 Palatine Hill thumbnail.jpg",
-                    "r2Url": "https://images.alexandergillon.com/2-Rome/B2_Palatine_Hill.png",
-                    "thumbR2URL": "https://images.alexandergillon.com/2-Rome/B2_Palatine_Hill_thumb.jpg"
+                    "r2Url": "https://images.alexandergillon.com/3-Rome/B2_Palatine_Hill.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/3-Rome/B2_Palatine_Hill_thumb.jpg"
+                }
+            ]
+        ]
+    },
+    {
+        "title": "CMU & Pitt",
+        "rows": [
+            [
+                {
+                    "path": "input/02 CMU/A1 Cathedral of Learning.png",
+                    "altText": "Cathedral of Learning",
+                    "objectKey": "2-CMU___Pitt/A1_Cathedral_of_Learning.png",
+                    "thumbObjectKey": "2-CMU___Pitt/A1_Cathedral_of_Learning_thumb.jpg",
+                    "thumbPath": "input/02 CMU/A1 Cathedral of Learning thumbnail.jpg",
+                    "r2Url": "https://images.alexandergillon.com/2-CMU___Pitt/A1_Cathedral_of_Learning.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/2-CMU___Pitt/A1_Cathedral_of_Learning_thumb.jpg"
+                },
+                {
+                    "path": "input/02 CMU/A2 Clock.png",
+                    "altText": "Clock",
+                    "objectKey": "2-CMU___Pitt/A2_Clock.png",
+                    "thumbObjectKey": "2-CMU___Pitt/A2_Clock_thumb.jpg",
+                    "thumbPath": "input/02 CMU/A2 Clock thumbnail.jpg",
+                    "r2Url": "https://images.alexandergillon.com/2-CMU___Pitt/A2_Clock.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/2-CMU___Pitt/A2_Clock_thumb.jpg"
+                },
+                {
+                    "path": "input/02 CMU/A3 Walking to the Sky.png",
+                    "altText": "Walking to the Sky",
+                    "objectKey": "2-CMU___Pitt/A3_Walking_to_the_Sky.png",
+                    "thumbObjectKey": "2-CMU___Pitt/A3_Walking_to_the_Sky_thumb.jpg",
+                    "thumbPath": "input/02 CMU/A3 Walking to the Sky thumbnail.jpg",
+                    "r2Url": "https://images.alexandergillon.com/2-CMU___Pitt/A3_Walking_to_the_Sky.png",
+                    "thumbR2URL": "https://images.alexandergillon.com/2-CMU___Pitt/A3_Walking_to_the_Sky_thumb.jpg"
                 }
             ]
         ]
@@ -342,11 +376,11 @@
         "rows": [
             [
                 {
-                    "path": "input/02 Eclipse/A1 solar eclipse.png",
+                    "path": "input/01 Eclipse/A1 solar eclipse.png",
                     "altText": "solar eclipse",
                     "objectKey": "1-Solar_Eclipse_2024/A1_solar_eclipse.png",
                     "thumbObjectKey": "1-Solar_Eclipse_2024/A1_solar_eclipse_thumb.jpg",
-                    "thumbPath": "input/02 Eclipse/A1 solar eclipse thumbnail.jpg",
+                    "thumbPath": "input/01 Eclipse/A1 solar eclipse thumbnail.jpg",
                     "r2Url": "https://images.alexandergillon.com/1-Solar_Eclipse_2024/A1_solar_eclipse.png",
                     "thumbR2URL": "https://images.alexandergillon.com/1-Solar_Eclipse_2024/A1_solar_eclipse_thumb.jpg"
                 }
@@ -358,11 +392,11 @@
         "rows": [
             [
                 {
-                    "path": "input/01 Niagara/A1 Niagara River.png",
+                    "path": "input/00 Niagara/A1 Niagara River.png",
                     "altText": "Niagara River",
                     "objectKey": "0-Niagara_Glen/A1_Niagara_River.png",
                     "thumbObjectKey": "0-Niagara_Glen/A1_Niagara_River_thumb.jpg",
-                    "thumbPath": "input/01 Niagara/A1 Niagara River thumbnail.jpg",
+                    "thumbPath": "input/00 Niagara/A1 Niagara River thumbnail.jpg",
                     "r2Url": "https://images.alexandergillon.com/0-Niagara_Glen/A1_Niagara_River.png",
                     "thumbR2URL": "https://images.alexandergillon.com/0-Niagara_Glen/A1_Niagara_River_thumb.jpg"
                 }
