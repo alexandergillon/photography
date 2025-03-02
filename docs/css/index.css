@@ -1,301 +1,281 @@
-@font-face {
-    font-family: "Wasted Vindey";
-    src: url("../fonts/Wasted-Vindey.ttf");
-}
-
 .mainFont {
-    font-family: "Wasted Vindey", serif;
-    font-variant-ligatures: none;
-    letter-spacing: 0.02rem;
+  font-family: "Wasted Vindey", sans-serif;
+  font-variant-ligatures: none;
+  letter-spacing: 0.02rem;
 }
 
 .mainFontWide {
-    font-family: "Wasted Vindey", serif;
-    font-variant-ligatures: none;
-    letter-spacing: 0.15rem;
+  font-family: "Wasted Vindey", sans-serif;
+  font-variant-ligatures: none;
+  letter-spacing: 0.15rem;
 }
 
-:root {
-    --background-color: #FDFAF6;
-    --text-color: #000000;
-}
-
+/* CSS filters which achieve the same colors as above */
 .bgColor {
-    background-color: var(--background-color);
+  background-color: #FDFAF6;
 }
 
 .textColor {
-    color: var(--text-color);
+  color: #000000;
 }
 
 .pswp__bg {
-    background: var(--background-color) !important;
+  background: #FDFAF6 !important;
 }
 
 .pswpCustom {
-    --pswp-icon-color: var(--text-color) !important;
-    --pswp-icon-color-secondary: var(--background-color) !important;
-}
-
-body {
-    opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
-    margin: 0;
+  --pswp-icon-color: #000000 !important;
+  --pswp-icon-color-secondary: #FDFAF6 !important;
 }
 
 nav {
-    height: 2.5rem;
-    margin: 0.8rem calc(0.8rem + 5px) 0.8rem 0.8rem; /* margin-right is a but wider because of scrollbar */
-
-    ul {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-
-    li {
-        display: inline-block;
-        float: right;
-        height: 100%;
-        margin: 0 0.4rem;
-        aspect-ratio: 1 / 1;
-    }
-
-    a {
-        display: inline-block;
-        height: 80%;
-        margin: 10%;
-    }
-
-    div {
-        height: 100%;
-        position: relative;
-    }
-
-    .navBarIcon {
-        filter: brightness(0) saturate(100%);
-        transition: 0.25s;
-    }
-
-    .navBarIcon:hover {
-        filter: none;
-        transition: 0.25s;
-    }
-
-    img {
-        height: 100%;
-    }
+  height: 2.5rem;
+  margin: 0.8rem calc(0.8rem + 5px) 0.8rem 0.8rem; /* margin-right is a bit wider because of scrollbar */
+}
+nav ul {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+nav li {
+  display: inline-block;
+  float: right;
+  height: 100%;
+  margin: 0 0.4rem;
+  aspect-ratio: 1/1;
+}
+nav a {
+  display: inline-block;
+  height: 80%;
+  margin: 10%;
+}
+nav div {
+  height: 100%;
+  position: relative;
+}
+nav .navBarIcon {
+  filter: brightness(0) saturate(100%); /* monochrome black */
+  transition: 0.25s;
+}
+nav .navBarIcon:hover {
+  filter: none;
+  transition: 0.25s;
+}
+nav img {
+  height: 100%;
 }
 
-#content {
-    width: 80%;
-    margin: auto;
-}
-
-#pageTitle {
-    margin: 3rem auto 5rem;
-    text-align: center;
-    font-weight: normal;
-    font-size: 6rem;
-}
-
+/* --transition-time set in JS on .imageSeriesRows */
 .imageSeries {
-    margin: 2rem 0;
-    opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
+  margin: 2rem 0;
+  opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
 }
 
 .imageSeriesTitleDiv {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .imageSeriesTitle {
-    margin: 0;
-    font-weight: normal;
-    font-size: 2.25rem;
+  margin: 0;
+  font-weight: normal;
+  font-size: 2.25rem;
 }
 
 .imageSeriesDropdownCheckbox {
-    display: none;
+  display: none;
 }
 
 .imageSeriesDropdownLabel {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .imageSeriesDropdownLabel > * {
-    filter: none;
-    transition: 0.25s ease-in-out;
+  filter: none;
+  transition: 0.25s ease-in-out;
 }
 
 .imageSeriesDropdownLabel:hover > * {
-    filter: brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(91%) contrast(90%);
-    transition: 0.25s ease-in-out;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(91%) contrast(90%);
+  transition: 0.25s ease-in-out;
 }
 
 .imageSeriesDropdownLabelImage {
-    height: 1rem;
-    transform: scaleY(1);
+  height: 1rem;
+  transform: scaleY(1);
 }
 
 :checked ~ .imageSeriesDropdownLabel > .imageSeriesDropdownLabelImage {
-    transform: scaleY(-1);
-    transition: 0.25s ease-in-out;
+  transform: scaleY(-1);
+  transition: 0.25s ease-in-out;
 }
 
 .imageSeriesRows {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height var(--transition-time) ease-in-out; /* --transition-time set in JS */
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--transition-time) ease-in-out;
 }
 
 .imageSeriesRows.expanded {
-    max-height: var(--max-height); /* --max-height set in JS */
-    transition: max-height var(--transition-time) ease-in-out; /* --transition-time set in JS */
+  max-height: var(--max-height); /* --max-height set in JS */
+  transition: max-height var(--transition-time) ease-in-out;
 }
 
 .imageSeriesRow {
-    display: grid;
-    column-gap: 0.5em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+  display: grid;
+  column-gap: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .imageSeriesRow:first-child {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .imageSeriesRow:last-child {
-    margin-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 
 .imageSeriesRow.singleton a {
-    max-width: 100%;
-    max-height: 80vh;
-    text-align: center;
+  max-width: 100%;
+  max-height: 80vh;
+  text-align: center;
 }
 
 .imageSeriesImage {
-    object-fit: contain;
-    width: 100%;
-    cursor: zoom-in;
+  object-fit: contain;
+  width: 100%;
+  cursor: zoom-in;
 }
 
+/* singletons display in the middle, and have a capped height to not take up too much of the page */
 .singleton .imageSeriesImage {
-    width: unset;
-    max-width: 100%;
-    height: 100%;
-}
-
-#footer {
-    height: 2.5rem;
-    margin: 3rem 1rem;
-
-    ul {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-        text-align: center;
-    }
-
-    li {
-        display: inline-block;
-    }
-
-    /* divider between footer elements */
-    li + li:before {
-        position: relative;
-        top: 0.1rem; /* slash sits above the text baseline, but we want it to be vertically centered with text */
-        font-size: 1.3rem;
-        content: "/";
-    }
-
-    span {
-        margin: 0 0.5rem;
-        font-size: 1.1rem;
-    }
-
-    /* copyright icon uses a different font, adjusted a little so it sits vertically centered */
-    #copyright {
-        position: relative;
-        top: 0.05rem;
-        margin: 0;
-        font-size: 1.2rem;
-        font-family: Arial, sans-serif;
-    }
-}
-
-#footer, .noScriptText {
-    a {
-        text-decoration: none;
-        color: #3776A1;
-        transition: 0.25s;
-    }
-
-    a:hover {
-        color: #89CFF1;
-        transition: 0.25s;
-    }
-
-    .externalLinkIcon {
-        position: relative;
-        top: -0.1rem; /* link icon is not really 'centered' at the source in the way that we want it, so move it up a little */
-        vertical-align: middle;
-        height: 0.75rem;
-        margin-left: 0.35rem;
-        margin-right: 0.1rem;
-        filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
-        transition: 0.25s;
-    }
-
-    :hover > .externalLinkIcon {
-        filter: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
-        transition: 0.25s;
-    }
-}
-
-.noScriptText {
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-.noScriptText:last-child {
-    margin-bottom: 7rem;
-}
-
-.fadeInAnimation {
-    animation-duration: 0.5s;
-    animation-name: fade-in;
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards; /* keeps opacity at 1 after animation is done */
-}
-
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
+  width: unset;
+  max-width: 100%;
+  height: 100%;
 }
 
 .imageSeriesLoadAnimation {
-    animation-duration: 0.5s;
-    animation-name: image-series-load-animation;
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards; /* keeps opacity at 1 after animation is done */
+  animation-duration: 0.5s;
+  animation-name: image-series-load-animation;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards; /* keeps opacity at 1 after animation is done */
 }
 
 @keyframes image-series-load-animation {
-    0% {
-        opacity: 0;
-        translate: 0 -1rem;
-    }
-
-    100% {
-        opacity: 1;
-        translate: 0 0;
-    }
+  0% {
+    opacity: 0;
+    translate: 0 -1rem;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
 }
+.noScriptText a, #footer a {
+  text-decoration: none;
+  color: #3776A1;
+  transition: 0.25s;
+}
+.noScriptText a:hover, #footer a:hover {
+  color: #89CFF1;
+  transition: 0.25s;
+}
+.noScriptText .externalLinkIcon, #footer .externalLinkIcon {
+  position: relative;
+  top: -0.1rem; /* link icon is not really 'centered' at the source in the way that we want it, so move it up a little */
+  vertical-align: middle;
+  height: 0.75rem;
+  margin-left: 0.35rem;
+  margin-right: 0.1rem;
+  filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
+  transition: 0.25s;
+}
+.noScriptText :hover > .externalLinkIcon, #footer :hover > .externalLinkIcon {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
+  transition: 0.25s;
+}
+
+#footer {
+  height: 2.5rem;
+  margin: 3rem 1rem;
+  /* divider between footer elements */
+  /* copyright icon uses a different font, adjusted a little so it sits vertically centered */
+}
+#footer ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}
+#footer li {
+  display: inline-block;
+}
+#footer li + li:before {
+  position: relative;
+  top: 0.1rem; /* slash sits above the text baseline, but we want it to be vertically centered with text */
+  font-size: 1.3rem;
+  content: "/";
+}
+#footer span {
+  margin: 0 0.5rem;
+  font-size: 1.1rem;
+}
+#footer #copyright {
+  position: relative;
+  top: 0.05rem;
+  margin: 0;
+  font-size: 1.2rem;
+  font-family: Arial, sans-serif;
+}
+
+.noScriptText {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.noScriptText:last-child {
+  margin-bottom: 7rem;
+}
+
+/* this needs to go here because SCSS can't handle importing relative URLs */
+@font-face {
+  font-family: "Wasted Vindey";
+  src: url("../fonts/Wasted-Vindey.ttf");
+}
+body {
+  opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
+  margin: 0;
+}
+
+#content {
+  width: 80%;
+  margin: auto;
+}
+
+#pageTitle {
+  margin: 3rem auto 5rem;
+  text-align: center;
+  font-weight: normal;
+  font-size: 6rem;
+}
+
+.fadeInAnimation {
+  animation-duration: 0.5s;
+  animation-name: fade-in;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards; /* keeps opacity at 1 after animation is done */
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

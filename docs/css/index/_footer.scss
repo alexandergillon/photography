@@ -1,0 +1,41 @@
+@use "external-link";
+
+#footer {
+    @extend %external-link;
+
+    height: 2.5rem;
+    margin: 3rem 1rem;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        text-align: center;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+    /* divider between footer elements */
+    li + li:before {
+        position: relative;
+        top: 0.1rem; /* slash sits above the text baseline, but we want it to be vertically centered with text */
+        font-size: 1.3rem;
+        content: "/";
+    }
+
+    span {
+        margin: 0 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    /* copyright icon uses a different font, adjusted a little so it sits vertically centered */
+    #copyright {
+        position: relative;
+        top: 0.05rem;
+        margin: 0;
+        font-size: 1.2rem;
+        font-family: Arial, sans-serif;
+    }
+}

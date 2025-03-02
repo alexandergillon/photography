@@ -1,0 +1,31 @@
+@use "colors";
+$link-transition: 0.25s;
+
+%external-link {
+    a {
+        text-decoration: none;
+        color: colors.$link-color;
+        transition: $link-transition;
+    }
+
+    a:hover {
+        color: colors.$link-color-highlight;
+        transition: $link-transition;
+    }
+
+    .externalLinkIcon {
+        position: relative;
+        top: -0.1rem; /* link icon is not really 'centered' at the source in the way that we want it, so move it up a little */
+        vertical-align: middle;
+        height: 0.75rem;
+        margin-left: 0.35rem;
+        margin-right: 0.1rem;
+        filter: colors.$link-color-filter;
+        transition: $link-transition;
+    }
+
+    :hover > .externalLinkIcon {
+        filter: colors.$link-color-highlight-filter;
+        transition: $link-transition;
+    }
+}

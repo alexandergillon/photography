@@ -1,0 +1,14 @@
+@use "external-link";
+
+.noScriptText {
+    @extend %external-link;
+}
+
+.noScriptText {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.noScriptText:last-child {
+    margin-bottom: 7rem;
+}

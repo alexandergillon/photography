@@ -1,0 +1,25 @@
+$background-color: #FDFAF6;
+$text-color: #000000;
+
+$link-color: #3776A1;
+$link-color-highlight: #89CFF1;
+/* CSS filters which achieve the same colors as above */
+$link-color-filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
+$link-color-highlight-filter: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
+
+.bgColor {
+    background-color: $background-color;
+}
+
+.textColor {
+    color: $text-color;
+}
+
+.pswp__bg {
+    background: $background-color !important;
+}
+
+.pswpCustom {
+    --pswp-icon-color: #{$text-color} !important;
+    --pswp-icon-color-secondary: #{$background-color} !important;
+}

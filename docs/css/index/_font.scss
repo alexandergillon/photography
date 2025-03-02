@@ -1,0 +1,14 @@
+$font-name: "Wasted Vindey";
+$font-stack: $font-name, sans-serif;
+
+.mainFont {
+    font-family: $font-stack;
+    font-variant-ligatures: none;
+    letter-spacing: 0.02rem;
+}
+
+.mainFontWide {
+    font-family: $font-stack;
+    font-variant-ligatures: none;
+    letter-spacing: 0.15rem;
+}

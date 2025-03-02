@@ -1,0 +1,111 @@
+$dropdown-transition: 0.25s ease-in-out;
+$image-series-rows-transition: max-height var(--transition-time) ease-in-out; /* --transition-time set in JS on .imageSeriesRows */
+
+.imageSeries {
+    margin: 2rem 0;
+    opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
+}
+
+.imageSeriesTitleDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.imageSeriesTitle {
+    margin: 0;
+    font-weight: normal;
+    font-size: 2.25rem;
+}
+
+.imageSeriesDropdownCheckbox {
+    display: none;
+}
+
+.imageSeriesDropdownLabel {
+    cursor: pointer;
+}
+
+.imageSeriesDropdownLabel > * {
+    filter: none;
+    transition: $dropdown-transition;
+}
+
+.imageSeriesDropdownLabel:hover > * {
+    filter: brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(91%) contrast(90%);
+    transition: $dropdown-transition;
+}
+
+.imageSeriesDropdownLabelImage {
+    height: 1rem;
+    transform: scaleY(1);
+}
+
+:checked ~ .imageSeriesDropdownLabel > .imageSeriesDropdownLabelImage {
+    transform: scaleY(-1);
+    transition: $dropdown-transition;
+}
+
+.imageSeriesRows {
+    overflow: hidden;
+    max-height: 0;
+    transition: $image-series-rows-transition;
+}
+
+.imageSeriesRows.expanded {
+    max-height: var(--max-height); /* --max-height set in JS */
+    transition: $image-series-rows-transition;
+}
+
+.imageSeriesRow {
+    display: grid;
+    column-gap: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.imageSeriesRow:first-child {
+    margin-top: 1.5rem;
+}
+
+.imageSeriesRow:last-child {
+    margin-bottom: 3rem;
+}
+
+.imageSeriesRow.singleton a {
+    max-width: 100%;
+    max-height: 80vh;
+    text-align: center;
+}
+
+.imageSeriesImage {
+    object-fit: contain;
+    width: 100%;
+    cursor: zoom-in;
+}
+
+/* singletons display in the middle, and have a capped height to not take up too much of the page */
+.singleton .imageSeriesImage {
+    width: unset;
+    max-width: 100%;
+    height: 100%;
+}
+
+.imageSeriesLoadAnimation {
+    animation-duration: 0.5s;
+    animation-name: image-series-load-animation;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards; /* keeps opacity at 1 after animation is done */
+}
+
+@keyframes image-series-load-animation {
+    0% {
+        opacity: 0;
+        translate: 0 -1rem;
+    }
+
+    100% {
+        opacity: 1;
+        translate: 0 0;
+    }
+}

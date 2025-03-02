@@ -1,0 +1,46 @@
+@use "index/font";
+@use "index/colors";
+@use "index/navbar";
+@use "index/image-series";
+@use "index/footer";
+@use "index/noscript";
+
+/* this needs to go here because SCSS can't handle importing relative URLs */
+@font-face {
+    font-family: font.$font-name;
+    src: url("../fonts/Wasted-Vindey.ttf");
+}
+
+body {
+    opacity: 0; /* so that it doesn't appear before animation plays - will be set to 1 by animation, after it's finished playing */
+    margin: 0;
+}
+
+#content {
+    width: 80%;
+    margin: auto;
+}
+
+#pageTitle {
+    margin: 3rem auto 5rem;
+    text-align: center;
+    font-weight: normal;
+    font-size: 6rem;
+}
+
+.fadeInAnimation {
+    animation-duration: 0.5s;
+    animation-name: fade-in;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards; /* keeps opacity at 1 after animation is done */
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

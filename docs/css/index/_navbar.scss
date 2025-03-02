@@ -1,0 +1,46 @@
+$icon-transition: 0.25s;
+
+nav {
+    height: 2.5rem;
+    margin: 0.8rem calc(0.8rem + 5px) 0.8rem 0.8rem; /* margin-right is a bit wider because of scrollbar */
+
+    ul {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    li {
+        display: inline-block;
+        float: right;
+        height: 100%;
+        margin: 0 0.4rem;
+        aspect-ratio: 1 / 1;
+    }
+
+    a {
+        display: inline-block;
+        height: 80%;
+        margin: 10%;
+    }
+
+    div {
+        height: 100%;
+        position: relative;
+    }
+
+    .navBarIcon {
+        filter: brightness(0) saturate(100%); /* monochrome black */
+        transition: $icon-transition;
+    }
+
+    .navBarIcon:hover {
+        filter: none;
+        transition: $icon-transition;
+    }
+
+    img {
+        height: 100%;
+    }
+}
