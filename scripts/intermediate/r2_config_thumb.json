@@ -1,5 +1,42 @@
 [
     {
+        "title": "Summer Palace",
+        "rows": [
+            [
+                {
+                    "path": "input/10 Summer Palace/A1 Lake.png",
+                    "altText": "Lake",
+                    "objectKey": "10-Summer_Palace/A1_Lake.png",
+                    "thumbObjectKey": "10-Summer_Palace/A1_Lake_thumb.jpg",
+                    "thumbPath": "input/10 Summer Palace/A1 Lake thumbnail.jpg"
+                }
+            ],
+            [
+                {
+                    "path": "input/10 Summer Palace/B1 Arch Bridge.png",
+                    "altText": "Arch Bridge",
+                    "objectKey": "10-Summer_Palace/B1_Arch_Bridge.png",
+                    "thumbObjectKey": "10-Summer_Palace/B1_Arch_Bridge_thumb.jpg",
+                    "thumbPath": "input/10 Summer Palace/B1 Arch Bridge thumbnail.jpg"
+                },
+                {
+                    "path": "input/10 Summer Palace/B2 Duck.png",
+                    "altText": "Duck",
+                    "objectKey": "10-Summer_Palace/B2_Duck.png",
+                    "thumbObjectKey": "10-Summer_Palace/B2_Duck_thumb.jpg",
+                    "thumbPath": "input/10 Summer Palace/B2 Duck thumbnail.jpg"
+                },
+                {
+                    "path": "input/10 Summer Palace/B3 Eagle-eye View.png",
+                    "altText": "Eagle-eye View",
+                    "objectKey": "10-Summer_Palace/B3_Eagle_eye_View.png",
+                    "thumbObjectKey": "10-Summer_Palace/B3_Eagle_eye_View_thumb.jpg",
+                    "thumbPath": "input/10 Summer Palace/B3 Eagle-eye View thumbnail.jpg"
+                }
+            ]
+        ]
+    },
+    {
         "title": "Ravenswood Manor",
         "rows": [
             [
