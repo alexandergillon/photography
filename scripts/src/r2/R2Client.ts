@@ -5,7 +5,7 @@
 import config from "config"
 import fs from "fs"
 import { S3Client, HeadBucketCommand, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } from "@aws-sdk/client-s3"
-import { Manifest } from "@/types"
+import { Manifest } from "@/types/config"
 
 /**
  * Client class for interacting with R2.
@@ -22,12 +22,12 @@ export class R2Client {
    */
   constructor(accountId: string, accessKeyId: string, secretAccessKey: string) {
     this.r2Client = new S3Client({
-        region: "auto",
-        endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
-        credentials: {
-            accessKeyId: accessKeyId,
-            secretAccessKey: secretAccessKey,
-        },
+      region: "auto",
+      endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
+      credentials: {
+          accessKeyId: accessKeyId,
+          secretAccessKey: secretAccessKey,
+      },
     })
   }
 

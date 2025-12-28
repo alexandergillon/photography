@@ -27,11 +27,11 @@ export type BaseImage = {
   path: string,               // Path to image, on disk
   altText: string,            // Alt text for the image
   objectKey: string,          // Object key for the image in R2
-  thumbObjectKey: string,     // Object key for the image's thumbnail in R2
 }
 
 export type ThumbImage = BaseImage & {
   thumbPath: string,          // Path to thumbnail image, on disk
+  thumbObjectKey: string,     // Object key for the image's thumbnail in R2
 }
 
 export type UploadedImage = ThumbImage & {
