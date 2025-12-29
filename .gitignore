@@ -1,2 +1,4 @@
 scripts/node_modules
 scripts/dist
+scripts/coverage
+scripts/.secrets

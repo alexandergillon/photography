@@ -2,7 +2,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:manual": "cross-env R2_SECRETS_PATH=./.secrets/r2.json vitest run --config ./vitest.manual.config.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.741.0",
@@ -10,6 +11,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.1",
+    "@vitest/coverage-v8": "^4.0.16",
+    "cross-env": "^10.1.0",
     "vitest": "^4.0.16"
   }
 }

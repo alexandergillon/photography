@@ -31,3 +31,7 @@ test('Object key parsing special character collapsing works', () => {
   expect(parseObjectKey(objectKey(uuid, 'series:::with!!!special@@@characters', 'image[[[with]]]special###characters')))
     .toEqual({ seriesUuid: uuid, seriesName: 'series-with-special-characters', imageName: 'image-with-special-characters' })
 })
+
+test('Object key parsing with invalid object key throws error', () => {
+  expect(() => parseObjectKey('invalid-object-key')).toThrow()
+})

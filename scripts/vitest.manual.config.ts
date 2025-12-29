@@ -8,10 +8,12 @@ export default defineConfig({
     },
   },
   test: {
-    include: ["src/**/*.test.ts"],
-    exclude: ["src/**/*.manual.test.ts"],
+    include: ["src/**/*.manual.test.ts"],
     coverage: {
       enabled: true,
+      exclude: [
+        "src/r2/utils.ts"
+      ]
     },
   },
 });

@@ -32,6 +32,21 @@ export class R2Client {
   }
 
   /**
+   * Creates a new R2 client from a secrets file.
+   * @param secretsPath Path to secrets file.
+   * @returns R2 client.
+   */
+  static fromSecrets(secretsPath: string): R2Client {
+    const secrets: { accountId: string, accessKeyId: string, secretAccessKey: string } = JSON.parse(fs.readFileSync(secretsPath).toString());
+    
+    if (!secrets.accountId || !secrets.accessKeyId || !secrets.secretAccessKey) {
+      throw new Error("Secrets file is missing required fields")
+    }
+
+    return new R2Client(secrets.accountId, secrets.accessKeyId, secrets.secretAccessKey)
+  }
+
+  /**
    * Checks whether the R2 bucket, as specified in the config, exists. If it doesn't, exits.
    */
   async ensureBucketExists(): Promise<void> {
@@ -41,9 +56,68 @@ export class R2Client {
       await this.r2Client.send(command)
       console.log(`Found bucket ${config.bucketName}`)
     } catch (error) {
-      console.log(`Error fetching bucket: ${error}`)
+      console.error(`Error fetching bucket: ${error}`)
       process.exit(1)
     }
+  }
+
+  /**
+   * Fetches an object from R2.
+   * @param objectKey Object key.
+   * @returns The object, or undefined if it doesn't exist / an error occurred.
+   */
+  private async get(objectKey: string) {
+    console.log(`Fetching ${objectKey} from R2`)
+    try {
+      const getObjectCommand = new GetObjectCommand({
+        Bucket: config.bucketName,
+        Key: objectKey,
+      })
+      const response = await this.r2Client.send(getObjectCommand)
+
+      if (response.Body) {
+        return response.Body
+      } else {
+        console.error(`Error fetching ${objectKey} from R2: body is empty`)
+        return undefined
+      }
+    } catch (error) {
+      console.error(`Error fetching ${objectKey} from R2: ${error}`)
+      return undefined
+    }
+  }
+
+  /**
+   * Fetches an object from R2, as a string.
+   * @param objectKey Object key.
+   * @returns The string, or undefined if it doesn't exist / an error occurred.
+   */
+  async getString(objectKey: string): Promise<string | undefined> {
+    const response = await this.get(objectKey)
+    if (response) return response.transformToString()
+    return undefined
+  }
+
+  /**
+   * Fetches an object from R2, as a byte array.
+   * @param objectKey Object key.
+   * @returns The byte array, or undefined if it doesn't exist / an error occurred.
+   */
+  async getByteArray(objectKey: string): Promise<Uint8Array | undefined> {
+    const response = await this.get(objectKey)
+    if (response) return response.transformToByteArray()
+    return undefined
+  }
+
+  /**
+   * Fetches an object from R2, parsed as a JSON object.
+   * @param objectKey Object key.
+   * @returns The JSON object, or undefined if it doesn't exist / an error occurred.
+   */
+  async getJsObject<T>(objectKey: string): Promise<T | undefined> {
+    const response = await this.get(objectKey)
+    if (response) return JSON.parse(await response.transformToString())
+    return undefined
   }
 
   /**
@@ -51,23 +125,30 @@ export class R2Client {
    * @returns The manifest, or undefined if it doesn't exist / an error occurred.
    */
   async getManifest(): Promise<Manifest | undefined> {
-    try {
-      console.log(`Fetching ${config.manifestKey} from R2`)
-      const command = new GetObjectCommand({
-        Bucket: config.bucketName,
-        Key: config.manifestKey,
-      })
-      const response = await this.r2Client.send(command)
+    return this.getJsObject<Manifest>(config.manifestKey)
+  }
 
-      if (response.Body) {
-        return JSON.parse(await response.Body.transformToString())
-      } else {
-        console.log(`Error fetching ${config.manifestKey} from R2: body is empty`)
-        return undefined
+  /**
+   * Fetches all object keys for an image series, up to 1000.
+   * @param seriesUuid UUID of the image series.
+   * @returns All keys for the image series.
+   */
+  async getImageSeries(seriesUuid: string): Promise<Array<string>> {
+    try {
+      const listObjectsCommand = new ListObjectsV2Command({ Bucket: config.bucketName, Prefix: seriesUuid })
+      const response = await this.r2Client.send(listObjectsCommand)
+      if (!response.Contents) return []
+
+      if (response.Contents.length >= 1000) {
+        console.warn(`Found ${response.Contents.length} objects for ${seriesUuid}, which is at/over the Cloudflare limit. Results may be truncated.`)
       }
+
+      return response.Contents.map(object => object.Key).filter(key => {
+        if (key === undefined) console.error(`Found undefined key when listing ${seriesUuid}`)
+        return key !== undefined
+      })
     } catch (error) {
-      console.log(`Error fetching ${config.manifestKey} from R2: ${error}`)
-      return undefined
+      throw new Error(`Error fetching ${seriesUuid} from R2: ${error}`)
     }
   }
 
@@ -89,7 +170,7 @@ export class R2Client {
       await this.r2Client.send(command)
       return true
     } catch (error) {
-      console.log(`Error uploading ${objectKey} to R2: ${error}`)
+      console.error(`Error uploading ${objectKey} to R2: ${error}`)
       return false
     }
   }
@@ -103,6 +184,10 @@ export class R2Client {
    */
   async uploadFile(path: string, objectKey: string, contentType: string): Promise<boolean> {
     console.log(`Uploading ${objectKey} to R2 (${path})`)
+    if (!fs.existsSync(path)) {
+      console.error(`File ${path} does not exist`)
+      return false
+    }
     return this.upload(fs.readFileSync(path), objectKey, contentType)
   }
 
@@ -117,9 +202,49 @@ export class R2Client {
   }
 
   /**
+   * Deletes an object from R2.
+   * @param key Key for the object in R2.
+   * @returns True if the deletion was successful, false otherwise.
+   */
+  async delete(key: string): Promise<boolean> {
+    try {
+      const deleteObjectCommand = new DeleteObjectCommand({
+        Bucket: config.bucketName,
+        Key: key,
+      })
+      await this.r2Client.send(deleteObjectCommand)
+      console.log(`Deleted object ${key}`)
+      return true
+    } catch (error) {
+      console.error(`Error deleting ${key} from R2: ${error}`)
+      return false
+    }
+  }
+
+  /**
+   * Deletes an image series from R2.
+   * @param seriesUuid UUID of the image series.
+   * @returns True if the deletion was successful, false otherwise.
+   */
+  async deleteImageSeries(seriesUuid: string): Promise<boolean> {
+    try {
+      let success = true
+      for (const key of await this.getImageSeries(seriesUuid)) {
+        const deleted = await this.delete(key)
+        if (!deleted) success = false
+      }
+      return success
+    } catch (error) {
+      console.error(`Error deleting ${seriesUuid} from R2: ${error}`)
+      return false
+    }
+  }
+
+  /**
    * Deletes all objects in R2. USE WITH EXTREME CAUTION.
    */
   async deleteAll(): Promise<boolean> {
+    let success = true
     try {
       const listObjectsCommand = new ListObjectsV2Command({ Bucket: config.bucketName })
 
@@ -129,18 +254,19 @@ export class R2Client {
         if (!response.Contents || response.Contents.length === 0) break
 
         for (const object of response.Contents) {
-          const deleteObjectCommand = new DeleteObjectCommand({
-            Bucket: config.bucketName,
-            Key: object.Key,
-          })
-          await this.r2Client.send(deleteObjectCommand)
-          console.log(`Deleted object ${object.Key}`)
+          if (object.Key === undefined) {
+            console.error(`Found undefined key when listing ${config.bucketName}`)
+            success = false
+            continue
+          }
+          const deleted = await this.delete(object.Key)
+          success &&= deleted
         }
       }
     } catch (error) {
-      console.log(`Error deleting objects: ${error}`)
-      return false
+      console.error(`Error deleting objects: ${error}`)
+      success = false
     }
-    return true
+    return success
   }
 }

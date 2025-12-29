@@ -63,3 +63,17 @@ test('Image series config is correct', () => {
   expect(row1[0].altText).toBe('beach')
   expect(row1[1].altText).toBe('desert')
 })
+
+test('Throws error on missing title.txt', () => {
+  const tempDir = path.join(os.tmpdir(), `image-config-test-${randomUUID()}`)
+  fs.mkdirSync(tempDir)
+  
+  expect(() => imageSeriesBaseConfig(tempDir, randomUUID())).toThrow()
+})
+
+test('Throws error on invalid image name', () => {
+  const tempDir = setup()
+  fs.writeFileSync(path.join(tempDir, 'invalid.png'), 'dummy data')
+  
+  expect(() => imageSeriesBaseConfig(tempDir, randomUUID())).toThrow()
+})
