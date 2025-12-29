@@ -13,9 +13,9 @@ import { objectKey } from "@/r2/utils"
  * @returns The image series configuration.
  */
 export function imageSeriesBaseConfig(dir: string, seriesUuid: string): ImageSeries<BaseImage> {
-  const namePath = `${dir}/name.txt`
-  if (!fs.existsSync(namePath)) throw new Error(`Could not find name.txt for image series in '${dir}'`)
-  const seriesName = fs.readFileSync(namePath).toString()
+  const titlePath = `${dir}/title.txt`
+  if (!fs.existsSync(titlePath)) throw new Error(`Could not find title.txt for image series in '${dir}'`)
+  const title = fs.readFileSync(titlePath).toString()
 
   // Gets all pngs in the directory, and partitions them by row
   const pngs = fs.readdirSync(dir, { withFileTypes: true })
@@ -31,15 +31,16 @@ export function imageSeriesBaseConfig(dir: string, seriesUuid: string): ImageSer
       const configRow = row!.map(imageName => {
         return {
           path: `${dir}/${imageName}`,
+          fileName: imageName,
           altText: altTextOf(imageName),
-          objectKey: objectKey(seriesUuid, seriesName, imageName),
+          objectKey: objectKey(seriesUuid, title, imageName),
         }
       })
       configRows.push(configRow)
     }
 
   return {
-    title: seriesName,
+    title: title,
     rows: configRows,
   }
 }

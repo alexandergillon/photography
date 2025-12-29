@@ -2,7 +2,7 @@ import { expect, test } from 'vitest'
 import os from 'os';
 import fs from 'fs';
 import path from 'path';
-import { imageSeriesBaseConfig } from "@/image-config";
+import { imageSeriesBaseConfig } from "@/utils/image-config";
 import { randomUUID } from 'crypto';
 import { objectKey } from '@/r2/utils';
 
@@ -10,7 +10,7 @@ function setup() {
   const tempDir = path.join(os.tmpdir(), `image-config-test-${randomUUID()}`);
   fs.mkdirSync(tempDir)
 
-  fs.writeFileSync(path.join(tempDir, 'name.txt'), 'My Images')
+  fs.writeFileSync(path.join(tempDir, 'title.txt'), 'My Images')
 
   fs.writeFileSync(path.join(tempDir, 'A1-street.png'), 'dummy data')
   fs.writeFileSync(path.join(tempDir, 'A2-lake.png'), 'dummy data')
@@ -41,6 +41,13 @@ test('Image series config is correct', () => {
 
   expect(row1[0].path).toBe(`${tempDir}/B1-beach.png`)
   expect(row1[1].path).toBe(`${tempDir}/B2-desert.png`)
+
+  expect(row0[0].fileName).toBe("A1-street.png")
+  expect(row0[1].fileName).toBe("A2-lake.png")
+  expect(row0[2].fileName).toBe("A3-mountain.png")
+
+  expect(row1[0].fileName).toBe("B1-beach.png")
+  expect(row1[1].fileName).toBe("B2-desert.png")
 
   expect(row0[0].objectKey).toBe(objectKey(seriesUuid, 'My Images', 'A1-street.png'))
   expect(row0[1].objectKey).toBe(objectKey(seriesUuid, 'My Images', 'A2-lake.png'))

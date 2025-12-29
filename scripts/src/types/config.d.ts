@@ -25,12 +25,14 @@ export type Gallery<T> = ImageSeries<T>[]
 
 export type BaseImage = {
   path: string,               // Path to image, on disk
+  fileName: string,           // Name of the image file (i.e. path minus preceding dirs)
   altText: string,            // Alt text for the image
   objectKey: string,          // Object key for the image in R2
 }
 
 export type ThumbImage = BaseImage & {
   thumbPath: string,          // Path to thumbnail image, on disk
+  thumbFileName: string,      // Name of the thumbnail image file (i.e. path minus preceding dirs)
   thumbObjectKey: string,     // Object key for the image's thumbnail in R2
 }
 
