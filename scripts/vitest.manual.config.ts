@@ -12,8 +12,12 @@ export default defineConfig({
     coverage: {
       enabled: true,
       exclude: [
-        "src/r2/utils.ts"
+        "src/r2/utils.ts",
+        "src/utils/**",
+        "src/__tests__/**"
       ]
     },
+    // Tests hit an actual R2 bucket, so need to be run serially or they can interfere
+    fileParallelism: false,
   },
 });

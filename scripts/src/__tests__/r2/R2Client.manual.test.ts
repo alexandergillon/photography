@@ -1,22 +1,20 @@
 // Don't want these tests running automatically, as they hit actual R2.
-import { afterAll, beforeAll, beforeEach, expect, test, vi } from 'vitest'
+import { afterAll, beforeAll, beforeEach, afterEach, expect, test, vi } from 'vitest'
 import fs from "fs"
 import path from 'path'
 import { randomUUID } from 'crypto'
 import { R2Client } from '@/r2/R2Client'
 import type { Manifest, WebImage, ImageSeries, ThumbImage } from '@/types/config'
 import { objectKey } from '@/r2/utils'
+import { assertBytesEqual } from '@/__tests__/__utils__'
 
 const BIRD_PATH = path.join(__dirname, "..", "__bird__.png")
 const CAT_PATH = path.join(__dirname, "..", "__cat__.jpg")
 
-const BIRD_WIDTH = 1620
-const BIRD_HEIGHT = 1080
-
 const TIMEOUT_MILLISECONDS = 120000
 
 beforeAll(() => {
-  vi.mock("config", () => ({ 
+  vi.mock("config", () => ({
     default: {
       "bucketName": "alexandergillon-photography-test",
       "manifestKey": "manifest.json"
@@ -25,8 +23,6 @@ beforeAll(() => {
 })
 
 afterAll(() => {
-  const r2Client = setupR2Client()
-  r2Client.deleteAll()
   vi.resetAllMocks()
 })
 
@@ -35,6 +31,11 @@ function setupR2Client() {
 }
 
 beforeEach(async () => {
+  const r2Client = setupR2Client()
+  await r2Client.deleteAll()
+})
+
+afterEach(async () => {
   const r2Client = setupR2Client()
   await r2Client.deleteAll()
 })
@@ -90,7 +91,7 @@ test("Test getting/deleting manifest", async () => {
       title: "Series 1",
       uuid: "46c9f8c4-4fce-41a2-b20d-c33158ac95e6",
       rows: [
-        [ 
+        [
           { key: "1.png", thumbKey: "1.jpg", alt: "Image 1", width: 100, height: 100 },
           { key: "2.png", thumbKey: "2.jpg", alt: "Image 2", width: 100, height: 100 },
           { key: "3.png", thumbKey: "3.jpg", alt: "Image 3", width: 100, height: 100 },
@@ -126,6 +127,51 @@ test("Test getting/deleting manifest", async () => {
   expect(await r2Client.getManifest()).toEqual(manifest)
 }, TIMEOUT_MILLISECONDS)
 
+test("Test manifest exists", async () => {
+  const r2Client = setupR2Client()
+  expect(await r2Client.manifestExists()).toBe(false)
+
+  const manifest: Manifest = [
+    {
+      title: "Series 1",
+      uuid: "46c9f8c4-4fce-41a2-b20d-c33158ac95e6",
+      rows: [
+        [
+          { key: "1.png", thumbKey: "1.jpg", alt: "Image 1", width: 100, height: 100 },
+          { key: "2.png", thumbKey: "2.jpg", alt: "Image 2", width: 100, height: 100 },
+          { key: "3.png", thumbKey: "3.jpg", alt: "Image 3", width: 100, height: 100 },
+        ],
+        [
+          { key: "4.png", thumbKey: "4.jpg", alt: "Image 4", width: 100, height: 100 },
+          { key: "5.png", thumbKey: "5.jpg", alt: "Image 5", width: 100, height: 100 },
+          { key: "6.png", thumbKey: "6.jpg", alt: "Image 6", width: 100, height: 100 },
+        ]
+      ]
+    },
+    {
+      title: "Series 2",
+      uuid: "7e2d1377-90e1-4cec-9e54-598762e8911c",
+      rows: [
+        [
+          { key: "7.png", thumbKey: "7.jpg", alt: "Image 7", width: 100, height: 100 },
+          { key: "8.png", thumbKey: "8.jpg", alt: "Image 8", width: 100, height: 100 },
+          { key: "9.png", thumbKey: "9.jpg", alt: "Image 9", width: 100, height: 100 },
+        ],
+        [
+          { key: "10.png", thumbKey: "10.jpg", alt: "Image 10", width: 100, height: 100 },
+          { key: "11.png", thumbKey: "11.jpg", alt: "Image 11", width: 100, height: 100 },
+        ],
+        [
+          { key: "12.png", thumbKey: "12.jpg", alt: "Image 12", width: 100, height: 100 },
+        ],
+      ]
+    }
+  ]
+
+  expect(await r2Client.uploadManifest(manifest)).toBe(true)
+  expect(await r2Client.manifestExists()).toBe(true)
+}, TIMEOUT_MILLISECONDS)
+
 test("Test getting/deleting image series", async () => {
   const r2Client = setupR2Client()
   const seriesUuid = randomUUID()
@@ -141,7 +187,7 @@ test("Test getting/deleting image series", async () => {
   function seriesContainsKey(key: string) {
     return imageSeries.some((imageKey) => imageKey === key)
   }
-  
+
   for (let i = 0; i < 10; i++) {
     expect(seriesContainsKey(objectKey(seriesUuid, seriesName, `${i}.png`))).toBe(true)
   }
@@ -160,31 +206,31 @@ test("Test upload image series", async () => {
     uuid: seriesUuid,
     rows: [
       [
-        { 
-          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1.png"), 
+        {
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1.png"),
           thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1-thumb.jpg"),
-          path: BIRD_PATH, 
-          fileName: "test-upload-image-series-1.png", 
-          thumbPath: CAT_PATH, 
-          thumbFileName: "test-upload-image-series-1-thumb.jpg", 
+          path: BIRD_PATH,
+          fileName: "test-upload-image-series-1.png",
+          thumbPath: CAT_PATH,
+          thumbFileName: "test-upload-image-series-1-thumb.jpg",
           altText: "bird-cat",
         },
-        { 
-          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2.png"), 
+        {
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2.png"),
           thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2-thumb.jpg"),
-          path: BIRD_PATH, 
-          fileName: "test-upload-image-series-2.png", 
-          thumbPath: CAT_PATH, 
-          thumbFileName: "test-upload-image-series-2-thumb.jpg", 
+          path: BIRD_PATH,
+          fileName: "test-upload-image-series-2.png",
+          thumbPath: CAT_PATH,
+          thumbFileName: "test-upload-image-series-2-thumb.jpg",
           altText: "bird-cat",
         },
-        { 
-          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3.png"), 
+        {
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3.png"),
           thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3-thumb.jpg"),
-          path: BIRD_PATH, 
-          fileName: "test-upload-image-series-3.png", 
-          thumbPath: CAT_PATH, 
-          thumbFileName: "test-upload-image-series-3-thumb.jpg", 
+          path: BIRD_PATH,
+          fileName: "test-upload-image-series-3.png",
+          thumbPath: CAT_PATH,
+          thumbFileName: "test-upload-image-series-3-thumb.jpg",
           altText: "bird-cat",
         },
       ]
@@ -197,8 +243,8 @@ test("Test upload image series", async () => {
   const catBytes = new Uint8Array(fs.readFileSync(CAT_PATH));
   for (const row of imageSeries.rows) {
     for (const img of row) {
-      expect(await r2Client.getByteArray(img.objectKey)).toEqual(birdBytes);
-      expect(await r2Client.getByteArray(img.thumbObjectKey)).toEqual(catBytes);
+      assertBytesEqual(await r2Client.getByteArray(img.objectKey), birdBytes, "png", `Image series upload test: ${img.objectKey}`)
+      assertBytesEqual(await r2Client.getByteArray(img.thumbObjectKey), catBytes, "jpg", `Image series upload test: ${img.thumbObjectKey}`)
     }
   }
 }, TIMEOUT_MILLISECONDS)

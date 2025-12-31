@@ -12,6 +12,9 @@ export default defineConfig({
     exclude: ["src/**/*.manual.test.ts"],
     coverage: {
       enabled: true,
+      exclude: [
+        "src/__tests__/**"
+      ]
     },
   },
 });

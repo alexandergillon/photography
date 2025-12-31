@@ -74,18 +74,18 @@ test('Image series config is correct', () => {
 test('Throws error on missing title.txt', () => {
   const tempDir = path.join(os.tmpdir(), `image-config-test-${randomUUID()}`)
   fs.mkdirSync(tempDir)
-  
+
   expect(() => imageSeriesBaseConfig(tempDir, randomUUID())).toThrow()
 })
 
 test('Throws error on invalid image name', () => {
   const tempDir = setup()
   fs.writeFileSync(path.join(tempDir, 'invalid.png'), 'dummy data')
-  
+
   expect(() => imageSeriesBaseConfig(tempDir, randomUUID())).toThrow()
 })
 
-test('Web config generation is valid', () => {
+test('Web config generation is valid', async () => {
   const seriesUuid = randomUUID()
   const seriesName = "test-upload-image-series"
 
@@ -94,31 +94,31 @@ test('Web config generation is valid', () => {
     uuid: seriesUuid,
     rows: [
       [
-        { 
-          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1.png"), 
+        {
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1.png"),
           thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1-thumb.jpg"),
-          path: BIRD_PATH, 
-          fileName: "test-upload-image-series-1.png", 
-          thumbPath: CAT_PATH, 
-          thumbFileName: "test-upload-image-series-1-thumb.jpg", 
+          path: BIRD_PATH,
+          fileName: "test-upload-image-series-1.png",
+          thumbPath: CAT_PATH,
+          thumbFileName: "test-upload-image-series-1-thumb.jpg",
           altText: "bird-cat",
         },
-        { 
-          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2.png"), 
+        {
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2.png"),
           thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2-thumb.jpg"),
-          path: BIRD_PATH, 
-          fileName: "test-upload-image-series-2.png", 
-          thumbPath: CAT_PATH, 
-          thumbFileName: "test-upload-image-series-2-thumb.jpg", 
+          path: BIRD_PATH,
+          fileName: "test-upload-image-series-2.png",
+          thumbPath: CAT_PATH,
+          thumbFileName: "test-upload-image-series-2-thumb.jpg",
           altText: "bird-cat",
         },
-        { 
-          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3.png"), 
+        {
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3.png"),
           thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3-thumb.jpg"),
-          path: BIRD_PATH, 
-          fileName: "test-upload-image-series-3.png", 
-          thumbPath: CAT_PATH, 
-          thumbFileName: "test-upload-image-series-3-thumb.jpg", 
+          path: BIRD_PATH,
+          fileName: "test-upload-image-series-3.png",
+          thumbPath: CAT_PATH,
+          thumbFileName: "test-upload-image-series-3-thumb.jpg",
           altText: "bird-cat",
         },
       ]
@@ -130,22 +130,22 @@ test('Web config generation is valid', () => {
     uuid: seriesUuid,
     rows: [
       [
-        { 
-          key: objectKey(seriesUuid, seriesName, "test-upload-image-series-1.png"), 
+        {
+          key: objectKey(seriesUuid, seriesName, "test-upload-image-series-1.png"),
           thumbKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1-thumb.jpg"),
           alt: "bird-cat",
           width: BIRD_WIDTH,
           height: BIRD_HEIGHT,
         },
-        { 
-          key: objectKey(seriesUuid, seriesName, "test-upload-image-series-2.png"), 
+        {
+          key: objectKey(seriesUuid, seriesName, "test-upload-image-series-2.png"),
           thumbKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2-thumb.jpg"),
           alt: "bird-cat",
           width: BIRD_WIDTH,
           height: BIRD_HEIGHT,
         },
-        { 
-          key: objectKey(seriesUuid, seriesName, "test-upload-image-series-3.png"), 
+        {
+          key: objectKey(seriesUuid, seriesName, "test-upload-image-series-3.png"),
           thumbKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3-thumb.jpg"),
           alt: "bird-cat",
           width: BIRD_WIDTH,
@@ -154,6 +154,6 @@ test('Web config generation is valid', () => {
       ]
     ]
   }
-  
-  expect(imageSeriesWebConfig(thumbConfig)).resolves.toEqual(expectedWebConfig);
+
+  expect(await imageSeriesWebConfig(thumbConfig)).toEqual(expectedWebConfig);
 })

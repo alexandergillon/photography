@@ -4,7 +4,7 @@
 
 import config from "config"
 import fs from "fs"
-import { S3Client, HeadBucketCommand, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } from "@aws-sdk/client-s3"
+import { S3Client, HeadBucketCommand, HeadObjectCommand, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } from "@aws-sdk/client-s3"
 import type { Manifest, ThumbImage, ImageSeries } from "@/types/config"
 
 /**
@@ -38,7 +38,7 @@ export class R2Client {
    */
   static fromSecrets(secretsPath: string): R2Client {
     const secrets: { accountId: string, accessKeyId: string, secretAccessKey: string } = JSON.parse(fs.readFileSync(secretsPath).toString());
-    
+
     if (!secrets.accountId || !secrets.accessKeyId || !secrets.secretAccessKey) {
       throw new Error("Secrets file is missing required fields")
     }
@@ -51,13 +51,35 @@ export class R2Client {
    */
   async ensureBucketExists(): Promise<void> {
     try {
-      console.log(`Checking for bucket ${config.bucketName}`)
+      if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Checking for bucket ${config.bucketName}`)
       const command = new HeadBucketCommand({ Bucket: config.bucketName })
       await this.r2Client.send(command)
-      console.log(`Found bucket ${config.bucketName}`)
+      if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Found bucket ${config.bucketName}`)
     } catch (error) {
       console.error(`Error fetching bucket: ${error}`)
       process.exit(1)
+    }
+  }
+
+  /**
+   * Checks whether the manifest exists in R2.
+   * @returns True if the manifest exists, false otherwise. Throws on other errors.
+   */
+  async manifestExists(): Promise<boolean> {
+    try {
+      const command = new HeadObjectCommand({
+        Bucket: config.bucketName,
+        Key: "manifest.json",
+      });
+      await this.r2Client.send(command);
+      return true;
+    } catch (error: any) {
+      if (error.$metadata.httpStatusCode === 404) {
+        if (process.env.PHOTOGRAPHY_VERBOSE) console.log("Manifest does not exist")
+        return false
+      } else {
+        throw error
+      }
     }
   }
 
@@ -67,7 +89,7 @@ export class R2Client {
    * @returns The object, or undefined if it doesn't exist / an error occurred.
    */
   private async get(objectKey: string) {
-    console.log(`Fetching ${objectKey} from R2`)
+    if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Fetching ${objectKey} from R2`)
     try {
       const getObjectCommand = new GetObjectCommand({
         Bucket: config.bucketName,
@@ -145,6 +167,7 @@ export class R2Client {
 
       return response.Contents.map(object => object.Key).filter(key => {
         if (key === undefined) console.error(`Found undefined key when listing ${seriesUuid}`)
+          console.warn(key)
         return key !== undefined
       })
     } catch (error) {
@@ -183,7 +206,7 @@ export class R2Client {
    * @returns True if the upload was successful, false otherwise.
    */
   async uploadFile(path: string, objectKey: string, contentType: string): Promise<boolean> {
-    console.log(`Uploading ${objectKey} to R2 (${path})`)
+    if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Uploading ${objectKey} to R2 (${path})`)
     if (!fs.existsSync(path)) {
       console.error(`File ${path} does not exist`)
       return false
@@ -197,7 +220,7 @@ export class R2Client {
    * @returns True if the upload was successful, false otherwise.
    */
   async uploadManifest(manifest: Manifest): Promise<boolean> {
-    console.log(`Uploading ${config.manifestKey} to R2`)
+    if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Uploading ${config.manifestKey} to R2`)
     return this.upload(JSON.stringify(manifest), config.manifestKey, "application/json")
   }
 
@@ -207,7 +230,7 @@ export class R2Client {
    * @returns True if all uploads were successful, false otherwise.
    */
   async uploadImageSeries(imageSeries: ImageSeries<ThumbImage>): Promise<boolean> {
-    console.log(`Uploading image series ${imageSeries.title} to R2`);
+    if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Uploading image series ${imageSeries.title} to R2`);
 
     let success = true
     for (const row of imageSeries.rows) {
@@ -233,7 +256,7 @@ export class R2Client {
         Key: key,
       })
       await this.r2Client.send(deleteObjectCommand)
-      console.log(`Deleted object ${key}`)
+      if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Deleted object ${key}`)
       return true
     } catch (error) {
       console.error(`Error deleting ${key} from R2: ${error}`)

@@ -24,6 +24,7 @@ test('Image series thumbnails are correct', async () => {
   const thumbConfig = await imageSeriesThumbs(tempDir, seriesUuid, config)
 
   expect(thumbConfig.title).toBe('My Images')
+  expect(thumbConfig.uuid).toBe(seriesUuid)
   expect(thumbConfig.rows.length).toBe(1)
   expect(thumbConfig.rows[0].length).toBe(1)
 
