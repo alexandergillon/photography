@@ -4,7 +4,7 @@
 
 import config from "config"
 import fs from "fs"
-import { S3Client, HeadBucketCommand, HeadObjectCommand, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } from "@aws-sdk/client-s3"
+import { S3Client, HeadBucketCommand, HeadObjectCommand, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand, type S3ServiceException } from "@aws-sdk/client-s3"
 import type { Manifest, ThumbImage, ImageSeries } from "@/types/config"
 
 /**
@@ -73,7 +73,8 @@ export class R2Client {
       });
       await this.r2Client.send(command);
       return true;
-    } catch (error: any) {
+    } catch (e) {
+      const error = e as S3ServiceException
       if (error.$metadata.httpStatusCode === 404) {
         if (process.env.PHOTOGRAPHY_VERBOSE) console.log("Manifest does not exist")
         return false
@@ -167,7 +168,6 @@ export class R2Client {
 
       return response.Contents.map(object => object.Key).filter(key => {
         if (key === undefined) console.error(`Found undefined key when listing ${seriesUuid}`)
-          console.warn(key)
         return key !== undefined
       })
     } catch (error) {
@@ -182,7 +182,7 @@ export class R2Client {
    * @param contentType Content type of the blob.
    * @returns True if the upload was successful, false otherwise.
    */
-  async upload(blob: any, objectKey: string, contentType: string): Promise<boolean> {
+  async upload(blob: string | Buffer, objectKey: string, contentType: string): Promise<boolean> {
     try {
       const command = new PutObjectCommand({
         Bucket: config.bucketName,

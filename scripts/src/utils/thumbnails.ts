@@ -4,7 +4,7 @@
 
 import fs from "fs";
 import { Jimp } from "jimp";
-import { BaseImage, ImageSeries, ImageRow, ThumbImage } from "@/types/config";
+import type { BaseImage, ImageSeries, ImageRow, ThumbImage } from "@/types/config";
 import { objectKey } from "@/r2/utils";
 
 /**

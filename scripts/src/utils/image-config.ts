@@ -3,7 +3,7 @@
  */
 
 import fs from "fs"
-import { BaseImage, ImageRow, ImageSeries, ThumbImage, WebImage } from "@/types/config"
+import type { BaseImage, ImageRow, ImageSeries, ThumbImage, WebImage } from "@/types/config"
 import { objectKey } from "@/r2/utils"
 import { Jimp } from "jimp"
 

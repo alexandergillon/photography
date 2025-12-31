@@ -4,7 +4,7 @@ import fs from "fs"
 import path from 'path'
 import { randomUUID } from 'crypto'
 import { R2Client } from '@/r2/R2Client'
-import type { Manifest, WebImage, ImageSeries, ThumbImage } from '@/types/config'
+import type { Manifest, ImageSeries, ThumbImage } from '@/types/config'
 import { objectKey } from '@/r2/utils'
 import { assertBytesEqual } from '@/__tests__/__utils__'
 

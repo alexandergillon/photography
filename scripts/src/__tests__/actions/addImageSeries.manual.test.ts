@@ -88,17 +88,17 @@ async function validateImageSeries(manifestLength: number, index: number, imageN
   expect(rowB[0].alt).toBe(imageName);
   expect(rowB[1].alt).toBe(imageName);
 
-  expect(rowA[0].width).toBe((dimensions as any)[imageName].width);
-  expect(rowA[0].height).toBe((dimensions as any)[imageName].height);
-  expect(rowA[1].width).toBe((dimensions as any)[imageName].width);
-  expect(rowA[1].height).toBe((dimensions as any)[imageName].height);
-  expect(rowA[2].width).toBe((dimensions as any)[imageName].width);
-  expect(rowA[2].height).toBe((dimensions as any)[imageName].height);
+  expect(rowA[0].width).toBe((dimensions as any)[imageName].width);  // eslint-disable-line @typescript-eslint/no-explicit-any
+  expect(rowA[0].height).toBe((dimensions as any)[imageName].height);  // eslint-disable-line @typescript-eslint/no-explicit-any
+  expect(rowA[1].width).toBe((dimensions as any)[imageName].width);  // eslint-disable-line @typescript-eslint/no-explicit-any
+  expect(rowA[1].height).toBe((dimensions as any)[imageName].height);  // eslint-disable-line @typescript-eslint/no-explicit-any
+  expect(rowA[2].width).toBe((dimensions as any)[imageName].width);  // eslint-disable-line @typescript-eslint/no-explicit-any
+  expect(rowA[2].height).toBe((dimensions as any)[imageName].height);  // eslint-disable-line @typescript-eslint/no-explicit-any
 
-  expect(rowB[0].width).toBe((dimensions as any)[imageName].width);
-  expect(rowB[0].height).toBe((dimensions as any)[imageName].height);
-  expect(rowB[1].width).toBe((dimensions as any)[imageName].width);
-  expect(rowB[1].height).toBe((dimensions as any)[imageName].height);
+  expect(rowB[0].width).toBe((dimensions as any)[imageName].width);  // eslint-disable-line @typescript-eslint/no-explicit-any
+  expect(rowB[0].height).toBe((dimensions as any)[imageName].height);  // eslint-disable-line @typescript-eslint/no-explicit-any
+  expect(rowB[1].width).toBe((dimensions as any)[imageName].width);  // eslint-disable-line @typescript-eslint/no-explicit-any
+  expect(rowB[1].height).toBe((dimensions as any)[imageName].height);  // eslint-disable-line @typescript-eslint/no-explicit-any
 
   const imageBytes = new Uint8Array(fs.readFileSync(imagePath));
   assertBytesEqual(await r2Client.getByteArray(rowA[0].key), imageBytes, "png", `Add image series test: ${rowA[0].key}`)

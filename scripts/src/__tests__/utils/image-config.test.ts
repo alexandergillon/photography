@@ -3,7 +3,7 @@ import os from 'os';
 import fs from 'fs';
 import path from 'path';
 import { imageSeriesBaseConfig, imageSeriesWebConfig } from "@/utils/image-config";
-import { ThumbImage, ImageSeries } from '@/types/config';
+import type { ThumbImage, ImageSeries } from '@/types/config';
 import { randomUUID } from 'crypto';
 import { objectKey } from '@/r2/utils';
 
