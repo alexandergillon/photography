@@ -15,11 +15,15 @@ import { objectKey } from "@/r2/utils";
  * @param series Image series.
  * @returns The image series with thumbnail info.
  */
-export async function imageSeriesThumbs(dir: string, seriesUuid: string, series: ImageSeries<BaseImage>): Promise<ImageSeries<ThumbImage>> {
+export async function imageSeriesThumbs(
+  dir: string,
+  seriesUuid: string,
+  series: ImageSeries<BaseImage>,
+): Promise<ImageSeries<ThumbImage>> {
   const thumbRows: ImageRow<ThumbImage>[] = [];
 
   for (const row of series.rows) {
-    const thumbRow: ThumbImage[] = []
+    const thumbRow: ThumbImage[] = [];
 
     for (const image of row) {
       const thumbInfo = await createThumb(dir, image);
@@ -27,10 +31,10 @@ export async function imageSeriesThumbs(dir: string, seriesUuid: string, series:
         ...image,
         ...thumbInfo,
         thumbObjectKey: objectKey(seriesUuid, series.title, thumbInfo.thumbFileName),
-      })
+      });
     }
 
-    thumbRows.push(thumbRow)
+    thumbRows.push(thumbRow);
   }
 
   const thumbSeries: ImageSeries<ThumbImage> = {
@@ -39,7 +43,7 @@ export async function imageSeriesThumbs(dir: string, seriesUuid: string, series:
     rows: thumbRows,
   };
 
-  return thumbSeries
+  return thumbSeries;
 }
 
 /**
@@ -52,9 +56,9 @@ export async function imageSeriesThumbs(dir: string, seriesUuid: string, series:
  * @param image Image to create a thumbnail for.
  * @returns The path to the thumbnail and the name of the thumbnail file.
  */
-async function createThumb(dir: string, image: BaseImage): Promise<{ thumbPath: string, thumbFileName: string }> {
-  const thumbNameNoExt = image.fileName.replace(/\.png$/, "-thumb")
-  const thumbName = `${thumbNameNoExt}.jpg`
+async function createThumb(dir: string, image: BaseImage): Promise<{ thumbPath: string; thumbFileName: string }> {
+  const thumbNameNoExt = image.fileName.replace(/\.png$/, "-thumb");
+  const thumbName = `${thumbNameNoExt}.jpg`;
   const thumbPathNoExt = `${dir}/${thumbNameNoExt}`;
   const thumbPath = `${dir}/${thumbName}`;
 
@@ -70,5 +74,5 @@ async function createThumb(dir: string, image: BaseImage): Promise<{ thumbPath: 
   return {
     thumbPath: thumbPath,
     thumbFileName: thumbName,
-  }
+  };
 }

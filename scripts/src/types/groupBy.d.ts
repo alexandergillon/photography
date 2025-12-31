@@ -1,4 +1,4 @@
-/** 
+/**
  * @file TS doesn't know about Object.groupBy(). This is a workaround from here: https://stackoverflow.com/a/77724124.
  */
 
@@ -20,8 +20,5 @@ interface MapConstructor {
    * @param items An iterable.
    * @param keySelector A callback which will be invoked for each item in items.
    */
-  groupBy<K, T>(
-    items: Iterable<T>,
-    keySelector: (item: T, index: number) => K,
-  ): Map<K, T[]>;
+  groupBy<K, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Map<K, T[]>;
 }

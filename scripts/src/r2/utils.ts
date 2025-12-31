@@ -10,7 +10,7 @@
  * @returns The object key for the image.
  */
 export function objectKey(seriesUuid: string, seriesName: string, imageName: string): string {
-  return `${seriesUuid}_${sanitize(seriesName)}/${sanitize(imageName)}`
+  return `${seriesUuid}_${sanitize(seriesName)}/${sanitize(imageName)}`;
 }
 
 /**
@@ -18,17 +18,21 @@ export function objectKey(seriesUuid: string, seriesName: string, imageName: str
  * @param objectKey The object key to parse.
  * @returns An object containing the series UUID, series name, and image name.
  */
-export function parseObjectKey(objectKey: string): { seriesUuid: string, seriesName: string, imageName: string } {
+export function parseObjectKey(objectKey: string): {
+  seriesUuid: string;
+  seriesName: string;
+  imageName: string;
+} {
   const match = objectKey.match(
-    /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})_([a-z0-9-]+)\/([a-z0-9-]+)$/i
-  )
-  if (!match) throw new Error(`Invalid object key: ${objectKey}`)
-  
+    /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})_([a-z0-9-]+)\/([a-z0-9-]+)$/i,
+  );
+  if (!match) throw new Error(`Invalid object key: ${objectKey}`);
+
   return {
     seriesUuid: match[1],
     seriesName: match[2],
     imageName: match[3],
-  }
+  };
 }
 
 /**
@@ -37,5 +41,5 @@ export function parseObjectKey(objectKey: string): { seriesUuid: string, seriesN
  * @returns The sanitized string.
  */
 function sanitize(s: string): string {
-    return s.replaceAll(/[^A-Za-z0-9]+/g, "-");
+  return s.replaceAll(/[^A-Za-z0-9]+/g, "-");
 }

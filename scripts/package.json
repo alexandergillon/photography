@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "format": "prettier --write ./src",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
     "build": "tsc",
@@ -18,8 +19,10 @@
     "@vitest/coverage-v8": "^4.0.16",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
     "globals": "^16.5.0",
     "jiti": "^2.6.1",
+    "prettier": "^3.7.4",
     "typescript-eslint": "^8.51.0",
     "vitest": "^4.0.16"
   }
