@@ -3,8 +3,9 @@
  */
 
 import fs from "fs"
-import { BaseImage, ImageRow, ImageSeries } from "@/types/config"
+import { BaseImage, ImageRow, ImageSeries, ThumbImage, WebImage } from "@/types/config"
 import { objectKey } from "@/r2/utils"
+import { Jimp } from "jimp"
 
 /**
  * Parses a directory of images into an image series configuration.
@@ -41,6 +42,7 @@ export function imageSeriesBaseConfig(dir: string, seriesUuid: string): ImageSer
 
   return {
     title: title,
+    uuid: seriesUuid,
     rows: configRows,
   }
 }
@@ -67,3 +69,38 @@ function altTextOf(name: string): string {
     if (!match) throw new Error(`Image name ${name} does not match the required format (e.g. A1-lake.png)`)
     return match[1];
 }
+
+/**
+ * Converts thumbnail image series config to web image config.
+ * @param thumbConfig The thumbnail image series config.
+ * @returns A promise that resolves to the web image series config.
+ */
+export async function imageSeriesWebConfig(thumbConfig: ImageSeries<ThumbImage>): Promise<ImageSeries<WebImage>> {
+  const webRows = await Promise.all(
+    thumbConfig.rows.map(
+      async row => await Promise.all(row.map(webImage))
+    )
+  )
+  return {
+    title: thumbConfig.title,
+    uuid: thumbConfig.uuid,
+    rows: webRows,
+  }
+}
+
+/**
+ * Converts a thumbnail image config to a web image config.
+ * @param imageConfig The thumbnail image config.
+ * @returns A promise that resolves to the web image config.
+ */
+async function webImage(imageConfig: ThumbImage): Promise<WebImage> {
+  const image = await Jimp.read(imageConfig.path);
+  return {
+    alt: imageConfig.altText,
+    key: imageConfig.objectKey,
+    thumbKey: imageConfig.thumbObjectKey,
+    width: image.width,
+    height: image.height,
+  };
+}
+

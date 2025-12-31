@@ -12,6 +12,7 @@ export type ImageRow<T> = T[]
 
 export type ImageSeries<T> = {
   title: string,              // Title of the image series
+  uuid: string,               // UUID of the image series
   rows: ImageRow<T>[],        // Rows of images in the series
 }
 
@@ -49,8 +50,8 @@ export type UploadedImage = ThumbImage & {
 
 export type WebImage = {
   alt: string                // Alt text for the image
-  src: string                // URL to full-size image
-  thumb: string              // URL to thumbnail image
+  key: string                // key to full-size image in R2
+  thumbKey: string           // key to thumbnail image in R2
   width: number              // Width of the image
   height: number             // Height of the image
 }

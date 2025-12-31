@@ -4,10 +4,15 @@ import fs from "fs"
 import path from 'path'
 import { randomUUID } from 'crypto'
 import { R2Client } from '@/r2/R2Client'
-import { Manifest } from '@/types/config'
+import type { Manifest, WebImage, ImageSeries, ThumbImage } from '@/types/config'
 import { objectKey } from '@/r2/utils'
 
 const BIRD_PATH = path.join(__dirname, "..", "__bird__.png")
+const CAT_PATH = path.join(__dirname, "..", "__cat__.jpg")
+
+const BIRD_WIDTH = 1620
+const BIRD_HEIGHT = 1080
+
 const TIMEOUT_MILLISECONDS = 120000
 
 beforeAll(() => {
@@ -83,33 +88,35 @@ test("Test getting/deleting manifest", async () => {
   const manifest: Manifest = [
     {
       title: "Series 1",
+      uuid: "46c9f8c4-4fce-41a2-b20d-c33158ac95e6",
       rows: [
         [ 
-          { src: "test/1.png", thumb: "test/1.jpg", alt: "Image 1", width: 100, height: 100 },
-          { src: "test/2.png", thumb: "test/2.jpg", alt: "Image 2", width: 100, height: 100 },
-          { src: "test/3.png", thumb: "test/3.jpg", alt: "Image 3", width: 100, height: 100 },
+          { key: "1.png", thumbKey: "1.jpg", alt: "Image 1", width: 100, height: 100 },
+          { key: "2.png", thumbKey: "2.jpg", alt: "Image 2", width: 100, height: 100 },
+          { key: "3.png", thumbKey: "3.jpg", alt: "Image 3", width: 100, height: 100 },
         ],
         [
-          { src: "test/4.png", thumb: "test/4.jpg", alt: "Image 4", width: 100, height: 100 },
-          { src: "test/5.png", thumb: "test/5.jpg", alt: "Image 5", width: 100, height: 100 },
-          { src: "test/6.png", thumb: "test/6.jpg", alt: "Image 6", width: 100, height: 100 },
+          { key: "4.png", thumbKey: "4.jpg", alt: "Image 4", width: 100, height: 100 },
+          { key: "5.png", thumbKey: "5.jpg", alt: "Image 5", width: 100, height: 100 },
+          { key: "6.png", thumbKey: "6.jpg", alt: "Image 6", width: 100, height: 100 },
         ]
       ]
     },
     {
       title: "Series 2",
+      uuid: "7e2d1377-90e1-4cec-9e54-598762e8911c",
       rows: [
         [
-          { src: "test/7.png", thumb: "test/7.jpg", alt: "Image 7", width: 100, height: 100 },
-          { src: "test/8.png", thumb: "test/8.jpg", alt: "Image 8", width: 100, height: 100 },
-          { src: "test/9.png", thumb: "test/9.jpg", alt: "Image 9", width: 100, height: 100 },
+          { key: "7.png", thumbKey: "7.jpg", alt: "Image 7", width: 100, height: 100 },
+          { key: "8.png", thumbKey: "8.jpg", alt: "Image 8", width: 100, height: 100 },
+          { key: "9.png", thumbKey: "9.jpg", alt: "Image 9", width: 100, height: 100 },
         ],
         [
-          { src: "test/10.png", thumb: "test/10.jpg", alt: "Image 10", width: 100, height: 100 },
-          { src: "test/11.png", thumb: "test/11.jpg", alt: "Image 11", width: 100, height: 100 },
+          { key: "10.png", thumbKey: "10.jpg", alt: "Image 10", width: 100, height: 100 },
+          { key: "11.png", thumbKey: "11.jpg", alt: "Image 11", width: 100, height: 100 },
         ],
         [
-          { src: "test/12.png", thumb: "test/12.jpg", alt: "Image 12", width: 100, height: 100 },
+          { key: "12.png", thumbKey: "12.jpg", alt: "Image 12", width: 100, height: 100 },
         ],
       ]
     }
@@ -141,6 +148,59 @@ test("Test getting/deleting image series", async () => {
 
   expect(await r2Client.deleteImageSeries(seriesUuid)).toBe(true)
   expect(await r2Client.getImageSeries(seriesUuid)).toEqual([])
+}, TIMEOUT_MILLISECONDS)
+
+test("Test upload image series", async () => {
+  const r2Client = setupR2Client()
+  const seriesUuid = randomUUID()
+  const seriesName = "test-upload-image-series"
+
+  const imageSeries: ImageSeries<ThumbImage> = {
+    title: "Test Series",
+    uuid: seriesUuid,
+    rows: [
+      [
+        { 
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1.png"), 
+          thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-1-thumb.jpg"),
+          path: BIRD_PATH, 
+          fileName: "test-upload-image-series-1.png", 
+          thumbPath: CAT_PATH, 
+          thumbFileName: "test-upload-image-series-1-thumb.jpg", 
+          altText: "bird-cat",
+        },
+        { 
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2.png"), 
+          thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-2-thumb.jpg"),
+          path: BIRD_PATH, 
+          fileName: "test-upload-image-series-2.png", 
+          thumbPath: CAT_PATH, 
+          thumbFileName: "test-upload-image-series-2-thumb.jpg", 
+          altText: "bird-cat",
+        },
+        { 
+          objectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3.png"), 
+          thumbObjectKey: objectKey(seriesUuid, seriesName, "test-upload-image-series-3-thumb.jpg"),
+          path: BIRD_PATH, 
+          fileName: "test-upload-image-series-3.png", 
+          thumbPath: CAT_PATH, 
+          thumbFileName: "test-upload-image-series-3-thumb.jpg", 
+          altText: "bird-cat",
+        },
+      ]
+    ]
+  }
+
+  expect(await r2Client.uploadImageSeries(imageSeries)).toBe(true)
+
+  const birdBytes = new Uint8Array(fs.readFileSync(BIRD_PATH));
+  const catBytes = new Uint8Array(fs.readFileSync(CAT_PATH));
+  for (const row of imageSeries.rows) {
+    for (const img of row) {
+      expect(await r2Client.getByteArray(img.objectKey)).toEqual(birdBytes);
+      expect(await r2Client.getByteArray(img.thumbObjectKey)).toEqual(catBytes);
+    }
+  }
 }, TIMEOUT_MILLISECONDS)
 
 test("Test delete", async () => {

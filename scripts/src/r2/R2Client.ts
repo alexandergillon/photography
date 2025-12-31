@@ -5,7 +5,7 @@
 import config from "config"
 import fs from "fs"
 import { S3Client, HeadBucketCommand, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } from "@aws-sdk/client-s3"
-import { Manifest } from "@/types/config"
+import type { Manifest, ThumbImage, ImageSeries } from "@/types/config"
 
 /**
  * Client class for interacting with R2.
@@ -199,6 +199,26 @@ export class R2Client {
   async uploadManifest(manifest: Manifest): Promise<boolean> {
     console.log(`Uploading ${config.manifestKey} to R2`)
     return this.upload(JSON.stringify(manifest), config.manifestKey, "application/json")
+  }
+
+  /**
+   * Uploads all images and thumbnails in an image series to R2. Does not update the manifest.
+   * @param imageSeries Image series.
+   * @returns True if all uploads were successful, false otherwise.
+   */
+  async uploadImageSeries(imageSeries: ImageSeries<ThumbImage>): Promise<boolean> {
+    console.log(`Uploading image series ${imageSeries.title} to R2`);
+
+    let success = true
+    for (const row of imageSeries.rows) {
+      for (const image of row) {
+        const uploaded = await this.uploadFile(image.path, image.objectKey, "image/png")
+        if (!uploaded) success = false
+        const thumbUploaded = await this.uploadFile(image.thumbPath, image.thumbObjectKey, "image/jpeg")
+        if (!thumbUploaded) success = false
+      }
+    }
+    return success;
   }
 
   /**
