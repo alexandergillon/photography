@@ -7,8 +7,8 @@ import type { ThumbImage, ImageSeries } from "@/types/config";
 import { randomUUID } from "crypto";
 import { objectKey } from "@/r2/utils";
 
-const BIRD_PATH = path.join(__dirname, "..", "__bird__.png");
-const CAT_PATH = path.join(__dirname, "..", "__cat__.jpg");
+const BIRD_PATH = path.join(__dirname, "..", "__images__", "bird.png");
+const CAT_PATH = path.join(__dirname, "..", "__images__", "cat.jpg");
 
 const BIRD_WIDTH = 1620;
 const BIRD_HEIGHT = 1080;

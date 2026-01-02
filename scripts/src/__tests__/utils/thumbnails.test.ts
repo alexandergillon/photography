@@ -7,12 +7,14 @@ import { imageSeriesBaseConfig } from "@/utils/image-config";
 import { imageSeriesThumbs } from "@/utils/thumbnails";
 import { objectKey } from "@/r2/utils";
 
+const BIRD_PATH = path.join(__dirname, "..", "__images__", "bird.png");
+
 function setup() {
   const tempDir = path.join(os.tmpdir(), `thumbnails-test-${randomUUID()}`);
   fs.mkdirSync(tempDir);
 
   fs.writeFileSync(path.join(tempDir, "title.txt"), "My Images");
-  fs.copyFileSync(path.join(__dirname, "..", "__bird__.png"), path.join(tempDir, "A1-bird.png"));
+  fs.copyFileSync(BIRD_PATH, path.join(tempDir, "A1-bird.png"));
 
   return tempDir;
 }

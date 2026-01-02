@@ -8,8 +8,8 @@ import type { Manifest, ImageSeries, ThumbImage } from "@/types/config";
 import { objectKey } from "@/r2/utils";
 import { assertBytesEqual } from "@/__tests__/__utils__";
 
-const BIRD_PATH = path.join(__dirname, "..", "__bird__.png");
-const CAT_PATH = path.join(__dirname, "..", "__cat__.jpg");
+const BIRD_PATH = path.join(__dirname, "..", "__images__", "bird.png");
+const CAT_PATH = path.join(__dirname, "..", "__images__", "cat.jpg");
 
 const TIMEOUT_MILLISECONDS = 120000;
 
