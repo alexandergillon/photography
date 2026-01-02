@@ -3,7 +3,7 @@ import path from "path";
 import os from "os";
 import fs from "fs";
 import { randomUUID } from "crypto";
-import { addImageSeries, updateImageSeries } from "@/actions";
+import { addImageSeries, updateImageSeries, deleteImageSeries } from "@/actions";
 import { R2Client } from "@/r2/R2Client";
 import { assertBytesEqual } from "@/__tests__/__utils__";
 
@@ -33,7 +33,7 @@ const dimensions = {
   hallway: {
     width: 1080,
     height: 1620,
-  }
+  },
 };
 
 const TIMEOUT_MILLISECONDS = 300000;
@@ -78,7 +78,13 @@ function setup(imageName: string, imagePath: string) {
   return tempDir;
 }
 
-async function validateImageSeries(manifestLength: number, index: number, seriesUuid: string, imageName: string, imagePath: string) {
+async function validateImageSeries(
+  manifestLength: number,
+  index: number,
+  seriesUuid: string,
+  imageName: string,
+  imagePath: string,
+) {
   const r2Client = setupR2Client();
 
   const manifest = await r2Client.getManifest();
@@ -104,10 +110,10 @@ async function validateImageSeries(manifestLength: number, index: number, series
   expect(rowA[0].height).toBe((dimensions as any)[imageName].height); // eslint-disable-line @typescript-eslint/no-explicit-any
   expect(rowA[1].width).toBe((dimensions as any)[imageName].width); // eslint-disable-line @typescript-eslint/no-explicit-any
   expect(rowA[1].height).toBe((dimensions as any)[imageName].height); // eslint-disable-line @typescript-eslint/no-explicit-any
-  
+
   expect(rowB[0].width).toBe((dimensions as any)[imageName].width); // eslint-disable-line @typescript-eslint/no-explicit-any
   expect(rowB[0].height).toBe((dimensions as any)[imageName].height); // eslint-disable-line @typescript-eslint/no-explicit-any
-  
+
   const imageBytes = new Uint8Array(fs.readFileSync(imagePath));
   assertBytesEqual(
     await r2Client.getByteArray(rowA[0].key),
@@ -127,7 +133,7 @@ async function validateImageSeries(manifestLength: number, index: number, series
     "png",
     `Add image series test: ${rowB[0].key}`,
   );
-  
+
   const a1ThumbData = await r2Client.getByteArray(rowA[0].thumbKey);
   expect(a1ThumbData).toBeDefined();
   expect(a1ThumbData?.length).toBeGreaterThan(0);
@@ -144,7 +150,7 @@ async function validateImageSeries(manifestLength: number, index: number, series
 test(
   "Adding image series - without and with existing manifest",
   async () => {
-    // no existing manifest 
+    // no existing manifest
     let tempDir = setup("bird", BIRD_PATH);
     const series1Uuid = randomUUID();
     await addImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series1Uuid);
@@ -161,7 +167,7 @@ test(
 );
 
 test(
-  "Various inserts + updates",
+  "Various inserts, updates and deletes",
   async () => {
     let tempDir = setup("bird", BIRD_PATH);
     const series1Uuid = randomUUID();
@@ -184,7 +190,7 @@ test(
     await validateImageSeries(3, 2, series1Uuid, "bird", BIRD_PATH);
     // series2 (car), series3 (island), series1 (bird)
 
-    tempDir = setup("train", TRAIN_PATH)
+    tempDir = setup("train", TRAIN_PATH);
     const series4Uuid = randomUUID();
     await addImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series4Uuid, series1Uuid);
     await validateImageSeries(4, 0, series2Uuid, "car", CAR_PATH);
@@ -193,7 +199,7 @@ test(
     await validateImageSeries(4, 3, series4Uuid, "train", TRAIN_PATH);
     // series2 (car), series3 (island), series1 (bird), series4 (train)
 
-    tempDir = setup("hallway", HALLWAY_PATH)
+    tempDir = setup("hallway", HALLWAY_PATH);
     await updateImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series3Uuid);
     await validateImageSeries(4, 0, series2Uuid, "car", CAR_PATH);
     await validateImageSeries(4, 1, series3Uuid, "hallway", HALLWAY_PATH);
@@ -201,6 +207,11 @@ test(
     await validateImageSeries(4, 3, series4Uuid, "train", TRAIN_PATH);
     // series2 (car), series3 (hallway), series1 (bird), series4 (train)
 
+    await deleteImageSeries(process.env.R2_SECRETS_PATH!, series1Uuid);
+    await validateImageSeries(3, 0, series2Uuid, "car", CAR_PATH);
+    await validateImageSeries(3, 1, series3Uuid, "hallway", HALLWAY_PATH);
+    await validateImageSeries(3, 2, series4Uuid, "train", TRAIN_PATH);
+    // series2 (car), series3 (hallway), series4 (train)
   },
   TIMEOUT_MILLISECONDS,
 );

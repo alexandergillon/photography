@@ -41,7 +41,7 @@ export async function addImageSeries(secretsPath: string, dir: string, seriesUui
   }
 
   if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Finished adding image series ${thumbConfig.title} (${seriesUuid})`);
-  return seriesUuid
+  return seriesUuid;
 }
 
 /**
@@ -54,37 +54,56 @@ export async function updateImageSeries(secretsPath: string, dir: string, series
   const r2Client = R2Client.fromSecrets(secretsPath);
   r2Client.ensureBucketExists();
 
+  const result = await deleteImageSeries(secretsPath, seriesUuid);
+  if (!result.success) return; // deleteImageSeries prints error
+
+  if (result.previous) {
+    await addImageSeries(secretsPath, dir, seriesUuid, result.previous);
+  } else {
+    await addImageSeries(secretsPath, dir, seriesUuid);
+  }
+}
+
+/**
+ * Deletes an existing image series.
+ * @param secretsPath Path to the secrets file.
+ * @param seriesUuid UUID of the series to delete.
+ * @returns A result indicating success/failure, and the UUID of the previous series (if any).
+ */
+export async function deleteImageSeries(
+  secretsPath: string,
+  seriesUuid: string,
+): Promise<{ success: boolean; previous?: string | undefined }> {
+  const r2Client = R2Client.fromSecrets(secretsPath);
+  r2Client.ensureBucketExists();
+
   const manifest = await r2Client.getManifest();
   if (!manifest) {
     console.error("Failed to get manifest");
-    return;
+    return { success: false };
   }
 
-  const seriesIndex = manifest.findIndex(series => series.uuid === seriesUuid);
+  const seriesIndex = manifest.findIndex((series) => series.uuid === seriesUuid);
   const previousSeries = seriesIndex == 0 ? undefined : manifest[seriesIndex - 1].uuid;
   if (seriesIndex === -1) {
     console.error(`Series ${seriesUuid} not found in manifest`);
-    return;
+    return { success: false };
   }
 
   const manifestWithoutSeries = manifest.slice(0, seriesIndex).concat(manifest.slice(seriesIndex + 1));
-  if (!await r2Client.deleteImageSeries(seriesUuid)) {
+  if (!(await r2Client.deleteImageSeries(seriesUuid))) {
     console.error(`Failed to delete image series ${seriesUuid}`);
-    return;
+    return { success: false };
   }
   if (!(await r2Client.uploadManifest(manifestWithoutSeries))) {
     console.error(`
       Failed to upload manifest after deleting image series - MANIFEST IS OUT OF SYNC.
       You may need to fix the manifest manually.
     `);
-    return;
+    return { success: false };
   }
 
-  if (previousSeries) {
-    await addImageSeries(secretsPath, dir, seriesUuid, previousSeries);
-  } else {
-    await addImageSeries(secretsPath, dir, seriesUuid);
-  }
+  return { success: true, previous: previousSeries };
 }
 
 /**
@@ -95,7 +114,12 @@ export async function updateImageSeries(secretsPath: string, dir: string, series
  * @param afterSeriesUuid UUID of a series to insert after (optional). Defaults to inserting as the most recent.
  * @returns New manifest, or undefined if an error occurred.
  */
-async function makeNewManifest(seriesUuid: string, r2Client: R2Client, webConfig: ImageSeries<WebImage>, afterSeriesUuid?: string): Promise<Manifest | undefined> {
+async function makeNewManifest(
+  seriesUuid: string,
+  r2Client: R2Client,
+  webConfig: ImageSeries<WebImage>,
+  afterSeriesUuid?: string,
+): Promise<Manifest | undefined> {
   let manifest: Manifest = [];
 
   if (await r2Client.manifestExists()) {
@@ -112,8 +136,11 @@ async function makeNewManifest(seriesUuid: string, r2Client: R2Client, webConfig
   }
 
   if (afterSeriesUuid) {
-    const previousSeriesIndex = manifest.findIndex(series => series.uuid === afterSeriesUuid)
-    return manifest.slice(0, previousSeriesIndex + 1).concat(webConfig).concat(manifest.slice(previousSeriesIndex + 1))
+    const previousSeriesIndex = manifest.findIndex((series) => series.uuid === afterSeriesUuid);
+    return manifest
+      .slice(0, previousSeriesIndex + 1)
+      .concat(webConfig)
+      .concat(manifest.slice(previousSeriesIndex + 1));
   } else {
     return [webConfig].concat(manifest);
   }
