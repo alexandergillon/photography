@@ -1,25 +1,23 @@
 /**
- * @file This file handles adding a new image series to the site, when the series is to be the most recent series. I.e. the simple case.
+ * @file This file handles the core actions, like adding and updating image series.
  */
 
 import { R2Client } from "@/r2/R2Client";
-import { randomUUID } from "crypto";
 import { imageSeriesBaseConfig, imageSeriesWebConfig } from "@/utils/image-config";
 import type { Manifest, ImageSeries, WebImage } from "@/types/config";
 import { imageSeriesThumbs } from "@/utils/thumbnails";
 
 /**
  * Adds a new image series to the site.
- * @param dir Directory containing the image series.
  * @param secretsPath Path to the secrets file.
+ * @param dir Directory containing the image series.
+ * @param seriesUuid UUID of the new series.
  * @param afterSeriesUuid UUID of a series to insert after (optional). Defaults to inserting as the most recent.
- * @returns The UUID of the new series, or undefined if an error occurred.
  */
-export async function addImageSeries(dir: string, secretsPath: string, afterSeriesUuid?: string): Promise<string | undefined> {
+export async function addImageSeries(secretsPath: string, dir: string, seriesUuid: string, afterSeriesUuid?: string) {
   const r2Client = R2Client.fromSecrets(secretsPath);
   r2Client.ensureBucketExists();
 
-  const seriesUuid = randomUUID();
   const baseConfig = imageSeriesBaseConfig(dir, seriesUuid);
   const thumbConfig = await imageSeriesThumbs(dir, seriesUuid, baseConfig);
 
@@ -44,6 +42,49 @@ export async function addImageSeries(dir: string, secretsPath: string, afterSeri
 
   if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Finished adding image series ${thumbConfig.title} (${seriesUuid})`);
   return seriesUuid
+}
+
+/**
+ * Updates an existing image series.
+ * @param secretsPath Path to the secrets file.
+ * @param dir Directory containing the image series.
+ * @param seriesUuid UUID of the series to update.
+ */
+export async function updateImageSeries(secretsPath: string, dir: string, seriesUuid: string) {
+  const r2Client = R2Client.fromSecrets(secretsPath);
+  r2Client.ensureBucketExists();
+
+  const manifest = await r2Client.getManifest();
+  if (!manifest) {
+    console.error("Failed to get manifest");
+    return;
+  }
+
+  const seriesIndex = manifest.findIndex(series => series.uuid === seriesUuid);
+  const previousSeries = seriesIndex == 0 ? undefined : manifest[seriesIndex - 1].uuid;
+  if (seriesIndex === -1) {
+    console.error(`Series ${seriesUuid} not found in manifest`);
+    return;
+  }
+
+  const manifestWithoutSeries = manifest.slice(0, seriesIndex).concat(manifest.slice(seriesIndex + 1));
+  if (!await r2Client.deleteImageSeries(seriesUuid)) {
+    console.error(`Failed to delete image series ${seriesUuid}`);
+    return;
+  }
+  if (!(await r2Client.uploadManifest(manifestWithoutSeries))) {
+    console.error(`
+      Failed to upload manifest after deleting image series - MANIFEST IS OUT OF SYNC.
+      You may need to fix the manifest manually.
+    `);
+    return;
+  }
+
+  if (previousSeries) {
+    await addImageSeries(secretsPath, dir, seriesUuid, previousSeries);
+  } else {
+    await addImageSeries(secretsPath, dir, seriesUuid);
+  }
 }
 
 /**
