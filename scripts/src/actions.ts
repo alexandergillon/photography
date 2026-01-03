@@ -25,8 +25,7 @@ export async function addImageSeries(secretsPath: string, dir: string, seriesUui
     console.error("Failed to upload image series");
     return;
   }
-  if (process.env.PHOTOGRAPHY_VERBOSE)
-    console.log(`Image series ${thumbConfig.title} (${seriesUuid}) uploaded successfully`);
+  if (process.env.PHOTO_VERBOSE) console.log(`Image series ${thumbConfig.title} (${seriesUuid}) uploaded successfully`);
 
   const webConfig = await imageSeriesWebConfig(thumbConfig);
   const newManifest = await makeNewManifest(seriesUuid, r2Client, webConfig, afterSeriesUuid);
@@ -40,7 +39,7 @@ export async function addImageSeries(secretsPath: string, dir: string, seriesUui
     return;
   }
 
-  if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Finished adding image series ${thumbConfig.title} (${seriesUuid})`);
+  if (process.env.PHOTO_VERBOSE) console.log(`Finished adding image series ${thumbConfig.title} (${seriesUuid})`);
   return seriesUuid;
 }
 

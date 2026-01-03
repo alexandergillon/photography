@@ -52,7 +52,7 @@ afterAll(() => {
 });
 
 function setupR2Client() {
-  return R2Client.fromSecrets(process.env.R2_SECRETS_PATH!);
+  return R2Client.fromSecrets(process.env.PHOTO_SECRETS_PATH!);
 }
 
 beforeEach(async () => {
@@ -153,13 +153,13 @@ test(
     // no existing manifest
     let tempDir = setup("bird", BIRD_PATH);
     const series1Uuid = randomUUID();
-    await addImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series1Uuid);
+    await addImageSeries(process.env.PHOTO_SECRETS_PATH!, tempDir, series1Uuid);
     await validateImageSeries(1, 0, series1Uuid, "bird", BIRD_PATH);
 
     // manifest exists now
     tempDir = setup("car", CAR_PATH);
     const series2Uuid = randomUUID();
-    await addImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series2Uuid);
+    await addImageSeries(process.env.PHOTO_SECRETS_PATH!, tempDir, series2Uuid);
     await validateImageSeries(2, 0, series2Uuid, "car", CAR_PATH);
     await validateImageSeries(2, 1, series1Uuid, "bird", BIRD_PATH);
   },
@@ -171,20 +171,20 @@ test(
   async () => {
     let tempDir = setup("bird", BIRD_PATH);
     const series1Uuid = randomUUID();
-    await addImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series1Uuid);
+    await addImageSeries(process.env.PHOTO_SECRETS_PATH!, tempDir, series1Uuid);
     await validateImageSeries(1, 0, series1Uuid, "bird", BIRD_PATH);
     // series1 (bird)
 
     tempDir = setup("car", CAR_PATH);
     const series2Uuid = randomUUID();
-    await addImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series2Uuid);
+    await addImageSeries(process.env.PHOTO_SECRETS_PATH!, tempDir, series2Uuid);
     await validateImageSeries(2, 0, series2Uuid, "car", CAR_PATH);
     await validateImageSeries(2, 1, series1Uuid, "bird", BIRD_PATH);
     // series2 (car), series1 (bird)
 
     tempDir = setup("island", ISLAND_PATH);
     const series3Uuid = randomUUID();
-    await addImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series3Uuid, series2Uuid);
+    await addImageSeries(process.env.PHOTO_SECRETS_PATH!, tempDir, series3Uuid, series2Uuid);
     await validateImageSeries(3, 0, series2Uuid, "car", CAR_PATH);
     await validateImageSeries(3, 1, series3Uuid, "island", ISLAND_PATH);
     await validateImageSeries(3, 2, series1Uuid, "bird", BIRD_PATH);
@@ -192,7 +192,7 @@ test(
 
     tempDir = setup("train", TRAIN_PATH);
     const series4Uuid = randomUUID();
-    await addImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series4Uuid, series1Uuid);
+    await addImageSeries(process.env.PHOTO_SECRETS_PATH!, tempDir, series4Uuid, series1Uuid);
     await validateImageSeries(4, 0, series2Uuid, "car", CAR_PATH);
     await validateImageSeries(4, 1, series3Uuid, "island", ISLAND_PATH);
     await validateImageSeries(4, 2, series1Uuid, "bird", BIRD_PATH);
@@ -200,14 +200,14 @@ test(
     // series2 (car), series3 (island), series1 (bird), series4 (train)
 
     tempDir = setup("hallway", HALLWAY_PATH);
-    await updateImageSeries(process.env.R2_SECRETS_PATH!, tempDir, series3Uuid);
+    await updateImageSeries(process.env.PHOTO_SECRETS_PATH!, tempDir, series3Uuid);
     await validateImageSeries(4, 0, series2Uuid, "car", CAR_PATH);
     await validateImageSeries(4, 1, series3Uuid, "hallway", HALLWAY_PATH);
     await validateImageSeries(4, 2, series1Uuid, "bird", BIRD_PATH);
     await validateImageSeries(4, 3, series4Uuid, "train", TRAIN_PATH);
     // series2 (car), series3 (hallway), series1 (bird), series4 (train)
 
-    await deleteImageSeries(process.env.R2_SECRETS_PATH!, series1Uuid);
+    await deleteImageSeries(process.env.PHOTO_SECRETS_PATH!, series1Uuid);
     await validateImageSeries(3, 0, series2Uuid, "car", CAR_PATH);
     await validateImageSeries(3, 1, series3Uuid, "hallway", HALLWAY_PATH);
     await validateImageSeries(3, 2, series4Uuid, "train", TRAIN_PATH);

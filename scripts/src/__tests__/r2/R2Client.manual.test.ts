@@ -27,7 +27,7 @@ afterAll(() => {
 });
 
 function setupR2Client() {
-  return R2Client.fromSecrets(process.env.R2_SECRETS_PATH!);
+  return R2Client.fromSecrets(process.env.PHOTO_SECRETS_PATH!);
 }
 
 beforeEach(async () => {

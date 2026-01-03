@@ -63,12 +63,12 @@ async function createThumb(dir: string, image: BaseImage): Promise<{ thumbPath: 
   const thumbPath = `${dir}/${thumbName}`;
 
   if (fs.existsSync(thumbPath)) {
-    if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Found thumbnail ${thumbName} for image ${image.path}`);
+    if (process.env.PHOTO_VERBOSE) console.log(`Found thumbnail ${thumbName} for image ${image.path}`);
   } else {
     const png = await Jimp.read(image.path);
     png.scaleToFit({ w: 1920, h: 1920 });
     await png.write(`${thumbPathNoExt}.jpg`); // See function comment
-    if (process.env.PHOTOGRAPHY_VERBOSE) console.log(`Created thumbnail ${thumbName} for image ${image.path}`);
+    if (process.env.PHOTO_VERBOSE) console.log(`Created thumbnail ${thumbName} for image ${image.path}`);
   }
 
   return {
