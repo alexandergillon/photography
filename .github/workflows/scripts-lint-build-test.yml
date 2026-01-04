@@ -1,0 +1,21 @@
+name: scripts-lint-build-test
+on: [push]
+defaults:
+  run:
+    shell: bash
+    working-directory: ./scripts
+jobs:
+  scripts-lint-build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: './scripts/.nvmrc'
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm run test
+
