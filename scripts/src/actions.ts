@@ -16,7 +16,7 @@ import { imageSeriesThumbs } from "@/utils/thumbnails";
  */
 export async function addImageSeries(secretsPath: string, dir: string, seriesUuid: string, afterSeriesUuid?: string) {
   const r2Client = R2Client.fromSecrets(secretsPath);
-  r2Client.ensureBucketExists();
+  await r2Client.ensureBucketExists();
 
   const baseConfig = imageSeriesBaseConfig(dir, seriesUuid);
   const thumbConfig = await imageSeriesThumbs(dir, seriesUuid, baseConfig);
@@ -51,7 +51,7 @@ export async function addImageSeries(secretsPath: string, dir: string, seriesUui
  */
 export async function updateImageSeries(secretsPath: string, dir: string, seriesUuid: string) {
   const r2Client = R2Client.fromSecrets(secretsPath);
-  r2Client.ensureBucketExists();
+  await r2Client.ensureBucketExists();
 
   const result = await deleteImageSeries(secretsPath, seriesUuid);
   if (!result.success) return; // deleteImageSeries prints error
@@ -74,7 +74,7 @@ export async function deleteImageSeries(
   seriesUuid: string,
 ): Promise<{ success: boolean; previous?: string | undefined }> {
   const r2Client = R2Client.fromSecrets(secretsPath);
-  r2Client.ensureBucketExists();
+  await r2Client.ensureBucketExists();
 
   const manifest = await r2Client.getManifest();
   if (!manifest) {
@@ -103,6 +103,16 @@ export async function deleteImageSeries(
   }
 
   return { success: true, previous: previousSeries };
+}
+
+/**
+ * Deletes all image series.
+ * @param secretsPath Path to the secrets file.
+ */
+export async function deleteAllSeries(secretsPath: string) {
+  const r2Client = R2Client.fromSecrets(secretsPath);
+  await r2Client.ensureBucketExists();
+  await r2Client.deleteAll();
 }
 
 /**
