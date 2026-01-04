@@ -34,7 +34,7 @@ async function main() {
     .alias("verbose", "v")
     .help("help")
     .check((argv) => {
-      if (!(argv.add || argv['add-after'] || argv.update || argv.delete || argv['delete-all'])) {
+      if (!(argv.add || argv["add-after"] || argv.update || argv.delete || argv["delete-all"])) {
         throw new Error("Must specify --add, --add-after, --update, --delete, or --delete-all");
       }
       return true;
@@ -42,10 +42,10 @@ async function main() {
     .check((argv) => {
       let count = 0;
       if (argv.add) count++;
-      if (argv['add-after']) count++;
+      if (argv["add-after"]) count++;
       if (argv.update) count++;
       if (argv.delete) count++;
-      if (argv['delete-all']) count++;
+      if (argv["delete-all"]) count++;
       if (count > 1) {
         throw new Error("Must specify only one of --add, --add-after, --update, --delete, or --delete-all");
       }
@@ -67,17 +67,17 @@ async function main() {
           }
         }
       }
-      if (argv['add-after']) {
-        for (let i = 0; i < argv['add-after'].length; i += 2) {
-          if (!fs.existsSync(argv['add-after'][i])) {
-            throw new Error(`${argv['add-after'][i]} does not exist`);
-          } else if (!fs.statSync(argv['add-after'][i]).isDirectory()) {
-            throw new Error(`${argv['add-after'][i]} is not a directory`);
+      if (argv["add-after"]) {
+        for (let i = 0; i < argv["add-after"].length; i += 2) {
+          if (!fs.existsSync(argv["add-after"][i])) {
+            throw new Error(`${argv["add-after"][i]} does not exist`);
+          } else if (!fs.statSync(argv["add-after"][i]).isDirectory()) {
+            throw new Error(`${argv["add-after"][i]} is not a directory`);
           }
         }
-        for (let i = 1; i < argv['add-after'].length; i += 2) {
-          if (!isUuid(argv['add-after'][i])) {
-            throw new Error(`${argv['add-after'][i]} does not look like a UUID`);
+        for (let i = 1; i < argv["add-after"].length; i += 2) {
+          if (!isUuid(argv["add-after"][i])) {
+            throw new Error(`${argv["add-after"][i]} does not look like a UUID`);
           }
         }
       }

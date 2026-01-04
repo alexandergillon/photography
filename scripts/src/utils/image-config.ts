@@ -63,12 +63,12 @@ function rowOf(name: string): string {
 /**
  * Gets the alt text from an image name. This is the part of the name which is not the row identifier.
  * @param name The name of an image.
- * @return The alt text for that image (e.g. A1-street.png => street).
+ * @return The alt text for that image (e.g. A1-hanging-lamp.png => "hanging lamp").
  */
 function altTextOf(name: string): string {
   const match = name.match(/^[A-Z][0-9]+-(.+)\.png$/);
   if (!match) throw new Error(`Image name ${name} does not match the required format (e.g. A1-lake.png)`);
-  return match[1];
+  return match[1].replace(/-/g, " ");
 }
 
 /**

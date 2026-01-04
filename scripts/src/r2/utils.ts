@@ -24,7 +24,7 @@ export function parseObjectKey(objectKey: string): {
   imageName: string;
 } {
   const match = objectKey.match(
-    /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})_([a-z0-9-]+)\/([a-z0-9-]+)$/i,
+    /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})_([a-z0-9-.]+)\/([a-z0-9-.]+)$/i,
   );
   if (!match) throw new Error(`Invalid object key: ${objectKey}`);
 
@@ -41,5 +41,5 @@ export function parseObjectKey(objectKey: string): {
  * @returns The sanitized string.
  */
 function sanitize(s: string): string {
-  return s.replaceAll(/[^A-Za-z0-9]+/g, "-");
+  return s.replaceAll(/[^A-Za-z0-9.]+/g, "-");
 }
