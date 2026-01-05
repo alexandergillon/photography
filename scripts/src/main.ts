@@ -111,7 +111,11 @@ async function main() {
       return true;
     })
     .usage(
-      "usage: $0 [--secrets <file>] [--add <dir> [dir2 dir3 ...] | [--add-after <dir> <uuid> [dir2 uuid2 ...]] | --update <dir> <uuid> [dir2 uuid2 ...] | --delete <uuid> [uuid2 uuid3 ...]]",
+      `
+      usage: $0 [--secrets <file>] [--add <dir> [dir2 dir3 ...] | [--add-after <dir> <uuid> [dir2 uuid2 ...]] | --update <dir> <uuid> [dir2 uuid2 ...] | --delete <uuid> [uuid2 uuid3 ...]]
+
+      See README.md for required directory structure and secrets file format. 
+      `,
     )
     .parse();
 
