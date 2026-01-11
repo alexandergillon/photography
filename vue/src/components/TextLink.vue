@@ -1,6 +1,6 @@
 <!--
   TextLink.vue
-  
+
   Displays a textual link with an external link icon. The text and icon highlight on focus/hover.
 
   Props:
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import ExternalLinkIcon from './ExternalLinkIcon.vue';
+import ExternalLinkIcon from "./ExternalLinkIcon.vue";
 
 defineProps<{
   href: string;

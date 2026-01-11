@@ -1,6 +1,6 @@
 <!--
   ExternalLinkIcon.vue
-  
+
   Displays an external link icon, inline with text.
 -->
 <template>

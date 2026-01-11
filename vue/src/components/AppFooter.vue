@@ -1,6 +1,6 @@
 <!--
     AppFooter.vue
-    
+
     Footer component, containing some links and a copyright notice.
 -->
 <template>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import TextLink from '@/components/TextLink.vue';
+import TextLink from "@/components/TextLink.vue";
 
 const currentYear = new Date().getFullYear();
 </script>
@@ -70,7 +70,7 @@ li:not(:last-child)::after {
   position: relative;
   top: 0.05rem;
   margin: 0;
-  
+
   font-size: 1.2rem;
   font-family: Arial, sans-serif;
 }

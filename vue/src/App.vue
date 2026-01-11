@@ -1,14 +1,14 @@
 <template>
   <AppNavbar />
 
-  <p v-for="i in Array.from({ length: 100 }, (_, i) => i + 1)">
+  <p v-for="i in Array.from({ length: 100 }, (_, i) => i + 1)" :key="i">
     content
   </p>
-  
+
   <AppFooter />
 </template>
 
 <script setup lang="ts">
-import AppNavbar from '@/components/AppNavbar.vue';
-import AppFooter from '@/components/AppFooter.vue';
+import AppNavbar from "@/components/AppNavbar.vue";
+import AppFooter from "@/components/AppFooter.vue";
 </script>
