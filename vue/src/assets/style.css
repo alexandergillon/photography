@@ -1,5 +1,20 @@
+:root {
+  --background-color: #FDFAF6;
+  --text-color: #000000;
+
+  --link-color: #3776A1;
+  --link-color-hover: #89CFF1;
+  /** CSS filters that turn black into the above two colors. https://codepen.io/sosuke/pen/Pjoqqp */
+  --link-color-filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
+  --link-color-filter-hover: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
+  
+  --animation-transition: 0.25s;
+}
+
 body {
   margin: 0;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 .main-font {
@@ -8,17 +23,13 @@ body {
   letter-spacing: 0.02rem;
 }
 
+.main-font-wide {
+  font-family: "Wasted Vindey", sans-serif;
+  font-variant-ligatures: none;
+  letter-spacing: 0.15rem;
+}
+
 @font-face {
   font-family: "Wasted Vindey";
   src: url("/fonts/Wasted-Vindey.ttf");
-}
-
-:root {
-  --link-color: #3776A1;
-  --link-color-hover: #89CFF1;
-  /** CSS filters that turn black into the above two colors. https://codepen.io/sosuke/pen/Pjoqqp */
-  --link-color-filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
-  --link-color-filter-hover: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
-  
-  --animation-transition: 0.25s;
 }

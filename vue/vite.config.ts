@@ -1,7 +1,7 @@
-import path from 'path'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
+import path from "path";
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueDevTools from "vite-plugin-vue-devtools";
 
 export default defineConfig({
   plugins: [
@@ -10,15 +10,25 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   build: {
-    outDir: '../docs',
+    outDir: "../docs",
     rollupOptions: {
       output: {
-        entryFileNames: 'photography.js',
-      }
-    }
+        entryFileNames: "photography.js",
+      },
+    },
   },
-})
+  server: {
+    proxy: {
+      // This avoids CORS issues with the Vite dev server
+      "/r2-proxy": {
+        target: "https://images.alexandergillon.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/r2-proxy/, ""),
+      },
+    },
+  },
+});
