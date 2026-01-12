@@ -27,7 +27,7 @@
       </div>
 
       <CollapsibleContent class="image-series-content">
-        <p v-for="i in Array.from({ length: 10 }, (_, index) => index + 1)" :key="i">content</p>
+        <ImageRow v-for="(row, index) in imageSeries.rows" :key="index" :images="row" />
       </CollapsibleContent>
     </CollapsibleRoot>
   </div>
@@ -39,6 +39,7 @@ import type { ImageSeries } from "@/types/manifest";
 import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from "reka-ui";
 import DropdownIcon from "@/components/DropdownIcon.vue";
 import HoverFilter from "@/components/HoverFilter.vue";
+import ImageRow from "@/components/ImageRow.vue";
 
 const props = defineProps<{
   imageSeries: ImageSeries
