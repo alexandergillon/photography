@@ -8,13 +8,16 @@
   - text: Display text
 -->
 <template>
-  <a :href="href">
-    {{ text }} <ExternalLinkIcon />
-  </a>
+  <HoverFilter filter="link-color-filter-hover">
+    <a :href="href">
+      {{ text }} <ExternalLinkIcon />
+    </a>
+  </HoverFilter>
 </template>
 
 <script setup lang="ts">
-import ExternalLinkIcon from "./ExternalLinkIcon.vue";
+import ExternalLinkIcon from "@/components/ExternalLinkIcon.vue";
+import HoverFilter from "@/components/HoverFilter.vue";
 
 defineProps<{
   href: string;
@@ -23,15 +26,10 @@ defineProps<{
 </script>
 
 <style scoped>
-a, a:deep(img) {
+a {
   text-decoration: none;
   color: black;
   filter: var(--link-color-filter);
-  transition: var(--animation-transition);
-}
-
-a:hover, a:focus, a:hover:deep(img), a:focus:deep(img) {
-  filter: var(--link-color-filter-hover);
   transition: var(--animation-transition);
 }
 </style>

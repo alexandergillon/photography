@@ -32,7 +32,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3rem 1.5rem;
+  margin: 5rem 1.5rem 3rem 1.5rem;
 }
 
 ul {

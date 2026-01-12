@@ -4,9 +4,12 @@
 
   --link-color: #3776A1;
   --link-color-hover: #89CFF1;
-  /** CSS filters that turn black into the above two colors. https://codepen.io/sosuke/pen/Pjoqqp */
+  /* CSS filters that turn black into the above two colors. https://codepen.io/sosuke/pen/Pjoqqp */
   --link-color-filter: brightness(0) saturate(100%) invert(44%) sepia(8%) saturate(3691%) hue-rotate(162deg) brightness(91%) contrast(85%);
   --link-color-filter-hover: brightness(0) saturate(100%) invert(77%) sepia(29%) saturate(650%) hue-rotate(169deg) brightness(96%) contrast(98%);
+
+  /* grey-ish color (on black) */
+  --highlight-filter: brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(91%) contrast(90%);
   
   --animation-transition: 0.25s;
 }

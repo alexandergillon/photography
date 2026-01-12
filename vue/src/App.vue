@@ -11,8 +11,13 @@
   </h1>
 
   <template v-if="manifest">
-    {{ manifest }}
+    <ImageSeries
+      v-for="imageSeries in manifest"
+      :key="imageSeries.uuid"
+      :image-series="imageSeries"
+    />
   </template>
+
   <template v-else>
     Loading...
   </template>
@@ -26,6 +31,7 @@ import type { Manifest } from "@/types/manifest";
 import { getManifest } from "@/utils/r2";
 import AppNavbar from "@/components/AppNavbar.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import ImageSeries from "@/components/ImageSeries.vue";
 
 const manifest = ref<Manifest | null>(null);
 
@@ -42,7 +48,7 @@ fetchManifest(); // initial fetch
 
 <style scoped>
 h1 {
-  margin: 2rem auto;
+  margin: 2rem auto 4rem auto;
   text-align: center;
   font-weight: normal;
   font-size: 6rem;
