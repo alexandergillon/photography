@@ -9,12 +9,19 @@
 -->
 <template>
   <div v-if="!loaded" class="gallery-image-placeholder" />
-  <img
-    v-show="loaded"
-    class="gallery-image"
-    :src="imageUrl(image.thumbKey)"
-    @load="loaded = true"
-  />
+  <a
+    :data-fancybox="seriesUuid"
+    :data-src="imageUrl(image.thumbKey)"
+    :data-width="image.width"
+    :data-height="image.height"
+  >
+    <img
+      v-show="loaded"
+      class="gallery-image"
+      :src="imageUrl(image.thumbKey)"
+      @load="loaded = true"
+    />
+  </a>
 </template>
 
 <script setup lang="ts">
@@ -23,6 +30,7 @@ import { imageUrl } from "@/utils/r2";
 import type { Image } from "@/types/manifest";
 
 const props = defineProps<{
+  seriesUuid: string;
   image: Image;
 }>();
 

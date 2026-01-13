@@ -38,3 +38,9 @@ body {
   font-family: "Wasted Vindey";
   src: url("/fonts/Wasted-Vindey.ttf");
 }
+
+/* Adds a mat around images. */
+.gallery-fancybox img {
+  box-sizing: border-box;
+  border: 3rem solid white;
+}

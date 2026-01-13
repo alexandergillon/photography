@@ -7,7 +7,12 @@
 -->
 <template>
   <div class="image-row">
-    <GalleryImage v-for="image in images" :key="image.key" :image="image" />
+    <GalleryImage
+      v-for="image in images"
+      :key="image.key"
+      :series-uuid="seriesUuid"
+      :image="image"
+    />
   </div>
 </template>
 
@@ -17,6 +22,7 @@ import type { ImageRow } from "@/types/manifest";
 import GalleryImage from "@/components/GalleryImage.vue";
 
 const props = defineProps<{
+  seriesUuid: string;
   images: ImageRow;
 }>();
 

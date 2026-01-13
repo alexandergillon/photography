@@ -27,7 +27,7 @@
       </div>
 
       <CollapsibleContent class="image-series-content">
-        <ImageRow v-for="(row, index) in imageSeries.rows" :key="index" :images="row" />
+        <ImageRow v-for="(row, index) in imageSeries.rows" :key="index" :series-uuid="imageSeries.uuid" :images="row" />
       </CollapsibleContent>
     </CollapsibleRoot>
   </div>
