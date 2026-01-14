@@ -20,7 +20,7 @@
       class="gallery-image"
       :src="imageUrl(image.thumbKey)"
       @load="loaded = true"
-    />
+    >
   </a>
 </template>
 
@@ -47,5 +47,6 @@ const loaded = ref(false);
 .gallery-image, .gallery-image-placeholder {
   display: block;
   width: 100%;
+  cursor: zoom-in;
 }
 </style>

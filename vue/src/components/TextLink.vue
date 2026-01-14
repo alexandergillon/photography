@@ -9,7 +9,7 @@
 -->
 <template>
   <HoverFilter filter="link-color-filter-hover">
-    <a :href="href">
+    <a :href="href" target="_blank" rel="noopener noreferrer">
       {{ text }} <ExternalLinkIcon />
     </a>
   </HoverFilter>

@@ -12,9 +12,10 @@
 
   <template v-if="manifest">
     <ImageSeries
-      v-for="imageSeries in manifest"
+      v-for="(imageSeries, index) in manifest"
       :key="imageSeries.uuid"
       :image-series="imageSeries"
+      :index="index"
     />
   </template>
 

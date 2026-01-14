@@ -11,7 +11,7 @@
     title     (string): Title
 -->
 <template>
-  <a :href="props.href">
+  <a :href="props.href" target="_blank" rel="noopener noreferrer">
     <img :src="props.iconSrc" :alt="props.alt" :title="props.title">
   </a>
 </template>
