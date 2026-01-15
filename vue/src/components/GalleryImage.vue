@@ -8,8 +8,9 @@
   actual image to make the same strategy work.
 -->
 <template>
-  <div v-if="!loaded" class="gallery-image-placeholder" />
+  <div v-if="!loaded" class="gallery-image-placeholder" :class="{ singleton: singleton }" />
   <a
+    class="gallery-image-anchor"
     :data-fancybox="seriesUuid"
     :data-src="imageUrl(image.thumbKey)"
     :data-width="image.width"
@@ -18,6 +19,7 @@
     <img
       v-show="loaded"
       class="gallery-image"
+      :class="{ singleton: singleton }"
       :src="imageUrl(image.thumbKey)"
       @load="loaded = true"
     >
@@ -30,10 +32,10 @@ import { imageUrl } from "@/utils/r2";
 import type { Image } from "@/types/manifest";
 
 const props = defineProps<{
-  seriesUuid: string;
-  image: Image;
+  seriesUuid: string; // UUID of the image series
+  image: Image; // The image itself
+  singleton: boolean; // Whether the image is a singleton (only image in its row) - needed for styling
 }>();
-
 const aspect = computed(() => props.image.width / props.image.height);
 const loaded = ref(false);
 </script>
@@ -48,5 +50,18 @@ const loaded = ref(false);
   display: block;
   width: 100%;
   cursor: zoom-in;
+}
+
+/* In the non-singleton case, these styles have no effect (both the anchor and the image take up all available width).
+   In the singleton case, the image may or may not take up all the width. This ensures the anchor is the same size, and
+   centers both the anchor and the image. */
+.gallery-image-anchor {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.gallery-image.singleton, .gallery-image-placeholder.singleton {
+  width: unset; /* overrides non-singleton case */
+  height: var(--singleton-height); /* set in ImageRow.vue */
 }
 </style>

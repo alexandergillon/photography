@@ -6,12 +6,13 @@
   unit).
 -->
 <template>
-  <div class="image-row">
+  <div class="image-row" :class="{ singleton: singleton }">
     <GalleryImage
       v-for="image in images"
       :key="image.key"
       :series-uuid="seriesUuid"
       :image="image"
+      :singleton="singleton"
     />
   </div>
 </template>
@@ -28,6 +29,8 @@ const props = defineProps<{
 
 const aspects = computed(() => props.images.map(image => image.width / image.height));
 const gridTemplateColumns = computed(() => aspects.value.map(aspect => `${aspect}fr`).join(" "));
+const singleton = computed(() => props.images.length == 1);
+const singletonAspect = computed(() => aspects.value[0]);
 </script>
 
 <style scoped>
@@ -41,5 +44,12 @@ const gridTemplateColumns = computed(() => aspects.value.map(aspect => `${aspect
   grid-template-columns: v-bind(gridTemplateColumns);
   column-gap: var(--gap);
   margin-bottom: var(--gap);
+}
+
+.image-row.singleton {
+  /* The calc is the height that the image would be if it took up the entire width of the image series.
+     If that's less than 75vh, that's fine. Otherwise, we cap it to 75vh so the entire image fits on screen. */
+  --singleton-height: min( 75vh, calc(var(--image-series-width) / v-bind(singletonAspect)) );
+  height: var(--singleton-height);
 }
 </style>

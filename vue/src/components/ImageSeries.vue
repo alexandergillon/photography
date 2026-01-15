@@ -67,7 +67,9 @@ onMounted(() => {
   --animation-time: 0.5s; /* fade-in animation time */
   /* delay between image series animations for the initial page load (see file header) */
   --animation-delay-initial-load: 0.1s;
-  width: 80vw;
+
+  --image-series-width: 80vw;
+  width: var(--image-series-width);
   margin: 1.75rem auto;
   opacity: 0; /* starts hidden and fades in */
 }
