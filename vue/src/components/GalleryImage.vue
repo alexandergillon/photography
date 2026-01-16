@@ -8,22 +8,23 @@
   actual image to make the same strategy work.
 -->
 <template>
-  <div v-if="!loaded" class="gallery-image-placeholder" :class="{ singleton: singleton }" />
-  <a
-    class="gallery-image-anchor"
-    :data-fancybox="seriesUuid"
-    :data-src="imageUrl(image.thumbKey)"
-    :data-width="image.width"
-    :data-height="image.height"
-  >
-    <img
-      v-show="loaded"
-      class="gallery-image"
-      :class="{ singleton: singleton }"
-      :src="imageUrl(image.thumbKey)"
-      @load="loaded = true"
+  <div class="gallery-image-div" :class="{ singleton: singleton }">
+    <a
+      class="gallery-image-anchor"
+      :data-fancybox="seriesUuid"
+      :data-src="imageUrl(image.thumbKey)"
+      :data-width="image.width"
+      :data-height="image.height"
     >
-  </a>
+      <img
+        v-show="loaded"
+        class="gallery-image"
+        :class="{ loaded: loaded }"
+        :src="imageUrl(image.thumbKey)"
+        @load="loaded = true"
+      >
+    </a>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -41,27 +42,39 @@ const loaded = ref(false);
 </script>
 
 <style scoped>
-.gallery-image-placeholder {
+.gallery-image-div {
+  width: 100%;
   aspect-ratio: v-bind(aspect);
   background-color: var(--image-placeholder-color);
 }
 
-.gallery-image, .gallery-image-placeholder {
+.gallery-image-div.singleton {
+  width: unset;
+  height: var(--singleton-height);
+  margin: 0 auto;
+}
+
+.gallery-image-anchor {
   display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-image {
   width: 100%;
   cursor: zoom-in;
 }
 
-/* In the non-singleton case, these styles have no effect (both the anchor and the image take up all available width).
-   In the singleton case, the image may or may not take up all the width. This ensures the anchor is the same size, and
-   centers both the anchor and the image. */
-.gallery-image-anchor {
-  width: fit-content;
-  margin: 0 auto;
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.gallery-image.singleton, .gallery-image-placeholder.singleton {
-  width: unset; /* overrides non-singleton case */
-  height: var(--singleton-height); /* set in ImageRow.vue */
+.gallery-image.loaded {
+  animation: imageFadeIn 0.5s ease-in;
 }
 </style>

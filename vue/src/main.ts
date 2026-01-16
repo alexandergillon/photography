@@ -31,4 +31,5 @@ Fancybox.bind("[data-fancybox]", {
     "--f-arrow-bg": "none",
   },
   wheel: "slide",
+  zoomEffect: false,
 });
