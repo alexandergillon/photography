@@ -56,6 +56,12 @@ const titleId = computed(() => `image-series-${props.imageSeries.uuid}-title`);
 const showSeriesAnimationTime = `${300 * (props.imageSeries.rows.length ** 0.25)}ms`;
 const imageSeriesWidth = `${constants.IMAGE_SERIES_WIDTH_VW}vw`;
 
+// Exposes a close function to the parent, so the parent can display a "close all" button
+const close = () => {
+  open.value = false;
+};
+defineExpose({ close });
+
 // Observer manages the slide in animation when the element comes into view
 const imageSeriesRef = useTemplateRef<HTMLDivElement>("image-series");
 const observer = useIntersectionObserver();
