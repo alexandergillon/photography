@@ -40,6 +40,7 @@
 <script setup lang="ts">
 import { ref, computed, useTemplateRef, onMounted } from "vue";
 import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from "reka-ui";
+import constants from "@/utils/constants";
 import type { ImageSeries } from "@/types/manifest";
 import { useIntersectionObserver } from "@/composables/imageSeriesIntersectionObserver";
 import DropdownIcon from "@/components/DropdownIcon.vue";
@@ -53,6 +54,7 @@ const props = defineProps<{
 const open = ref(false);
 const titleId = computed(() => `image-series-${props.imageSeries.uuid}-title`);
 const showSeriesAnimationTime = `${300 * (props.imageSeries.rows.length ** 0.25)}ms`;
+const imageSeriesWidth = `${constants.IMAGE_SERIES_WIDTH_VW}vw`;
 
 // Observer manages the slide in animation when the element comes into view
 const imageSeriesRef = useTemplateRef<HTMLDivElement>("image-series");
@@ -68,7 +70,7 @@ onMounted(() => {
   /* delay between image series animations for the initial page load (see file header) */
   --animation-delay-initial-load: 0.1s;
 
-  --image-series-width: 80vw;
+  --image-series-width: v-bind(imageSeriesWidth);
   width: var(--image-series-width);
   margin: 1.75rem auto;
   opacity: 0; /* starts hidden and fades in */
