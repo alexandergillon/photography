@@ -6,6 +6,11 @@
   On initial page load, all image series that are on screen fade in, with a delay between each series (to create
   a "cascading" effect). Afterwards, image series fade in as you scroll down the page. The core logic for this is
   in the useIntersectionObserver composable.
+
+  Exposes functions to:
+    - close the image series
+    - scroll to it and open
+    - manually force the series to be shown (rather than waiting until on-screen to fade in)
 -->
 <template>
   <div ref="image-series" class="image-series">
@@ -41,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, useTemplateRef, onMounted } from "vue";
+import { ref, computed, useTemplateRef, onMounted, nextTick } from "vue";
 import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from "reka-ui";
 import constants from "@/utils/constants";
 import type { ImageSeries } from "@/types/manifest";
@@ -60,18 +65,32 @@ const titleId = computed(() => `image-series-${props.imageSeries.uuid}-title`);
 const showSeriesAnimationTime = `${300 * (props.imageSeries.rows.length ** 0.25)}ms`;
 const imageSeriesWidth = `${constants.IMAGE_SERIES_WIDTH_VW}vw`;
 
-// Exposes a close function to the parent, so the parent can display a "close all" button
-const close = () => {
-  open.value = false;
-};
-defineExpose({ close });
-
 // Observer manages the slide in animation when the element comes into view
 const imageSeriesRef = useTemplateRef<HTMLDivElement>("image-series");
 const observer = useIntersectionObserver();
 onMounted(() => {
   observer.register(imageSeriesRef.value!, props.index);
 });
+
+// Forcibly show the image series (bypassing the intersection observer). NB this does not open the series (just show its header).
+function show() {
+  observer.show(imageSeriesRef.value!);
+}
+
+// Close function, so the parent can display a "close all" button
+function close() {
+  open.value = false;
+}
+
+// Scroll + open function, used for directly linking to an image series
+async function scrollAndOpen() {
+  open.value = true;
+  await nextTick();
+  await new Promise(resolve => setTimeout(resolve, parseInt(showSeriesAnimationTime)));
+  imageSeriesRef.value?.scrollIntoView({ behavior: "instant" });
+}
+
+defineExpose({ show, close, scrollAndOpen });
 </script>
 
 <style scoped>

@@ -21,7 +21,7 @@
       </div>
       <ImageSeries
         v-for="(imageSeries, index) in manifest"
-        ref="imageSeriesRefs"
+        :ref="instance => handleImageSeriesRef(instance as ImageSeriesType, imageSeries.uuid, index)"
         :key="imageSeries.uuid"
         :image-series="imageSeries"
         :index="index"
@@ -37,10 +37,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useTemplateRef } from "vue";
+import { nextTick, ref } from "vue";
 import constants from "@/utils/constants";
 import type { Manifest } from "@/types/manifest";
+import type { ImageSeriesType } from "@/types/templateRef";
 import { getManifest } from "@/utils/r2";
+import { urlUuid } from "@/utils/url";
 import AppNavbar from "@/components/AppNavbar.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import HoverFilter from "@/components/HoverFilter.vue";
@@ -48,22 +50,67 @@ import ImageSeries from "@/components/ImageSeries.vue";
 import ToastWrapper from "@/components/ToastWrapper.vue";
 
 const manifest = ref<Manifest | null>(null);
-const imageSeriesRefs = useTemplateRef("imageSeriesRefs");
+const imageSeriesArray: Array<ImageSeriesType> = [];
+const uuidToIndex: Map<string, number> = new Map();
 const imageSeriesWidth = `${constants.IMAGE_SERIES_WIDTH_VW}vw`;
+
+/**
+ * Callback for Vue "ref" on ImageSeries components, to keep track of them for other functionality.
+ * @param instance The ImageSeries component instance.
+ * @param uuid UUID.
+ * @param index Index.
+ */
+function handleImageSeriesRef(instance: ImageSeriesType, uuid: string, index: number) {
+  uuidToIndex.set(uuid, index);
+  imageSeriesArray[index] = instance;
+}
 
 async function fetchManifest() {
   try {
     manifest.value = await getManifest();
+
+    // scrolls to inital image series, if one was directly linked to
+    await nextTick();
+    const initialUuid = urlUuid();
+    if (initialUuid) {
+      scrollTo(initialUuid);
+    }
   } catch (error) {
     console.error(error);
   }
 }
-fetchManifest(); // initial fetch
+fetchManifest();
 
+// Handles linking to image series while the page is already loaded (as changing only the hash does
+// not trigger a full page load)
+addEventListener("hashchange", () => {
+  const uuid = urlUuid();
+  if (uuid) {
+    scrollTo(uuid);
+  }
+});
+
+/**
+ * Scrolls to an image series.
+ * @param uuid UUID of the image series.
+ */
+function scrollTo(uuid: string) {
+  const index = uuidToIndex.get(uuid);
+  if (index !== undefined) {
+    for (let i = 0; i <= index; i++) {
+      imageSeriesArray[i]?.show();
+    }
+    imageSeriesArray[index]?.scrollAndOpen();
+  }
+}
+
+/**
+ * Closes all image series.
+ */
 function closeAll() {
-  imageSeriesRefs.value?.forEach((imageSeriesRef) => {
-    imageSeriesRef?.close();
-  });
+  for (const imageSeries of imageSeriesArray) {
+    imageSeries?.close();
+  }
 }
 </script>
 

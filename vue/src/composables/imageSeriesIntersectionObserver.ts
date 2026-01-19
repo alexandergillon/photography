@@ -34,16 +34,14 @@ class ImageSeriesIntersectionObserver {
           // Image series is visible on page load
           const animationDelay = window.getComputedStyle(imageSeries).getPropertyValue("--animation-delay-initial-load").trim();
           imageSeries.style.animationDelay = `calc(${animationDelay} * ${imageSeries.dataset.animationIndex})`;
-          imageSeries.classList.add("visible");
-          this.observer.unobserve(imageSeries);
+          this.show(imageSeries);
         }
       } else {
         // Image series was already processed on page load, but wasn't visible (else we would have unobserved it).
         // Hence it must have been scrolled past, so we should fade it in.
 
         if (entry.isIntersecting) { // Should never be false at this point, but doesn't hurt to check.
-          imageSeries.classList.add("visible");
-          this.observer.unobserve(imageSeries);
+          this.show(imageSeries);
         }
       }
     }
@@ -62,6 +60,15 @@ class ImageSeriesIntersectionObserver {
       element.dataset.animationIndex = index.toString();
       this.observer.observe(element);
     }
+  }
+
+  /**
+   * Manually force an image series to be shown.
+   * @param element The image series div (same as passed to register()).
+   */
+  public show(element: HTMLDivElement) {
+    element.classList.add("visible");
+    this.observer.unobserve(element);
   }
 }
 

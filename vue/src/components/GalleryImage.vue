@@ -11,7 +11,7 @@
   <div class="gallery-image-div" :class="{ singleton: singleton }">
     <a
       class="gallery-image-anchor"
-      :data-fancybox="seriesUuid"
+      :data-fancybox="`${seriesUuid}-images`"
       :data-src="imageUrl(image.thumbKey)"
       :data-width="image.width"
       :data-height="image.height"

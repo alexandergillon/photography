@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 import { useTemplateRef } from "vue";
+import { uuidUrl } from "@/utils/url";
 import HoverFilter from "@/components/HoverFilter.vue";
 import TextToast from "@/components/TextToast.vue";
 
@@ -26,7 +27,7 @@ const props = defineProps<{
 const toast = useTemplateRef("toast");
 
 function copyLink() {
-  navigator.clipboard.writeText(`${window.location.origin}#${props.uuid}`);
+  navigator.clipboard.writeText(uuidUrl(props.uuid));
   toast.value?.open();
 }
 </script>
