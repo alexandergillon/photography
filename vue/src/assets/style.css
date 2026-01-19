@@ -1,0 +1,49 @@
+/* -filter versions are CSS filters that produce the same color: https://codepen.io/sosuke/pen/Pjoqqp */
+:root {
+  --background-color: #FAF4ED;
+  --image-placeholder-color: #F0E4D8;
+  --text-color: #000000;
+
+  --toast-background-color: #EDF6EA;
+  --toast-text-color: #4C9234;
+  --toast-text-color-filter: brightness(0) saturate(100%)  invert(49%) sepia(23%) saturate(6662%) hue-rotate(72deg) brightness(92%) contrast(59%);
+
+  --link-color: #4C9234;
+  --link-color-hover: #B7D2BB;
+  --link-color-filter: brightness(0) saturate(100%) invert(49%) sepia(58%) saturate(461%) hue-rotate(60deg) brightness(89%) contrast(95%);
+  --link-color-filter-hover: brightness(0) saturate(100%) invert(95%) sepia(13%) saturate(396%) hue-rotate(66deg) brightness(88%) contrast(86%);
+
+  /* Slight faded filter */
+  --highlight-filter: brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(91%) contrast(90%);
+
+  --animation-transition: 0.25s;
+}
+
+body {
+  margin: 0;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+.main-font {
+  font-family: "Wasted Vindey", sans-serif;
+  font-variant-ligatures: none;
+  letter-spacing: 0.02rem;
+}
+
+.main-font-wide {
+  font-family: "Wasted Vindey", sans-serif;
+  font-variant-ligatures: none;
+  letter-spacing: 0.15rem;
+}
+
+@font-face {
+  font-family: "Wasted Vindey";
+  src: url("/fonts/Wasted-Vindey.ttf");
+}
+
+/* Adds a mat around images. */
+.gallery-fancybox img {
+  box-sizing: border-box;
+  border: 3rem solid white;
+}

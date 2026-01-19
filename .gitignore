@@ -2,3 +2,5 @@ scripts/node_modules
 scripts/dist
 scripts/coverage
 scripts/.secrets
+
+vue/node_modules

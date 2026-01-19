@@ -1,0 +1,22 @@
+{
+  "include": ["vue-vite.d.ts", "src/**/*.vue", "src/**/*.ts"],
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+
+    "rootDir": "./src",
+    "outDir": "../docs",
+
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+
+    "paths": {
+      "@/*": ["./src/*"],
+    },
+  }
+}

@@ -1,0 +1,19 @@
+name: vue-lint-build
+on: [push]
+defaults:
+  run:
+    shell: bash
+    working-directory: ./vue
+jobs:
+  vue-lint-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: './vue/.nvmrc'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+
