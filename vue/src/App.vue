@@ -29,7 +29,7 @@
     </template>
 
     <template v-else>
-      Loading...
+      <div class="gallery-placeholder" />
     </template>
 
     <AppFooter />
@@ -120,6 +120,26 @@ h1 {
   text-align: center;
   font-weight: normal;
   font-size: 6rem;
+}
+
+@keyframes pulseFade {
+  0% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.25;
+  }
+}
+
+.gallery-placeholder {
+  width: v-bind(imageSeriesWidth);
+  height: 30rem;
+  margin: 2rem auto;
+  background-color: var(--image-placeholder-color);
+  animation: pulseFade 2s ease-in-out infinite;
 }
 
 .close-all {
