@@ -31,6 +31,9 @@
       </div>
 
       <CollapsibleContent class="image-series-content">
+        <div class="image-series-links">
+          <CopyLink :uuid="imageSeries.uuid" />
+        </div>
         <ImageRow v-for="(row, rowIndex) in imageSeries.rows" :key="rowIndex" :series-uuid="imageSeries.uuid" :images="row" />
       </CollapsibleContent>
     </CollapsibleRoot>
@@ -46,6 +49,7 @@ import { useIntersectionObserver } from "@/composables/imageSeriesIntersectionOb
 import DropdownIcon from "@/components/DropdownIcon.vue";
 import HoverFilter from "@/components/HoverFilter.vue";
 import ImageRow from "@/components/ImageRow.vue";
+import CopyLink from "@/components/CopyLink.vue";
 
 const props = defineProps<{
   imageSeries: ImageSeries, // Image series
@@ -144,5 +148,11 @@ onMounted(() => {
 }
 .image-series-content[data-state="closed"] {
   animation: slideUp v-bind(showSeriesAnimationTime) ease-out;
+}
+
+.image-series-links {
+  display: flex;
+  margin: 1rem 0.6rem 1rem 0;
+  justify-content: right;
 }
 </style>

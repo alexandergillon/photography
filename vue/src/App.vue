@@ -4,34 +4,36 @@
   The main Vue application.
 -->
 <template>
-  <AppNavbar />
+  <ToastWrapper>
+    <AppNavbar />
 
-  <h1 class="main-font-wide">
-    Alexander Gillon
-  </h1>
+    <h1 class="main-font-wide">
+      Alexander Gillon
+    </h1>
 
-  <template v-if="manifest">
-    <div class="close-all">
-      <HoverFilter filter="highlight-filter">
-        <button class="main-font" @click="closeAll">
-          Close All
-        </button>
-      </HoverFilter>
-    </div>
-    <ImageSeries
-      v-for="(imageSeries, index) in manifest"
-      ref="imageSeriesRefs"
-      :key="imageSeries.uuid"
-      :image-series="imageSeries"
-      :index="index"
-    />
-  </template>
+    <template v-if="manifest">
+      <div class="close-all">
+        <HoverFilter filter="highlight-filter">
+          <button class="main-font" @click="closeAll">
+            Close All
+          </button>
+        </HoverFilter>
+      </div>
+      <ImageSeries
+        v-for="(imageSeries, index) in manifest"
+        ref="imageSeriesRefs"
+        :key="imageSeries.uuid"
+        :image-series="imageSeries"
+        :index="index"
+      />
+    </template>
 
-  <template v-else>
-    Loading...
-  </template>
+    <template v-else>
+      Loading...
+    </template>
 
-  <AppFooter />
+    <AppFooter />
+  </ToastWrapper>
 </template>
 
 <script setup lang="ts">
@@ -43,6 +45,7 @@ import AppNavbar from "@/components/AppNavbar.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import HoverFilter from "@/components/HoverFilter.vue";
 import ImageSeries from "@/components/ImageSeries.vue";
+import ToastWrapper from "@/components/ToastWrapper.vue";
 
 const manifest = ref<Manifest | null>(null);
 const imageSeriesRefs = useTemplateRef("imageSeriesRefs");
