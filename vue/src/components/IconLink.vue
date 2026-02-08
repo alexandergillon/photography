@@ -28,7 +28,7 @@ const props = defineProps<{
 <style scoped>
 a {
   display: inline-block;
-  height: 2.25rem;
+  height: calc(2.25 * var(--size-unit-wide));
 }
 
 img {

@@ -101,7 +101,7 @@ defineExpose({ show, close, scrollAndOpen });
 
   --image-series-width: v-bind(imageSeriesWidth);
   width: var(--image-series-width);
-  margin: 1.75rem auto;
+  margin: calc(1.75 * var(--size-unit-narrow)) auto;
   opacity: 0; /* starts hidden and fades in */
 }
 
@@ -131,7 +131,7 @@ defineExpose({ show, close, scrollAndOpen });
 
 .image-series-title {
   margin: 0;
-  font-size: 2.25rem;
+  font-size: calc(2.25 * var(--base-font-size));
   font-weight: normal;
 }
 
@@ -139,6 +139,7 @@ defineExpose({ show, close, scrollAndOpen });
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0 var(--size-unit-narrow);
 }
 
 @keyframes slideDown {
@@ -171,7 +172,7 @@ defineExpose({ show, close, scrollAndOpen });
 
 .image-series-links {
   display: flex;
-  margin: 1rem 0.6rem 1rem 0;
+  margin: var(--size-unit-narrow) var(--size-unit-narrow) var(--size-unit-narrow) 0;
   justify-content: right;
 }
 </style>

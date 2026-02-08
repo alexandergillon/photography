@@ -51,7 +51,7 @@ ul {
 li {
   display: inline-block;
   position: relative;
-  font-size: 1.1rem;
+  font-size: calc(1.1 * var(--base-font-size));
 }
 
 /* Add a slash between list items. */
@@ -63,7 +63,7 @@ li:not(:last-child)::after {
   transform: translateX(-50%);
 
   content: "/";
-  font-size: 1.3rem;
+  font-size: calc(1.3 * var(--base-font-size));
 }
 
 .copyright {
@@ -71,7 +71,7 @@ li:not(:last-child)::after {
   top: 0.05rem;
   margin: 0;
 
-  font-size: 1.2rem;
+  font-size: calc(1.2 * var(--base-font-size));
   font-family: Arial, sans-serif;
 }
 </style>

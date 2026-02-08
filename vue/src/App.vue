@@ -116,10 +116,11 @@ function closeAll() {
 
 <style scoped>
 h1 {
-  margin: 2rem auto 4rem auto;
+  margin: calc(2 * var(--size-unit)) auto calc(4 * var(--size-unit-narrow)) auto;
+  max-width: 80vw;
   text-align: center;
   font-weight: normal;
-  font-size: 6rem;
+  font-size: calc(6 * var(--base-font-size));
 }
 
 @keyframes pulseFade {
@@ -153,7 +154,7 @@ h1 {
   padding: 0;
   border: 0;
   background: transparent;
-  font-size: 1.2rem;
+  font-size: calc(1.25 * var(--base-font-size));
   cursor: pointer;
 }
 </style>

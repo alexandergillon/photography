@@ -41,7 +41,7 @@ button {
 }
 
 img {
-  height: 1.25rem;
+  height: calc(1.25 * var(--size-unit-wide));
   position: relative;
   top: 0.15rem;
 }

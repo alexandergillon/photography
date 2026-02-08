@@ -15,7 +15,7 @@ defineProps<{
 
 <style scoped>
 img {
-  height: 1rem;
+  height: var(--size-unit);
   filter: none;
   transform: scaleY(1);
   transition: var(--animation-transition) ease-in-out;
