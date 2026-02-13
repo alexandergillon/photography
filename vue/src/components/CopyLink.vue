@@ -9,7 +9,7 @@
 <template>
   <HoverFilter filter="highlight-filter">
     <button @click="copyLink">
-      <img src="/images/link.svg" alt="copy link to image series">
+      <img :class="{ mobile: isMobile }" src="/images/link.svg" alt="copy link to image series">
     </button>
   </HoverFilter>
   <TextToast ref="toast" text="Link Copied" />
@@ -20,11 +20,13 @@ import { useTemplateRef } from "vue";
 import { uuidUrl } from "@/utils/url";
 import HoverFilter from "@/components/HoverFilter.vue";
 import TextToast from "@/components/TextToast.vue";
+import { useIsMobile } from "@/composables/isMobile";
 
 const props = defineProps<{
   uuid: string;
 }>();
 const toast = useTemplateRef("toast");
+const isMobile = useIsMobile();
 
 function copyLink() {
   navigator.clipboard.writeText(uuidUrl(props.uuid));
@@ -41,8 +43,12 @@ button {
 }
 
 img {
-  height: calc(1.25 * var(--size-unit-wide));
+  height: calc(1.25 * var(--size-unit));
   position: relative;
   top: 0.15rem;
+}
+
+img.mobile {
+  height: calc(2.5 * var(--size-unit));
 }
 </style>

@@ -39,7 +39,10 @@
         <div class="image-series-links">
           <CopyLink :uuid="imageSeries.uuid" />
         </div>
-        <ImageRow v-for="(row, rowIndex) in imageSeries.rows" :key="rowIndex" :series-uuid="imageSeries.uuid" :images="row" />
+        <ImageCarousel v-if="isMobile" :image-series="imageSeries" />
+        <template v-else>
+          <ImageRow v-for="(row, rowIndex) in imageSeries.rows" :key="rowIndex" :series-uuid="imageSeries.uuid" :images="row" />
+        </template>
       </CollapsibleContent>
     </CollapsibleRoot>
   </div>
@@ -51,16 +54,19 @@ import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from "reka-ui
 import constants from "@/utils/constants";
 import type { ImageSeries } from "@/types/manifest";
 import { useIntersectionObserver } from "@/composables/imageSeriesIntersectionObserver";
+import { useIsMobile } from "@/composables/isMobile";
 import DropdownIcon from "@/components/DropdownIcon.vue";
 import HoverFilter from "@/components/HoverFilter.vue";
 import ImageRow from "@/components/ImageRow.vue";
 import CopyLink from "@/components/CopyLink.vue";
+import ImageCarousel from "@/components/ImageCarousel.vue";
 
 const props = defineProps<{
   imageSeries: ImageSeries, // Image series
   index: number, // Index among all the image series
 }>();
 const open = ref(false);
+const isMobile = useIsMobile();
 const titleId = computed(() => `image-series-${props.imageSeries.uuid}-title`);
 const showSeriesAnimationTime = `${300 * (props.imageSeries.rows.length ** 0.25)}ms`;
 const imageSeriesWidth = `${constants.IMAGE_SERIES_WIDTH_VW}vw`;
@@ -101,7 +107,7 @@ defineExpose({ show, close, scrollAndOpen });
 
   --image-series-width: v-bind(imageSeriesWidth);
   width: var(--image-series-width);
-  margin: calc(1.75 * var(--size-unit-narrow)) auto;
+  margin: calc(1.75 * var(--size-unit)) auto;
   opacity: 0; /* starts hidden and fades in */
 }
 
@@ -139,7 +145,7 @@ defineExpose({ show, close, scrollAndOpen });
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0 var(--size-unit-narrow);
+  padding: 0 var(--size-unit);
 }
 
 @keyframes slideDown {
@@ -172,7 +178,7 @@ defineExpose({ show, close, scrollAndOpen });
 
 .image-series-links {
   display: flex;
-  margin: var(--size-unit-narrow) var(--size-unit-narrow) var(--size-unit-narrow) 0;
+  margin: var(--size-unit-wide) var(--size-unit-wide) var(--size-unit-wide) 0;
   justify-content: right;
 }
 </style>

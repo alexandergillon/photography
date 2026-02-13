@@ -8,7 +8,7 @@
   actual image to make the same strategy work.
 -->
 <template>
-  <div class="gallery-image-div" :class="{ singleton: singleton }">
+  <div class="gallery-image-div" :class="{ singleton: singleton, mobile: isMobile }">
     <a
       class="gallery-image-anchor"
       :data-fancybox="`${seriesUuid}-images`"
@@ -19,7 +19,7 @@
       <img
         v-show="loaded"
         class="gallery-image"
-        :class="{ loaded: loaded }"
+        :class="{ loaded: loaded, mobile: isMobile }"
         :src="imageUrl(image.thumbKey)"
         @load="loaded = true"
       >
@@ -31,12 +31,16 @@
 import { computed, ref } from "vue";
 import { imageUrl } from "@/utils/r2";
 import type { Image } from "@/types/manifest";
+import { useIsMobile } from "@/composables/isMobile";
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   seriesUuid: string; // UUID of the image series
   image: Image; // The image itself
-  singleton: boolean; // Whether the image is a singleton (only image in its row) - needed for styling
-}>();
+  singleton?: boolean; // Whether the image is a singleton (only image in its row) - needed for styling
+}>(), {
+  singleton: false,
+});
+const isMobile = useIsMobile();
 const aspect = computed(() => props.image.width / props.image.height);
 const loaded = ref(false);
 </script>
@@ -44,11 +48,14 @@ const loaded = ref(false);
 <style scoped>
 .gallery-image-div {
   width: 100%;
-  aspect-ratio: v-bind(aspect);
   background-color: var(--image-placeholder-color);
 }
 
-.gallery-image-div.singleton {
+.gallery-image-div:not(.mobile) {
+  aspect-ratio: v-bind(aspect);
+}
+
+.gallery-image-div.singleton:not(.mobile) {
   width: unset;
   height: var(--singleton-height);
   margin: 0 auto;
@@ -63,6 +70,12 @@ const loaded = ref(false);
 .gallery-image {
   width: 100%;
   cursor: zoom-in;
+}
+
+.gallery-image.mobile {
+  display: block;
+  box-sizing: border-box;
+  border: var(--border-mobile);
 }
 
 @keyframes imageFadeIn {

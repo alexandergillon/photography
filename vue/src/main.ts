@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import { Fancybox } from "@fancyapps/ui";
 import App from "@/App.vue";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import "@fancyapps/ui/dist/carousel/carousel.css";
 import "@/assets/style.css";
 
 createApp(App).mount("#app");

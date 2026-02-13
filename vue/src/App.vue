@@ -4,6 +4,8 @@
   The main Vue application.
 -->
 <template>
+  <SizeUnit />
+
   <ToastWrapper>
     <AppNavbar />
 
@@ -12,7 +14,7 @@
     </h1>
 
     <template v-if="manifest">
-      <div class="close-all">
+      <div class="close-all" :class="{ mobile: isMobile }">
         <HoverFilter filter="highlight-filter">
           <button class="main-font" @click="closeAll">
             Close All
@@ -41,6 +43,7 @@ import { nextTick, ref } from "vue";
 import constants from "@/utils/constants";
 import type { Manifest } from "@/types/manifest";
 import type { ImageSeriesType } from "@/types/templateRef";
+import { useIsMobile } from "@/composables/isMobile";
 import { getManifest } from "@/utils/r2";
 import { urlUuid } from "@/utils/url";
 import AppNavbar from "@/components/AppNavbar.vue";
@@ -48,7 +51,9 @@ import AppFooter from "@/components/AppFooter.vue";
 import HoverFilter from "@/components/HoverFilter.vue";
 import ImageSeries from "@/components/ImageSeries.vue";
 import ToastWrapper from "@/components/ToastWrapper.vue";
+import SizeUnit from "@/components/SizeUnit.vue";
 
+const isMobile = useIsMobile();
 const manifest = ref<Manifest | null>(null);
 const imageSeriesArray: Array<ImageSeriesType> = [];
 const uuidToIndex: Map<string, number> = new Map();
@@ -116,7 +121,7 @@ function closeAll() {
 
 <style scoped>
 h1 {
-  margin: calc(2 * var(--size-unit)) auto calc(4 * var(--size-unit-narrow)) auto;
+  margin: calc(2 * var(--size-unit-wide)) auto calc(4 * var(--size-unit-wide)) auto;
   max-width: 80vw;
   text-align: center;
   font-weight: normal;
@@ -156,5 +161,9 @@ h1 {
   background: transparent;
   font-size: calc(1.25 * var(--base-font-size));
   cursor: pointer;
+}
+
+.close-all.mobile button {
+  font-size: calc(1.75 * var(--base-font-size));
 }
 </style>

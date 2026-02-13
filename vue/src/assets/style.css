@@ -3,13 +3,19 @@
   --background-color: #FAF4ED;
   --image-placeholder-color: #F0E4D8;
   --text-color: #000000;
+
   /* Base font size - this is meant to be used in place of 1rem for text and handles scaling on various screen sizes. */
-  --base-font-size: clamp(0.6rem, 1.25vw, 1.5rem);
+  --base-font-size: clamp(0.65rem, 1.25vw, 1.5rem);
   /* Spacing units. This is meant to be used in place of 1rem for spacing and handles scaling on various screen sizes.
    * Narrow/wide are a bit of a misnomer - they are only affect smaller screen sizes */
   --size-unit-narrow: clamp(0.33rem, 1.25vw, 1.5rem);
   --size-unit: clamp(0.5rem, 1.25vw, 1.5rem);
   --size-unit-wide: clamp(0.67rem, 1.25vw, 1.5rem);
+
+  --border-width: calc(3 * var(--size-unit));
+  --border-width-mobile: calc(3 * var(--size-unit-narrow));
+  --border: var(--border-width) solid white;
+  --border-mobile: var(--border-width-mobile) solid white;
 
   --toast-background-color: #EDF6EA;
   --toast-text-color: #4C9234;
@@ -52,5 +58,5 @@ body {
 /* Adds a mat around images. */
 .gallery-fancybox img {
   box-sizing: border-box;
-  border: calc(3 * var(--size-unit)) solid white;
+  border: var(--border);
 }
