@@ -125,7 +125,7 @@ h1 {
   max-width: 80vw;
   text-align: center;
   font-weight: normal;
-  font-size: calc(6 * var(--base-font-size));
+  font-size: calc(6 * var(--font-size-base));
 }
 
 @keyframes pulseFade {
@@ -159,11 +159,11 @@ h1 {
   padding: 0;
   border: 0;
   background: transparent;
-  font-size: calc(1.25 * var(--base-font-size));
+  font-size: calc(1.25 * var(--font-size-base));
   cursor: pointer;
 }
 
 .close-all.mobile button {
-  font-size: calc(1.75 * var(--base-font-size));
+  font-size: calc(1.75 * var(--font-size-base));
 }
 </style>

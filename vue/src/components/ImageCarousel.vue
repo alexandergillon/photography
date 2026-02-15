@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from "vue";
 import { Carousel } from "@fancyapps/ui/dist/carousel";
+import { Dots } from "@fancyapps/ui/dist/carousel/carousel.dots.js";
 import type { Image, ImageSeries } from "@/types/manifest";
 import GalleryImage from "@/components/GalleryImage.vue";
 import { useSizeUnit } from "@/composables/sizeUnit";
@@ -35,8 +36,14 @@ const gap = computed(() => multiply(sizeUnit.value, 2));
 
 onMounted(() => {
   const container = document.getElementById(carouselId.value);
-  const options = {};
-  Carousel(container, options).init();
+  const options = {
+    Dots: {
+      dynamicFrom: 5,
+      dynamicPadd: 2,
+    },
+  };
+  const plugins = { Dots };
+  Carousel(container, options, plugins).init();
 });
 </script>
 

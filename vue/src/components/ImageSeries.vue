@@ -137,7 +137,7 @@ defineExpose({ show, close, scrollAndOpen });
 
 .image-series-title {
   margin: 0;
-  font-size: calc(2.25 * var(--base-font-size));
+  font-size: calc(2.25 * var(--font-size-base));
   font-weight: normal;
 }
 

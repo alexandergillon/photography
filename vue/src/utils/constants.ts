@@ -6,5 +6,5 @@ export default {
   /** Width of an image series, measured in vw. */
   IMAGE_SERIES_WIDTH_VW: 80,
   /** Mobile width breakpoint. */
-  MOBILE_WIDTH: "600px",
+  MOBILE_WIDTH: "600px", // Keep in sync with style.css
 };
