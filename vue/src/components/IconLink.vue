@@ -11,24 +11,31 @@
     title     (string): Title
 -->
 <template>
-  <a :href="props.href" target="_blank" rel="noopener noreferrer">
+  <a :class="{ mobile: isMobile }" :href="props.href" target="_blank" rel="noopener noreferrer">
     <img :src="props.iconSrc" :alt="props.alt" :title="props.title">
   </a>
 </template>
 
 <script setup lang="ts">
+import { useIsMobile } from "@/composables/isMobile";
+
 const props = defineProps<{
   iconSrc: string;
   href: string;
   alt: string;
   title: string;
 }>();
+const isMobile = useIsMobile();
 </script>
 
 <style scoped>
 a {
   display: inline-block;
-  height: 2.25rem;
+  height: calc(2.25 * var(--size-unit));
+}
+
+a.mobile {
+  height: calc(4 * var(--size-unit));
 }
 
 img {

@@ -4,6 +4,23 @@
   --image-placeholder-color: #F0E4D8;
   --text-color: #000000;
 
+  /* Base font size - this is meant to be used in place of 1rem for text and handles scaling on various screen sizes. */
+  --font-size-base: clamp(0.65rem, 1.25vw, 1.5rem);
+  /* Larger font on small screens. */
+  --font-size-large: clamp(0.8rem, 1.25vw, 1.5rem);
+
+  /* Spacing units. This is meant to be used in place of 1rem for spacing and handles scaling on various screen sizes.
+   * Narrow/wide are a bit of a misnomer - they are only affect smaller screen sizes */
+  --size-unit-narrow: clamp(0.33rem, 1.25vw, 1.5rem);
+  --size-unit: clamp(0.5rem, 1.25vw, 1.5rem);
+  --size-unit-wide: clamp(0.67rem, 1.25vw, 1.5rem);
+
+  --border-width: calc(2.5 * var(--size-unit));
+  /* Keep in sync with GalleryImage.vue. */
+  --border-width-mobile: calc(3 * var(--size-unit-narrow));
+  --border: var(--border-width) solid white;
+  --border-mobile: var(--border-width-mobile) solid white;
+
   --toast-background-color: #EDF6EA;
   --toast-text-color: #4C9234;
   --toast-text-color-filter: brightness(0) saturate(100%)  invert(49%) sepia(23%) saturate(6662%) hue-rotate(72deg) brightness(92%) contrast(59%);
@@ -45,5 +62,23 @@ body {
 /* Adds a mat around images. */
 .gallery-fancybox img {
   box-sizing: border-box;
-  border: 3rem solid white;
+  border: var(--border);
 }
+
+/* These selectors are a bit crazy because Fancybox has some very specific selectors we want to override on mobile. */
+@media (max-width: 600px) { /* Keep in sync with constants.ts. */
+  /* Moves the prev/next arrows near the bottom of the screen. */
+  .fancybox__container.gallery-fancybox .fancybox__carousel button.f-button.is-prev, 
+  .fancybox__container.gallery-fancybox .fancybox__carousel button.f-button.is-next {
+    top: 95vh;
+  }
+
+  /* Adjusts horizontal position of prev/next arrows. */
+  .fancybox__container.gallery-fancybox .fancybox__carousel button.f-button.is-prev {
+    left: calc(var(--f-arrow-pos, 0) / 2);
+  }
+  .fancybox__container.gallery-fancybox .fancybox__carousel button.f-button.is-next {
+    right: calc(var(--f-arrow-pos, 0) / 2);
+  }
+}
+
