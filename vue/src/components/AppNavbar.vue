@@ -34,7 +34,7 @@ const links = [
 
 <style scoped>
 nav {
-  margin: 1rem;
+  margin: var(--size-unit);
 }
 
 ul {
@@ -43,7 +43,7 @@ ul {
   list-style-type: none;
 
   display: flex;
-  gap: 1rem;
+  gap: var(--size-unit);
   justify-content: flex-end;
   align-items: center;
 }

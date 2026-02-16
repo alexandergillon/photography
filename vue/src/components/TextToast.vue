@@ -10,7 +10,7 @@
 -->
 <template>
   <ToastRoot v-model:open="open" class="toast-root">
-    <div class="toast-content">
+    <div class="toast-content" :class="{ mobile: isMobile }">
       <ToastDescription as-child>
         {{ text }}
       </ToastDescription>
@@ -27,10 +27,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { ToastRoot, ToastDescription, ToastClose } from "reka-ui";
+import { useIsMobile } from "@/composables/isMobile";
 
 defineProps<{
   text: string;
 }>();
+const isMobile = useIsMobile();
 const open = ref(false);
 
 /* This is an approach from the Reka docs (https://reka-ui.com/docs/components/toast). It enables the toast to replay its animation
@@ -54,6 +56,10 @@ defineExpose({ open: openToast });
   border: 1px solid var(--toast-text-color);
 
   align-items: start;
+}
+
+.toast-content.mobile {
+  font-size: calc(1.5 * var(--font-size-large));
 }
 
 .toast-close {

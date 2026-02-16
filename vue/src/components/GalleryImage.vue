@@ -8,7 +8,7 @@
   actual image to make the same strategy work.
 -->
 <template>
-  <div class="gallery-image-div" :class="{ singleton: singleton }">
+  <div ref="div" class="gallery-image-div" :class="{ singleton: singleton, mobile: isMobile }">
     <a
       class="gallery-image-anchor"
       :data-fancybox="`${seriesUuid}-images`"
@@ -19,7 +19,7 @@
       <img
         v-show="loaded"
         class="gallery-image"
-        :class="{ loaded: loaded }"
+        :class="{ loaded: loaded, mobile: isMobile }"
         :src="imageUrl(image.thumbKey)"
         @load="loaded = true"
       >
@@ -28,27 +28,59 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, watch, useTemplateRef } from "vue";
+import { useWindowSize } from "@vueuse/core";
 import { imageUrl } from "@/utils/r2";
 import type { Image } from "@/types/manifest";
+import { useIsMobile } from "@/composables/isMobile";
+import { useSizeUnit } from "@/composables/sizeUnit";
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   seriesUuid: string; // UUID of the image series
   image: Image; // The image itself
-  singleton: boolean; // Whether the image is a singleton (only image in its row) - needed for styling
-}>();
-const aspect = computed(() => props.image.width / props.image.height);
+  singleton?: boolean; // Whether the image is a singleton (only image in its row) - needed for styling
+}>(), {
+  singleton: false,
+});
+const { width, height } = useWindowSize();
+const isMobile = useIsMobile();
+const { sizeUnitNarrow } = useSizeUnit();
 const loaded = ref(false);
+
+const div = useTemplateRef("div");
+const divWidth = ref(0);
+function updateDivWidth() {
+  if (div.value) {
+    divWidth.value = parseFloat(window.getComputedStyle(div.value).width);
+  }
+}
+onMounted(updateDivWidth);
+watch([div, width, height], updateDivWidth);
+
+// Keep in sync with style.css
+const mobileBorderWidth = computed(() => 3 * sizeUnitNarrow.value);
+// Calculates the correct aspect ratio, taking into account the borders on mobile. This forces the div to have the
+// same dimensions of the image, which displays a placeholder box while the image is loading.
+const aspect = computed(() => {
+  const imageAspect = props.image.width / props.image.height;
+  if (!isMobile.value) return imageAspect;
+
+  const imageWidth = divWidth.value - 2 * mobileBorderWidth.value;
+  const imageHeight = imageWidth / imageAspect;
+  return divWidth.value / (imageHeight + 2 * mobileBorderWidth.value);
+});
+
+
 </script>
 
 <style scoped>
 .gallery-image-div {
   width: 100%;
-  aspect-ratio: v-bind(aspect);
   background-color: var(--image-placeholder-color);
+  aspect-ratio: v-bind(aspect);
 }
 
-.gallery-image-div.singleton {
+.gallery-image-div.singleton:not(.mobile) {
   width: unset;
   height: var(--singleton-height);
   margin: 0 auto;
@@ -63,6 +95,12 @@ const loaded = ref(false);
 .gallery-image {
   width: 100%;
   cursor: zoom-in;
+}
+
+.gallery-image.mobile {
+  display: block;
+  box-sizing: border-box;
+  border: var(--border-mobile);
 }
 
 @keyframes imageFadeIn {
