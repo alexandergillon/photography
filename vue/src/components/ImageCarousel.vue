@@ -24,7 +24,7 @@ import GalleryImage from "@/components/GalleryImage.vue";
 import { useSizeUnit } from "@/composables/sizeUnit";
 
 const props = defineProps<{ imageSeries: ImageSeries }>();
-const { sizeUnit, multiply } = useSizeUnit();
+const { sizeUnit } = useSizeUnit();
 
 const carouselId = computed(() => `${props.imageSeries.uuid}-carousel`);
 const images = computed<Array<Image>>(() => {
@@ -32,7 +32,7 @@ const images = computed<Array<Image>>(() => {
   props.imageSeries.rows.forEach(row => result.push(...row));
   return result;
 });
-const gap = computed(() => multiply(sizeUnit.value, 2));
+const gap = computed(() => `${sizeUnit.value * 3}px`);
 
 onMounted(() => {
   const container = document.getElementById(carouselId.value);
@@ -40,6 +40,9 @@ onMounted(() => {
     Dots: {
       dynamicFrom: 5,
       dynamicPadd: 2,
+    },
+    style: {
+      "--f-carousel-dots-height": "calc(6 * var(--size-unit))",
     },
   };
   const plugins = { Dots };

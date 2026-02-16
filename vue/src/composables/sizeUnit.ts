@@ -7,15 +7,10 @@
  */
 import { ref } from "vue";
 
-const sizeUnitNarrow = ref("0px");
-const sizeUnit = ref("0px");
-const sizeUnitWide = ref("0px");
-
-// Not the strictest use of a composable, but this is a convenient place to put this...
-function multiply(value: string, multiplier: number): string {
-  return `${Number(value.replace("px", "")) * multiplier}px`;
-}
+const sizeUnitNarrow = ref(0);
+const sizeUnit = ref(0);
+const sizeUnitWide = ref(0);
 
 export function useSizeUnit() {
-  return { sizeUnitNarrow, sizeUnit, sizeUnitWide, multiply };
+  return { sizeUnitNarrow, sizeUnit, sizeUnitWide };
 }

@@ -16,6 +16,7 @@
   --size-unit-wide: clamp(0.67rem, 1.25vw, 1.5rem);
 
   --border-width: calc(2.5 * var(--size-unit));
+  /* Keep in sync with GalleryImage.vue. */
   --border-width-mobile: calc(3 * var(--size-unit-narrow));
   --border: var(--border-width) solid white;
   --border-mobile: var(--border-width-mobile) solid white;

@@ -23,18 +23,18 @@ const wideDiv = useTemplateRef("sizeUnitWide");
 
 function updateSizeUnits() {
   if (narrowDiv.value) {
-    sizeUnitNarrow.value = window.getComputedStyle(narrowDiv.value).width;
+    sizeUnitNarrow.value = parseFloat(window.getComputedStyle(narrowDiv.value).width);
   }
   if (normalDiv.value) {
-    sizeUnit.value = window.getComputedStyle(normalDiv.value).width;
+    sizeUnit.value = parseFloat(window.getComputedStyle(normalDiv.value).width);
   }
   if (wideDiv.value) {
-    sizeUnitWide.value = window.getComputedStyle(wideDiv.value).width;
+    sizeUnitWide.value = parseFloat(window.getComputedStyle(wideDiv.value).width);
   }
 }
 
 onMounted(updateSizeUnits);
-watch([width, height], updateSizeUnits);
+watch([narrowDiv, normalDiv, wideDiv, width, height], updateSizeUnits);
 </script>
 
 <style scoped>
