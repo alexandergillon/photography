@@ -18,9 +18,12 @@
     >
       <img
         v-show="loaded"
+        ref="image"
         class="gallery-image"
         :class="{ loaded: loaded, mobile: isMobile }"
         :src="imageUrl(image.thumbKey)"
+        tabindex="0"
+        @keydown.enter.prevent="imageRef?.click()"
         @load="loaded = true"
       >
     </a>
@@ -42,6 +45,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   singleton: false,
 });
+const imageRef = useTemplateRef("image");
 const { width, height } = useWindowSize();
 const isMobile = useIsMobile();
 const { sizeUnitNarrow } = useSizeUnit();

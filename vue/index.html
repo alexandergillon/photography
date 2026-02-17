@@ -13,9 +13,42 @@
 
     <title>Alexander Gillon Photography</title>
 
+    <!-- Most styling is provided by the CSS imported in the Vue app. But this is provided so that the <noscript> tag
+      can be styled in the case that JS is disabled. This is not in a separate file to avoid a separate network request. -->
+    <noscript>
+      <style>
+        @font-face {
+          font-family: "Wasted Vindey";
+          src: url("/fonts/Wasted-Vindey.ttf");
+        }
+        
+        body {
+          background-color: #FAF4ED;
+        }
+        
+        noscript {
+          font-family: "Wasted Vindey", sans-serif;
+          font-variant-ligatures: none;
+          letter-spacing: 0.02rem;
+          font-size: 1.5rem;
+
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 60%;
+
+          text-align: center;
+        }
+      </style>
+    </noscript>
+
     <script type="module" src="/src/main.ts" defer></script>
   </head>
   <body class="main-font">
     <div id="app"></div>
+    <noscript>
+      Please enable JavaScript to view this page.
+    </noscript>
   </body>
 </html>
